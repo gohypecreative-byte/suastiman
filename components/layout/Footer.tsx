@@ -24,6 +24,7 @@ export function Footer() {
               <div className="w-8 h-8 rounded-full bg-[#132F47] border border-[#C5A880]/30 flex items-center justify-center text-[#C5A880] hover:border-[#C5A880] transition-colors cursor-pointer">
                 <Compass className="w-4 h-4" />
               </div>
+
             </div>
           </div>
 

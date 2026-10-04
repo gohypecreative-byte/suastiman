@@ -10,42 +10,65 @@ import { useCart } from "@/context/CartContext";
 const mockProducts = [
   {
     id: "p1",
-    name: "Divine 108 Rudraksha & Lapis Lazuli Meditation Mala",
+    name: "108-Seed Himalayan 5-Mukhi Rudraksha & Raw Lapis Mala",
     category: "malas",
-    crystal: "Natural 5-Mukhi Rudraksha & Grade-A Lapis",
-    intention: "Deep Dhyana & Intuitive Awakening",
-    price: 2499,
-    originalPrice: 3299,
+    crystal: "Natural Elaeocarpus ganitrus & Badakhshan Lapis Lazuli",
+    intention: "Contemplative Focus & Dhyana Practice",
+    price: 2899,
+    originalPrice: 3499,
     rating: 4.9,
     reviewCount: 142,
-    image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=600&q=80",
-    badge: "Most Auspicious",
-    description: "Experience profound tranquility and spiritual awakening with this mastercrafted 108-bead meditation mala. Each bead is hand-knotted by artisans in Rishikesh, stringing authentic 5-Mukhi Himalayan Rudraksha with premium Grade-A Lapis Lazuli from Afghanistan. This sacred combination balances the Third Eye chakra, enhancing intuition while keeping you deeply grounded.",
+    image: "/images/origin/rudraksha_macro_seed.jpg",
+    badge: "Source Verified",
+    description: "Before it was a mala, it was a fruit. Sourced from the high-altitude cloud forests of Eastern Nepal, each 5-Mukhi Rudraksha seed is river-washed and unlacquered, strung with raw Badakhshan Lapis Lazuli possessing visible natural golden pyrite veins. Hand-knotted by generational artisans in Rishikesh with unbleached cotton Brahmagranthi cords.",
     details: [
-      "Bead Size: 8mm",
-      "Length: Approximately 38 inches (hangs down to solar plexus)",
-      "Material: 108 Beads + 1 Guru Bead",
-      "Authenticity: Lab Certified Natural Stones & Rudraksha"
+      "Botanical: Elaeocarpus ganitrus Roxb.",
+      "Seed Count: 108 Natural Seeds + 1 Raw Lapis Guru Stone",
+      "Testing: Digital Radiography Verified 5 Internal Locules",
+      "Origin: Taplejung, Nepal Foothills (1,800m)",
+      "Care Kit: Includes vial of pure sandalwood seed oil"
     ]
   },
   {
     id: "p2",
-    name: "Golden Pyrite & Citrine Abundance Magnet Bracelet",
-    category: "bracelets",
-    crystal: "Raw Peruvian Pyrite & Natural Sun Citrine",
-    intention: "Wealth, Success & Solar Radiance",
-    price: 1999,
-    originalPrice: 2599,
-    rating: 4.8,
+    name: "Aged Krishna Tulsi Wood 108 Japa Meditation Mala",
+    category: "malas",
+    crystal: "Naturally Cured Ocimum sanctum Heartwood",
+    intention: "Mantra Repetition & Nervous System Calming",
+    price: 1899,
+    originalPrice: 2299,
+    rating: 4.9,
     reviewCount: 98,
-    image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=600&q=80",
-    badge: "Bestseller",
-    description: "Unleash your manifestation power. This vibrant abundance bracelet combines the raw, unyielding magnetism of Peruvian Pyrite with the sunny, wealth-attracting energy of natural Citrine. Consecrated on Thursday (Brihaspati Var) to amplify Jupiter's blessings of expansion and prosperity.",
+    image: "/images/origin/tulsi_heritage_plant.jpg",
+    badge: "Temple Grove Harvest",
+    description: "Crafted exclusively from aged Tulsi branches that have naturally expired in sacred temple gardens of Vrindavan. Hand-turned on manual wooden lathes without chemical gloss. In contact with skin warmth, natural eugenol essences are subtly released, lending a gentle herbal aroma during meditation.",
     details: [
-      "Bead Size: 8mm & 10mm mixed",
-      "Size: Stretchable (Fits 6.5 to 7.5 inch wrists)",
-      "Chakra Focus: Solar Plexus",
-      "Energization: Vedic Lakshmi-Kubera Mantra Infused"
+      "Botanical: Ocimum sanctum L. (Holy Basil)",
+      "Bead Size: 7mm Hand-Turned Spheres",
+      "Harvest: Ethical fallen wood collection (Never living green plants)",
+      "Origin: Vrindavan, Uttar Pradesh",
+      "Finish: Natural beeswax burnished, unvarnished"
+    ]
+  },
+  {
+    id: "p3",
+    name: "Raw Earth Lapis Lazuli & Brass Accent Bracelet",
+    category: "bracelets",
+    crystal: "Natural Untreated Metamorphic Lazurite",
+    intention: "Mental Equanimity & Grounded Awareness",
+    price: 1999,
+    originalPrice: 2499,
+    rating: 4.8,
+    reviewCount: 84,
+    image: "/images/origin/raw_gemstone_craft.jpg",
+    badge: "Zero Dye Guarantee",
+    description: "Raw subterranean beauty from ancient mineral veins. Water-cut and hand-buffed in the hereditary lapidary quarter of Jaipur, preserving the natural crystalline white calcite veins and shimmering metallic pyrite flecks. 100% free of artificial blue dyes or polymer resins.",
+    details: [
+      "Mineralogy: Natural Crystalline Lazurite Rock",
+      "Spacers: Hand-beaten solid Indian brass",
+      "Origin: Jaipur Lapidary Craftsmanship",
+      "Testing: Spectroscopic Certified Untreated",
+      "Fit: High-tensile durable organic cord"
     ]
   }
 ];

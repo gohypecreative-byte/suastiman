@@ -2,88 +2,84 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, Check, X, Shield, BookOpen, Sun, HeartHandshake } from "lucide-react";
+import { Shield, BookOpen, Sun, Check, X, Compass, Feather } from "lucide-react";
 
 export function BrandPhilosophy() {
   const whatWeBelieve = [
-    "Spirituality is about awareness, not fear.",
-    "Understanding is more valuable than blind belief.",
-    "Every spiritual object carries a deeper purpose and meaning.",
-    "Ancient wisdom remains deeply relevant for modern living.",
-    "Faith deserves honesty, respect, and sacred responsibility.",
+    "Before it was a mala, it was a fruit — nature precedes ritual.",
+    "Ancient Indian traditions should be expressed through modern, refined design.",
+    "Understanding and educational depth are more valuable than manufactured claims.",
+    "Natural materials (Rudraksha, Tulsi, unheated earth stone) should remain unadulterated.",
+    "Authenticity has weight, natural texture, and transparent origin.",
   ];
 
   const whatWeStandAgainst = [
-    "Fear-based selling and superstitions.",
-    "Misleading astrological guarantees.",
-    "Commercialisation of sacred faith.",
-    "Inauthentic, plastic or synthetic fake crystals.",
-    "Selling sacred products without spiritual context.",
+    "Fear-based selling, superstition, and commercial exploitation of faith.",
+    "Misleading astrological guarantees or 'instant luck' claims.",
+    "Synthetic glass crystals and plastic imitation beads.",
+    "Chemical dyes, toxic varnishes, or artificial heat treatments.",
+    "Selling sacred products without honoring where they come from.",
   ];
 
   return (
-    <section id="brand-story" className="py-24 bg-[#132F47] text-[#ECEADE] relative overflow-hidden">
-      <div className="absolute inset-0 bg-celestial-pattern opacity-15 pointer-events-none" />
+    <section id="brand-story" className="py-24 bg-[#0C161D] text-[#ECEADE] relative overflow-hidden border-b border-[#C5A880]/20">
+      <div className="absolute inset-0 bg-celestial-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Origin Story Top Block */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ECEADE]/10 border border-[#C5A880]/30 text-xs uppercase tracking-widest text-[#C5A880]">
-              <span>Brand Origin Story</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#182C3D] border border-[#C5A880]/30 text-xs uppercase tracking-[0.2em] text-[#C5A880]">
+              <Compass className="w-3.5 h-3.5" />
+              <span>Brand Philosophy</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#ECEADE] leading-tight">
-              We Don&apos;t Sell Spirituality. <br />
-              <span className="italic font-light text-gold-gradient">
-                We Help You Connect With It.
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-white leading-tight">
+              Svastimān is not trying <br />
+              <span className="italic text-[#DFCAAB] font-light">
+                to sell spirituality.
               </span>
             </h2>
 
-            <p className="text-base text-[#ECEADE]/80 font-light leading-relaxed">
-              Svastimān began with a personal journey into spirituality, rooted in years of
-              exploring ancient mythology, scriptures, traditions, and meditative practices.
+            <p className="text-base text-stone-300 font-light leading-relaxed">
+              We are building a house of sacred Indian materials that helps people understand and experience India&apos;s cultural heritage through authentic materials, traditional knowledge, and thoughtful modern design.
             </p>
 
-            <p className="text-sm text-[#ECEADE]/70 font-light leading-relaxed">
-              Along the way, we noticed a growing gap between authentic spiritual knowledge and how
-              spirituality was being commercialized today. Sacred products were sold blindly
-              without explaining their true significance. Svastimān exists to educate, empower, and
-              help you wear your spiritual intention with pride and understanding.
+            <p className="text-sm text-stone-400 font-light leading-relaxed">
+              Too much of today&apos;s spiritual marketplace relies on fear, fabricated astrological claims, and synthetic plastics masquerading as gemstones. SVASTIMAN begins at the origin: the mountain, the river, the ancient forest tree, and the quiet hands of generational craftsmen who wash each seed in running river water.
             </p>
 
-            <div className="pt-2 flex items-center gap-6">
+            <div className="pt-2 flex flex-wrap gap-6 text-xs text-stone-300">
               <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-[#C5A880]" />
-                <span className="text-xs text-[#ECEADE]/90 font-medium">Authentic Sourcing</span>
+                <Shield className="w-4 h-4 text-[#C5A880]" />
+                <span>Source Provenance</span>
               </div>
               <div className="flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#C5A880]" />
-                <span className="text-xs text-[#ECEADE]/90 font-medium">Ancient Wisdom</span>
+                <BookOpen className="w-4 h-4 text-[#C5A880]" />
+                <span>Scriptural Context</span>
               </div>
               <div className="flex items-center gap-2">
-                <Sun className="w-5 h-5 text-[#C5A880]" />
-                <span className="text-xs text-[#ECEADE]/90 font-medium">Mindful Living</span>
+                <Feather className="w-4 h-4 text-[#C5A880]" />
+                <span>Artisan Dignity</span>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-6 flex justify-center">
-            <div className="relative w-full max-w-lg aspect-4/3 rounded-3xl overflow-hidden border border-[#C5A880]/30 shadow-2xl bg-[#0A1B2A]">
+            <div className="relative w-full max-w-lg aspect-4/3 rounded-3xl overflow-hidden border border-[#C5A880]/30 shadow-2xl bg-[#070D12]">
               <Image
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80"
-                alt="Meditation & Ancient Wisdom"
+                src="/images/origin/rudraksha_hand_clean.jpg"
+                alt="Artisan Hands Cleaning Seeds"
                 fill
-                className="object-cover opacity-80"
+                className="object-cover brightness-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1B2A] via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-[#0A1B2A]/85 backdrop-blur-md border border-[#C5A880]/30 text-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C161D] via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-[#0C161D]/85 backdrop-blur-md border border-[#C5A880]/30 text-center">
                 <p className="font-serif italic text-sm text-[#ECEADE]">
-                  &ldquo;Every spiritual piece carries emotional significance, spiritual symbolism,
-                  and aesthetic elegance.&rdquo;
+                  &ldquo;Ancient, but not old-fashioned. Presenting ancient Indian traditions through a modern, sophisticated visual language.&rdquo;
                 </p>
-                <span className="text-[10px] uppercase tracking-widest text-[#C5A880] mt-1 block">
-                  — Svastimān Foundation
+                <span className="text-[10px] uppercase font-mono tracking-widest text-[#C5A880] mt-1.5 block">
+                  — SVASTIMĀN FOUNDATION
                 </span>
               </div>
             </div>
@@ -93,16 +89,16 @@ export function BrandPhilosophy() {
         {/* What We Believe vs What We Stand Against Comparison Box */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* What We Believe */}
-          <div className="bg-[#0A1B2A]/80 border border-emerald-500/30 rounded-3xl p-8 backdrop-blur-xs">
+          <div className="bg-[#101D27] border border-[#C5A880]/30 rounded-3xl p-8 backdrop-blur-xs shadow-xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <div className="w-10 h-10 rounded-full bg-[#182C3D] border border-[#C5A880]/50 flex items-center justify-center text-[#C5A880]">
                 <Check className="w-5 h-5" />
               </div>
-              <h3 className="font-serif text-2xl text-emerald-300 font-medium">What We Believe</h3>
+              <h3 className="font-serif text-2xl text-white font-normal">What We Honor</h3>
             </div>
             <ul className="space-y-4">
               {whatWeBelieve.map((text, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-[#ECEADE]/85">
+                <li key={i} className="flex items-start gap-3 text-sm text-stone-300 font-light">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] mt-2 shrink-0" />
                   <span>{text}</span>
                 </li>
@@ -111,16 +107,16 @@ export function BrandPhilosophy() {
           </div>
 
           {/* What We Stand Against */}
-          <div className="bg-[#0A1B2A]/80 border border-rose-500/30 rounded-3xl p-8 backdrop-blur-xs">
+          <div className="bg-[#101D27] border border-stone-800 rounded-3xl p-8 backdrop-blur-xs shadow-xl">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-rose-500/10 border border-rose-500/40 flex items-center justify-center text-rose-400">
+              <div className="w-10 h-10 rounded-full bg-rose-950/40 border border-rose-500/30 flex items-center justify-center text-rose-400">
                 <X className="w-5 h-5" />
               </div>
-              <h3 className="font-serif text-2xl text-rose-300 font-medium">What We Stand Against</h3>
+              <h3 className="font-serif text-2xl text-stone-200 font-normal">What We Reject</h3>
             </div>
             <ul className="space-y-4">
               {whatWeStandAgainst.map((text, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-[#ECEADE]/75">
+                <li key={i} className="flex items-start gap-3 text-sm text-stone-400 font-light">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
                   <span>{text}</span>
                 </li>

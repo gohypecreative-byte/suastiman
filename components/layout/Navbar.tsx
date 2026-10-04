@@ -23,36 +23,30 @@ export function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const navLinks = [
-    { name: "Handcrafted", href: "/collections/handcrafted", badge: "Exclusive" },
-    { name: "Best Sellers", href: "/collections/best-sellers" },
-    { name: "New Arrivals", href: "/collections/new-arrivals" },
-    { name: "Gifts", href: "/collections/gifts" },
+    { name: "The Origin", href: "/#origin-philosophy" },
     {
-      name: "Shop",
-      href: "/collections/all",
+      name: "Sacred Materials",
+      href: "/#material-journeys",
       children: [
-        { name: "Zodiac Bracelets", href: "/collections/zodiac-bracelets" },
-        { name: "Sacred Malas", href: "/collections/sacred-malas" },
-        { name: "Healing Crystals", href: "/collections/healing-crystals" },
+        { name: "Rudraksha Seeds", href: "/#material-journeys", desc: "Wild Himalayan Elaeocarpus" },
+        { name: "Tulsi Sacred Wood", href: "/#material-journeys", desc: "Naturally seasoned Vrindavan wood" },
+        { name: "Earth Gemstones", href: "/#material-journeys", desc: "Raw unheated natural minerals" },
+        { name: "Consecrated Cords", href: "/#material-journeys", desc: "Hand-twisted unbleached cotton & silk" },
       ],
     },
-    {
-      name: "Find Your Crystals",
-      href: "/collections/all",
-      children: [
-        { name: "Energy Finder Tool", href: "/tools/energy-finder", highlight: true },
-        { name: "Shop by Intention", href: "/collections/intentions" },
-      ],
-    },
-    { name: "Brand Story", href: "/about" },
+    { name: "Material Journeys", href: "/#material-journeys", badge: "" },
+    { name: "Feel the Material", href: "/#tactile-showcase" },
+    { name: "Know Your Tradition", href: "/#know-your-tradition", badge: "" },
+    { name: "The Collection", href: "/#products-section" },
+    { name: "Trust & Provenance", href: "/#trust-provenance" },
   ];
 
   return (
     <>
-      {/* Top Auspicious Announcement Bar */}
-      <div className="bg-[#0A1B2A] text-[#ECEADE] py-2 px-4 text-center text-xs tracking-wider border-b border-[#C5A880]/20 flex items-center justify-center gap-3">
-        <span className="font-light">
-          Vedic Consecrated &amp; Energized Natural Stones | Free Delivery above ₹1,999
+      {/* Top Heritage Provenance Bar */}
+      <div className="bg-[#0C161D] text-[#ECEADE] py-2.5 px-4 text-center text-[11px] tracking-[0.18em] uppercase border-b border-[#C5A880]/20 flex items-center justify-center gap-3">
+        <span className="font-light text-[#C5A880]">
+          House of Sacred Indian Materials &bull; Sourced from Nature, Honored by Hand &bull; Certified Origin
         </span>
       </div>
 
@@ -82,28 +76,24 @@ export function Navbar() {
                     {link.badge}
                   </span>
                 )}
-                
+
                 {link.children ? (
                   <div className="flex items-center gap-1 cursor-pointer py-2 text-sm font-medium text-[#132F47] hover:text-[#C5A880] transition-colors">
                     {link.name}
                     <ChevronDown className="w-3.5 h-3.5" />
-                    
+
                     {/* Dropdown Menu */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 overflow-hidden">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 overflow-hidden">
                       <div className="py-2">
                         {link.children.map((child) => (
                           <Link
                             key={child.name}
                             href={child.href}
-                            className={`block px-4 py-2.5 text-sm hover:bg-[#F9F8F5] transition-colors ${
-                              child.highlight 
-                                ? "text-[#C5A880] font-semibold bg-[#132F47]/5 hover:bg-[#132F47]/10" 
-                                : "text-stone-700 hover:text-[#132F47]"
-                            }`}
+                            className="block px-4 py-2.5 hover:bg-[#F9F8F5] transition-colors text-stone-700 hover:text-[#0C161D]"
                           >
-                            <div className="flex items-center gap-2">
-                              {child.highlight && <SunMedium className="w-3.5 h-3.5 text-[#C5A880]" />}
-                              {child.name}
+                            <div className="flex flex-col">
+                              <span className="font-medium text-xs text-[#0C161D]">{child.name}</span>
+                              {child.desc && <span className="text-[10px] text-stone-400 font-light">{child.desc}</span>}
                             </div>
                           </Link>
                         ))}
@@ -158,7 +148,7 @@ export function Navbar() {
               <Search className="w-5 h-5 text-stone-400" />
               <input
                 type="text"
-                placeholder="Search by crystal, zodiac sign, or intention (e.g. Tiger Eye, Aries, Protection)..."
+                placeholder="Search sacred materials, origin, or tradition (e.g. 5-Mukhi Rudraksha, Vrindavan Tulsi, Lapis Lazuli)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-transparent border-none text-sm text-[#111111] focus:outline-none placeholder:text-stone-400"
@@ -188,7 +178,7 @@ export function Navbar() {
                           key={child.name}
                           href={child.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className={`block text-sm py-1 ${child.highlight ? "text-[#C5A880] font-semibold" : "text-stone-600 hover:text-[#132F47]"}`}
+                          className="block text-sm py-1 text-stone-600 hover:text-[#0C161D]"
                         >
                           {child.name}
                         </Link>

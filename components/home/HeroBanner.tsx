@@ -3,133 +3,225 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Compass, CheckCircle2 } from "lucide-react";
 
-const slides = [
+interface NaturalStage {
+  step: string;
+  badge: string;
+  tagline: string;
+  title: string;
+  caption: string;
+  image: string;
+  elevation: string;
+  provenance: string;
+}
+
+// Exactly 9 Authentic Sequential Stages:
+// Mountain (01) -> River (02) -> Forest (03) -> Tree (04) -> Flower (05) -> Fruit (06) -> Rudraksha Seed (07) -> Hand Cleansing (08) -> Svastiman (09)
+const NINE_STAGES: NaturalStage[] = [
   {
-    id: 1,
-    image: "/images/hero_banner_full_v4.jpg",
-    subtitle: "ZODIAC COLLECTION",
-    title: "Find Your Sign.",
-    buttonText: "SHOP ZODIAC",
-    buttonLink: "/collections/zodiac-bracelets",
-    buttonTheme: "light", // White button, dark text
+    step: "01",
+    badge: "STAGE 01 • MOUNTAIN SOURCE",
+    tagline: "ROOTED IN SACRED GEOGRAPHY",
+    title: "Where altitude meets sanctity.",
+    caption: "High in the Himalayan heights (2,000m+), glacial winds and mineral-rich soils create the sole habitat where sacred life begins.",
+    image: "/images/origin/stage1_mountain.jpg",
+    elevation: "2,400m Himalayas",
+    provenance: "Sacred Upper Valleys",
   },
   {
-    id: 2,
-    image: "/images/hero_slider_2.jpg",
-    subtitle: "SITEWIDE OFFER",
-    title: "Up to 15% OFF",
-    buttons: [
-      { text: "SHOP NEW", link: "/collections/new-arrivals", theme: "dark" },
-      { text: "SHOP ALL", link: "/collections/all", theme: "outline" },
-    ],
+    step: "02",
+    badge: "STAGE 02 • GLACIAL RIVER",
+    tagline: "PURE MELTWATER CURRENTS",
+    title: "Carried by glacial springs.",
+    caption: "Perennial mountain streams carry pure glacial minerals into deep valley slopes, feeding the roots of undisturbed alpine groves.",
+    image: "/images/origin/stage2_river.jpg",
+    elevation: "2,100m Valley",
+    provenance: "Glacial Spring Network",
+  },
+  {
+    step: "03",
+    badge: "STAGE 03 • UNTOUCHED FOREST",
+    tagline: "DENSE CLOUD RAINFORESTS",
+    title: "Sheltered by mountain mist.",
+    caption: "Untouched Himalayan rainforests where diverse flora thrives under dense monsoon cloud cover, isolated from human pollution.",
+    image: "/images/origin/hero_journey_mountain.jpg",
+    elevation: "1,950m Cloud Belt",
+    provenance: "Temperate Alpine Forest",
+  },
+  {
+    step: "04",
+    badge: "STAGE 04 • ANCIENT TREE",
+    tagline: "ELAEOCARPUS GANITRUS ROXB.",
+    title: "Decades in sacred soil.",
+    caption: "Towering Elaeocarpus evergreen trees growing undisturbed for centuries, gathering the energy of alpine soil and mountain rains.",
+    image: "/images/origin/hero_journey_tree.jpg",
+    elevation: "1,800m Altitude",
+    provenance: "Living Botanical Heritage",
+  },
+  {
+    step: "05",
+    badge: "STAGE 05 • SACRED BLOSSOM",
+    tagline: "DELICATE MONSOON BLOOM",
+    title: "Ethereal white dawn petals.",
+    caption: "Fringed white bell blossoms bloom quietly with the mountain rains, pollinated by high-altitude bees before setting fruit.",
+    image: "/images/origin/hero_journey_flower.jpg",
+    elevation: "1,700m Canopy",
+    provenance: "Seasonal Monsoon Bloom",
+  },
+  {
+    step: "06",
+    badge: "STAGE 06 • THE BOTANICAL FRUIT",
+    tagline: "BEFORE IT WAS A MALA, IT WAS A FRUIT.",
+    title: "Nature precedes ritual.",
+    caption: "High in the cloud forests, the sacred Rudraksha ripens as a vibrant electric-blue botanical fruit before human hands ever touch it.",
+    image: "/images/origin/hero_journey_fruit.jpg",
+    elevation: "1,600m Sacred Grove",
+    provenance: "100% Wild Organic Fruit",
+  },
+  {
+    step: "07",
+    badge: "STAGE 07 • RAW STONE SEED",
+    tagline: "SACRED CELLULAR GEOMETRY",
+    title: "The natural mukhi seed.",
+    caption: "Beneath the blue fruit pulp lies the hard stone endocarp—furrowed with authentic mukhi facets formed entirely by nature's geometry.",
+    image: "/images/origin/hero_journey_seed.jpg",
+    elevation: "1,500m River Stone",
+    provenance: "Raw Uncarved Endocarp",
+  },
+  {
+    step: "08",
+    badge: "STAGE 08 • HAND CLEANSING",
+    tagline: "HONORED BY HUMAN HANDS",
+    title: "River water, patience & care.",
+    caption: "Generational artisans in mountain riverbeds gently peel away the fruit pulp with spring water, revealing pristine grooves without acid or chemicals.",
+    image: "/images/origin/hero_journey_wash.jpg",
+    elevation: "1,400m Spring Bed",
+    provenance: "Traditional Spring Washing",
+  },
+  {
+    step: "09",
+    badge: "STAGE 09 • SVASTIMĀN ARCHIVE",
+    tagline: "SACRED FORM & LAB PROVENANCE",
+    title: "From origin to your hands.",
+    caption: "Preserving raw integrity, verifying every mukhi with lab standards, and honoring the sacred object with traditional context, not fear.",
+    image: "/images/origin/stage9_svastiman.jpg",
+    elevation: "Sanctified Form",
+    provenance: "Lab-Tested & Verified",
   },
 ];
 
 export function HeroBanner() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0); // Default start on iconic Stage 01: mountain
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
+  // Smooth continuous sequence autoplay (1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> repeat)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % NINE_STAGES.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, []);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+  const current = NINE_STAGES[activeIndex];
 
   return (
-    <section className="relative w-full h-[600px] sm:h-[700px] lg:h-[800px] overflow-hidden flex items-end group rounded-[15px]">
-      
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 z-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            fill
-            className="object-cover object-center"
-            priority={index === 0}
-            sizes="100vw"
-          />
-          {/* Removed dark gradient overlay as requested */}
-          
-          {/* Text Content Overlay (Bottom Left) */}
-          <div className="absolute bottom-0 left-0 z-10 w-full max-w-7xl mx-auto px-12 sm:px-16 lg:px-20 pb-12 sm:pb-16 lg:pb-24">
-            <div className="max-w-xl">
-              <p className="text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-stone-200 mb-3 drop-shadow-md">
-                {slide.subtitle}
-              </p>
-              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-white mb-8 leading-tight drop-shadow-lg">
-                {slide.title}
-              </h1>
-              
-              <div className="flex flex-wrap gap-4">
-                {slide.buttons ? (
-                  slide.buttons.map((btn, i) => (
-                    <Link
-                      key={i}
-                      href={btn.link}
-                      className={`inline-flex items-center gap-4 px-8 py-4 font-medium text-sm transition-colors duration-300 group/btn ${
-                        btn.theme === "dark" 
-                          ? "bg-[#111111] hover:bg-black text-white" 
-                          : "bg-white/10 backdrop-blur-md border border-white hover:bg-white hover:text-black text-white"
-                      }`}
-                    >
-                      <span>{btn.text}</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  ))
-                ) : (
-                  <Link
-                    href={slide.buttonLink!}
-                    className="inline-flex items-center gap-4 px-8 py-4 bg-white hover:bg-stone-100 text-[#111111] font-medium text-sm transition-colors duration-300 group/btn"
-                  >
-                    <span>{slide.buttonText}</span>
-                    <ArrowRight className="w-4 h-4 text-[#111111] group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
-                )}
-              </div>
-            </div>
+    <section className="relative w-full min-h-[660px] lg:min-h-[780px] bg-[#0C161D] text-[#ECEADE] overflow-hidden flex flex-col justify-between rounded-[16px] border border-[#C5A880]/20 shadow-2xl select-none">
+      {/* Background Photography with Smooth Crossfade & High Natural Clarity (Light & Bright) */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {NINE_STAGES.map((stage, idx) => (
+          <div
+            key={stage.step}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === activeIndex ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+              }`}
+            style={{ transitionDuration: "1200ms" }}
+          >
+            <Image
+              src={stage.image}
+              alt={stage.title}
+              fill
+              priority={idx === 5 || idx === 0}
+              className="object-cover object-center brightness-[0.93] contrast-[1.03] transition-transform duration-[10000ms] ease-out scale-105"
+              sizes="100vw"
+            />
           </div>
-        </div>
-      ))}
-
-      {/* Navigation Arrows (visible on hover) */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-white/80 hover:bg-white text-[#111111] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-white/80 hover:bg-white text-[#111111] rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      {/* Pagination Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
         ))}
+
+        {/* Soft, light organic gradient for clear text contrast without turning image dark */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C161D]/90 via-[#0C161D]/25 to-black/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C161D]/85 via-[#0C161D]/20 to-transparent pointer-events-none" />
       </div>
 
+      {/* Top Header Tag & 9-Stage Progress Dots */}
+      <div className="relative z-10 p-6 sm:p-10 flex flex-wrap items-center justify-between gap-4">
+        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#0C161D]/75 backdrop-blur-md border border-[#C5A880]/30 text-[11px] font-medium tracking-[0.2em] uppercase text-[#DFCAAB]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping" />
+          <span>{current.badge}</span>
+        </div>
+
+        {/* Sequential 9-Stage Progress Indicator */}
+        <div className="flex items-center gap-1.5 bg-[#0C161D]/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+          {NINE_STAGES.map((stage, idx) => (
+            <button
+              key={stage.step}
+              onClick={() => setActiveIndex(idx)}
+              aria-label={`Go to Stage ${stage.step}`}
+              className={`h-1.5 rounded-full transition-all duration-500 ${idx === activeIndex ? "w-6 bg-[#C5A880]" : "w-1.5 bg-white/35 hover:bg-white/70"
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area: The Original Exact Copy & Structure */}
+      <div className="relative z-10 px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 max-w-4xl">
+        <div className="space-y-4">
+          <p className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#DFCAAB] drop-shadow-sm flex items-center gap-2">
+            <span className="w-8 h-[1px] bg-[#DFCAAB]" />
+            {current.tagline}
+          </p>
+
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight drop-shadow-md">
+            {current.title}
+          </h1>
+
+          <p className="text-sm sm:text-base text-stone-200/90 font-light max-w-2xl leading-relaxed drop-shadow-sm pt-2">
+            {current.caption}
+          </p>
+
+          <div className="pt-6 flex flex-wrap items-center gap-4">
+            <a
+              href="#origin-philosophy"
+              className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#F9F8F5] text-[#0C161D] text-xs font-semibold tracking-[0.15em] uppercase rounded-sm hover:bg-[#C5A880] transition-colors duration-300 group/btn shadow-lg"
+            >
+              <span>Explore The Origin Journey</span>
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </a>
+
+            <a
+              href="#material-journeys"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-black/40 hover:bg-black/60 text-[#ECEADE] text-xs font-medium tracking-[0.15em] uppercase rounded-sm backdrop-blur-md border border-white/20 transition-colors"
+            >
+              <span>Material Archives</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Provenance Indicators */}
+        <div className="mt-10 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-3 gap-6 text-[11px] text-stone-300 font-light">
+          <div>
+            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">BOTANICAL</span>
+            Elaeocarpus ganitrus Roxb.
+          </div>
+          <div>
+            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">ELEVATION</span>
+            {current.elevation}
+          </div>
+          <div className="hidden sm:block">
+            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">PROVENANCE</span>
+            {current.provenance}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

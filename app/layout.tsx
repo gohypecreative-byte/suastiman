@@ -16,17 +16,18 @@ const sansFont = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Svastimān | Modern Spiritual Guidance & Wearable Energy",
+  title: "Svastimān | House of Sacred Indian Materials & Traditional Knowledge",
   description:
-    "Discover authentic spiritual accessories, zodiac bracelets, healing malas, and astrological guidance handcrafted to align with your inner energy.",
+    "Svastimān is a house of authentic Indian sacred materials, unheated earth gemstones, wild Himalayan Rudraksha, and Vrindavan Tulsi wood. Rooted in source, honored by hand.",
   keywords: [
     "Svastiman",
-    "Spiritual Jewellery",
-    "Crystal Bracelets",
-    "Zodiac Jewellery",
-    "Healing Malas",
-    "Astrology Guidance",
-    "Wear Your Energy",
+    "House of Sacred Materials",
+    "Nepali Rudraksha",
+    "Vrindavan Tulsi Wood",
+    "Untreated Gemstones",
+    "Before it was a mala it was a fruit",
+    "Authentic Indian Heritage",
+    "Sacred Malas",
   ],
 };
 

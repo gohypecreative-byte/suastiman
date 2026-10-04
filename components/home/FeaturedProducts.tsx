@@ -1,280 +1,195 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShoppingBag, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingBag, ArrowRight, CheckCircle2, Sparkles, Compass } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-interface Product {
+export interface ProductItem {
   id: string;
   name: string;
-  category: "zodiac" | "malas" | "bracelets" | "chakra";
-  crystal: string;
-  intention: string;
+  category: "all" | "rudraksha" | "tulsi" | "gemstones";
+  material: string;
+  origin: string;
   price: number;
   originalPrice: number;
-  rating: number;
-  reviewCount: number;
   image: string;
-  badge?: string;
+  badge: string;
+  specs: string[];
 }
 
-const products: Product[] = [
+const PRODUCTS: ProductItem[] = [
   {
-    id: "p1",
-    name: "Divine 108 Rudraksha & Lapis Lazuli Meditation Mala",
-    category: "malas",
-    crystal: "Natural 5-Mukhi Rudraksha & Grade-A Lapis",
-    intention: "Deep Dhyana & Intuitive Awakening",
-    price: 2499,
-    originalPrice: 3299,
-    rating: 4.9,
-    reviewCount: 142,
-    image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=600&q=80",
-    badge: "Most Auspicious",
+    id: "prod-rudraksha-108",
+    name: "108-Seed Himalayan 5-Mukhi Rudraksha Mala",
+    category: "rudraksha",
+    material: "Wild Nepal Elaeocarpus & Unbleached Cotton",
+    origin: "Taplejung, East Nepal (2,200m)",
+    price: 2899,
+    originalPrice: 3499,
+    image: "/images/origin/stage9_svastiman.jpg",
+    badge: "100% Wild Sourced",
+    specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
   },
   {
-    id: "p2",
-    name: "Golden Pyrite & Citrine Abundance Magnet Bracelet",
-    category: "bracelets",
-    crystal: "Raw Peruvian Pyrite & Natural Sun Citrine",
-    intention: "Wealth, Success & Solar Radiance",
-    price: 1999,
-    originalPrice: 2599,
-    rating: 4.8,
-    reviewCount: 98,
-    image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=600&q=80",
-    badge: "Bestseller",
-  },
-  {
-    id: "p3",
-    name: "Sacred 7-Chakra Alignment Prana Harmonizer",
-    category: "chakra",
-    crystal: "Amethyst, Sodalite, Turquoise, Jade, Citrine, Carnelian, Red Jasper",
-    intention: "Complete Energetic Balance",
+    id: "prod-tulsi-japa",
+    name: "Aged Krishna Tulsi Wood 108 Japa Mala",
+    category: "tulsi",
+    material: "Naturally Cured Holy Basil Heartwood",
+    origin: "Vrindavan Temple Groves, UP",
     price: 1899,
-    originalPrice: 2499,
-    rating: 5.0,
-    reviewCount: 215,
-    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
-    badge: "Top Rated",
-  },
-  {
-    id: "p4",
-    name: "Moonstone & Rose Quartz Anahata Love Talisman",
-    category: "bracelets",
-    crystal: "Madagascar Rose Quartz & Sri Lankan Moonstone",
-    intention: "Heart Harmony & Soul Connection",
-    price: 1799,
     originalPrice: 2299,
-    rating: 4.9,
-    reviewCount: 86,
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80",
+    image: "/images/origin/tulsi_heritage_plant.jpg",
+    badge: "Temple Soil Harvest",
+    specs: ["Hand-Turned Micro Lathe", "Raw Beeswax Buffed", "Natural Eugenol Scent"],
   },
   {
-    id: "p5",
-    name: "Black Obsidian & Raw Tourmaline Auric Shield",
-    category: "bracelets",
-    crystal: "Natural Black Tourmaline & Volcanic Obsidian",
-    intention: "Evil Eye & Psychic Protection",
-    price: 1899,
-    originalPrice: 2399,
-    rating: 4.8,
-    reviewCount: 164,
-    image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80",
-    badge: "Protective Shield",
-  },
-  {
-    id: "p6",
-    name: "Zodiac Celestial Sun Leo & Aries Strength Band",
-    category: "zodiac",
-    crystal: "Golden Tiger Eye & Lava Rock",
-    intention: "Willpower, Courage & Leadership",
+    id: "prod-lapis-bracelet",
+    name: "Raw Earth Lapis Lazuli & Brass Bracelet",
+    category: "gemstones",
+    material: "Untreated Metamorphic Lapis with Pyrite",
+    origin: "Jaipur Water Lapidary Craft",
     price: 1999,
-    originalPrice: 2599,
-    rating: 4.9,
-    reviewCount: 112,
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80",
+    originalPrice: 2499,
+    image: "/images/origin/brand_macro_detail.jpg",
+    badge: "Zero Chemical Dye",
+    specs: ["Certified Mineralogy", "Natural Pyrite Veins", "High-Tensile Resilient Cord"],
+  },
+  {
+    id: "prod-rudraksha-wrist",
+    name: "Raw 5-Mukhi Rudraksha Tactile Wrist Mala",
+    category: "rudraksha",
+    material: "Direct Himalayan Endocarp Beads",
+    origin: "Himalayan Spring Wash Guild",
+    price: 1499,
+    originalPrice: 1899,
+    image: "/images/origin/hero_journey_seed.jpg",
+    badge: "Raw Woodstone",
+    specs: ["Natural Furrowed Mukhis", "Specific Gravity > 1.2", "Daily Mindful Wear"],
   },
 ];
 
 export function FeaturedProducts() {
-  const [activeTab, setActiveTab] = useState<string>("all");
+  const [filter, setFilter] = useState<"all" | "rudraksha" | "tulsi" | "gemstones">("all");
   const { addToCart } = useCart();
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const filtered =
-    activeTab === "all" ? products : products.filter((p) => p.category === activeTab);
-
-  // Auto-scroll logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        // If reached the end, scroll back to start, else scroll right by one item width
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
-          scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          // Calculate item width based on first child
-          const itemWidth = scrollRef.current.children[0]?.clientWidth || 300;
-          scrollRef.current.scrollBy({ left: itemWidth, behavior: "smooth" });
-        }
-      }
-    }, 4000); // 4 seconds
-
-    return () => clearInterval(timer);
-  }, [filtered.length]); // Reset interval when tab changes
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const itemWidth = scrollRef.current.children[0]?.clientWidth || 300;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -itemWidth : itemWidth,
-        behavior: "smooth",
-      });
-    }
-  };
+  const filtered = filter === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
 
   return (
-    <section id="products-section" className="py-20 bg-[#132F47] overflow-hidden">
-      {/* Header and Tabs container */}
-      <div className="w-full">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 px-4 sm:px-6 lg:px-12">
-          <div>
-            <div className="inline-flex items-center gap-2 text-[#C5A880] text-xs font-semibold uppercase tracking-widest mb-2">
-              <span>Sacred Creations</span>
+    <section id="featured-products" className="py-20 sm:py-28 bg-[#FBF9F5] text-[#0C161D] relative overflow-hidden border-b border-[#E8E2D5]">
+      {/* Background Subtle Organic Texture */}
+      <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+        {/* Section Header: Minimal & Tactile Focus */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="max-w-2xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFECE5] border border-[#C5A880]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.25em] uppercase text-[#7A6242]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8E704F]" />
+              <span>7. Product Showcase</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#ECEADE] font-normal">
-              Curated Spiritual Accessories
+
+            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
+              Tactile Sacred Objects, <br className="hidden sm:inline" />
+              <span className="italic text-[#7A6242] font-light">rooted in honest origin.</span>
             </h2>
-            <p className="text-[#ECEADE]/70 text-sm mt-1 max-w-xl font-light">
-              Crafted in reverence with natural gemstones, consecrated with Vedic mantras, and
-              designed for modern elegance.
+
+            <p className="text-stone-600 font-light text-sm sm:text-base max-w-xl">
+              Extreme detailed macro photography showcasing raw natural textures. Zero plastic coatings or artificial dyes.
             </p>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto bg-[#111111]/50 p-1.5 rounded-xl border border-[#ECEADE]/10 scrollbar-none">
-            {[
-              { id: "all", label: "All Sacred" },
-              { id: "bracelets", label: "Bracelets" },
-              { id: "malas", label: "Meditation Malas" },
-              { id: "zodiac", label: "Zodiac" },
-              { id: "chakra", label: "Chakra" },
-            ].map((tab) => (
+          {/* Filter Pills */}
+          <div className="flex items-center gap-2 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] self-start lg:self-end">
+            {(["all", "rudraksha", "tulsi", "gemstones"] as const).map((cat) => (
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all shrink-0 ${
-                  activeTab === tab.id
-                    ? "bg-[#C5A880] text-[#111111] shadow-xs"
-                    : "text-[#ECEADE] hover:text-[#C5A880] hover:bg-[#ECEADE]/5"
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
+                  filter === cat
+                    ? "bg-[#0C161D] text-white font-semibold shadow-md"
+                    : "text-stone-600 hover:text-black hover:bg-white/50"
                 }`}
               >
-                {tab.label}
+                {cat === "all" ? "All Pieces" : cat === "rudraksha" ? "Rudraksha" : cat === "tulsi" ? "Tulsi" : "Gemstones"}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Product Carousel (Full Bleed) */}
-        <div className="relative group w-full">
-          {/* Left Arrow */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-[35%] -translate-y-1/2 -translate-x-4 z-10 p-2 bg-[#111111]/80 hover:bg-[#111111] text-[#ECEADE] rounded-md opacity-0 group-hover:opacity-100 transition-opacity hidden md:block border border-[#ECEADE]/20"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
+        {/* 4-Product (Mobile Horizontal Swipe Carousel / Desktop 4-col Grid) */}
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0">
+          {filtered.map((prod) => (
+            <div
+              key={prod.id}
+              className="group relative rounded-2xl overflow-hidden bg-white border border-[#E0D9CA] hover:border-[#C5A880] shadow-md hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 w-[78vw] xs:w-[68vw] sm:w-auto snap-center"
+            >
+              {/* Product Macro Image (70% Visual) */}
+              <div className="relative w-full aspect-[4/5] overflow-hidden bg-stone-900">
+                <Image
+                  src={prod.image}
+                  alt={prod.name}
+                  fill
+                  className="object-cover brightness-[0.96] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 
-          <div
-            ref={scrollRef}
-            className="flex items-start overflow-x-auto scrollbar-none snap-x snap-mandatory pb-8"
-          >
-            {filtered.map((product) => (
-              <div
-                key={product.id}
-                className="group/card flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-3 sm:px-4 snap-start flex flex-col justify-between"
-              >
-                {/* Image Container */}
-                <Link href={`/products/${product.id}`} className="relative aspect-square w-full bg-[#111111] overflow-hidden block mb-4 border border-[#ECEADE]/10 rounded-[7px]">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover/card:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                  />
-
-                  {/* Badge */}
-                  {product.badge && (
-                    <div className="absolute top-3 left-3 bg-[#C5A880] text-[#111111] text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm shadow-xs">
-                      {product.badge}
-                    </div>
-                  )}
-
-                </Link>
-
-                {/* Product Info */}
-                <div className="flex flex-col space-y-2">
-                  <div className="flex items-center gap-1 text-[#C5A880] mb-1">
-                    <Star className="w-3.5 h-3.5 fill-[#C5A880] text-[#C5A880]" />
-                    <span className="font-semibold text-xs text-[#ECEADE]">{product.rating}</span>
-                    <span className="text-[10px] text-[#ECEADE]/50">({product.reviewCount})</span>
-                  </div>
-
-                  <Link href={`/products/${product.id}`} className="font-serif text-base text-[#ECEADE] font-medium leading-snug group-hover/card:text-[#C5A880] transition-colors line-clamp-2">
-                    {product.name}
-                  </Link>
-
-                  <p className="text-xs text-[#ECEADE]/60 font-light line-clamp-1">
-                    Intention: {product.intention}
-                  </p>
-
-                  {/* Price & Cart Icon */}
-                  <div className="pt-2 flex items-center justify-between">
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-serif text-lg font-normal text-[#ECEADE]">
-                        ₹{product.price}
-                      </span>
-                      <span className="text-xs text-[#ECEADE]/40 line-through">
-                        ₹{product.originalPrice}
-                      </span>
-                    </div>
-
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart({
-                          id: product.id,
-                          name: product.name,
-                          price: product.price,
-                          originalPrice: product.originalPrice,
-                          image: product.image,
-                          intention: product.intention,
-                          crystal: product.crystal,
-                        });
-                      }}
-                      className="p-1.5 text-[#C5A880] hover:bg-[#111111] hover:text-[#ECEADE] rounded-full transition-colors active:scale-95"
-                      title="Add to Bag"
-                    >
-                      <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </button>
-                  </div>
+                {/* Bottom Origin On Image */}
+                <div className="absolute bottom-3 left-3.5 right-3.5 pointer-events-none">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-stone-200 block truncate">
+                    {prod.origin}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Right Arrow */}
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-[35%] -translate-y-1/2 translate-x-4 z-10 p-2 bg-[#111111]/80 hover:bg-[#111111] text-[#ECEADE] rounded-md opacity-0 group-hover:opacity-100 transition-opacity hidden md:block border border-[#ECEADE]/20"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+              {/* Product Info (30% Minimal Text) */}
+              <div className="p-4 sm:p-5 space-y-3 bg-white flex flex-col justify-between flex-1">
+                <div className="space-y-1.5">
+                  <h3 className="font-serif text-base sm:text-lg font-normal text-[#1A1815] leading-snug group-hover:text-[#7A6242] transition-colors line-clamp-2">
+                    {prod.name}
+                  </h3>
+                  <p className="text-xs text-stone-500 font-light truncate">
+                    {prod.material}
+                  </p>
+                </div>
+
+                {/* Spec Pills */}
+                <div className="flex flex-wrap gap-1">
+                  {prod.specs.slice(0, 2).map((s, i) => (
+                    <span key={i} className="px-2 py-0.5 rounded bg-[#F4F1EA] text-[10px] font-mono text-stone-600">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Price and Add to Bag */}
+                <div className="pt-3 border-t border-[#EAE5D8] flex items-center justify-between">
+                  <div>
+                    <span className="text-base font-semibold text-[#1A1815]">₹{prod.price}</span>
+                    <span className="text-xs text-stone-400 line-through ml-2">₹{prod.originalPrice}</span>
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      addToCart({
+                        id: prod.id,
+                        name: prod.name,
+                        price: prod.price,
+                        image: prod.image,
+                        originalPrice: prod.originalPrice,
+                      })
+                    }
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0C161D] hover:bg-[#7A6242] text-[#ECEADE] text-[11px] font-mono uppercase tracking-wider transition-colors shadow-sm"
+                  >
+                    <ShoppingBag className="w-3 h-3" />
+                    <span>Acquire</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
