@@ -45,7 +45,7 @@ const NINE_STAGES: NaturalStage[] = [
     tagline: "DENSE CLOUD RAINFORESTS",
     title: "Sheltered by mountain mist.",
     caption: "Untouched Himalayan rainforests where diverse flora thrives under dense monsoon cloud cover, isolated from human pollution.",
-    image: "/images/origin/hero_journey_mountain.jpg",
+    image: "/images/origin/stage3_forest.jpg",
     elevation: "1,950m Cloud Belt",
     provenance: "Temperate Alpine Forest",
   },
@@ -125,7 +125,7 @@ export function HeroBanner() {
   const current = NINE_STAGES[activeIndex];
 
   return (
-    <section className="relative w-full min-h-[660px] lg:min-h-[780px] bg-[#0C161D] text-[#ECEADE] overflow-hidden flex flex-col justify-between rounded-[16px] border border-[#C5A880]/20 shadow-2xl select-none">
+    <section className="relative w-full min-h-[660px] lg:min-h-[780px] bg-[#0C161D] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
       {/* Background Photography with Smooth Crossfade & High Natural Clarity (Light & Bright) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {NINE_STAGES.map((stage, idx) => (
@@ -151,25 +151,8 @@ export function HeroBanner() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0C161D]/85 via-[#0C161D]/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* Top Header Tag & 9-Stage Progress Dots */}
-      <div className="relative z-10 p-6 sm:p-10 flex flex-wrap items-center justify-between gap-4">
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#0C161D]/75 backdrop-blur-md border border-[#C5A880]/30 text-[11px] font-medium tracking-[0.2em] uppercase text-[#DFCAAB]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-ping" />
-          <span>{current.badge}</span>
-        </div>
-
-        {/* Sequential 9-Stage Progress Indicator */}
-        <div className="flex items-center gap-1.5 bg-[#0C161D]/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-          {NINE_STAGES.map((stage, idx) => (
-            <button
-              key={stage.step}
-              onClick={() => setActiveIndex(idx)}
-              aria-label={`Go to Stage ${stage.step}`}
-              className={`h-1.5 rounded-full transition-all duration-500 ${idx === activeIndex ? "w-6 bg-[#C5A880]" : "w-1.5 bg-white/35 hover:bg-white/70"
-                }`}
-            />
-          ))}
-        </div>
+      {/* Top Header Area (Empty but keeping padding to maintain structure) */}
+      <div className="relative z-10 p-6 sm:p-10 flex flex-wrap items-center justify-end gap-4">
       </div>
 
       {/* Main Content Area: The Original Exact Copy & Structure */}
@@ -183,10 +166,6 @@ export function HeroBanner() {
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight drop-shadow-md">
             {current.title}
           </h1>
-
-          <p className="text-sm sm:text-base text-stone-200/90 font-light max-w-2xl leading-relaxed drop-shadow-sm pt-2">
-            {current.caption}
-          </p>
 
           <div className="pt-6 flex flex-wrap items-center gap-4">
             <a
@@ -203,22 +182,6 @@ export function HeroBanner() {
             >
               <span>Material Archives</span>
             </a>
-          </div>
-        </div>
-
-        {/* Provenance Indicators */}
-        <div className="mt-10 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-3 gap-6 text-[11px] text-stone-300 font-light">
-          <div>
-            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">BOTANICAL</span>
-            Elaeocarpus ganitrus Roxb.
-          </div>
-          <div>
-            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">ELEVATION</span>
-            {current.elevation}
-          </div>
-          <div className="hidden sm:block">
-            <span className="text-[#C5A880] block font-mono text-[10px] tracking-widest uppercase">PROVENANCE</span>
-            {current.provenance}
           </div>
         </div>
       </div>

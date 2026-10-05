@@ -7,13 +7,17 @@ import { useCart } from "@/context/CartContext";
 import {
   ShoppingBag,
   Search,
-  Sparkles,
   Menu,
   X,
   Compass,
   Heart,
   ChevronDown,
-  SunMedium,
+  User,
+  Truck,
+  CreditCard,
+  Percent,
+  ShieldCheck,
+  Leaf,
 } from "lucide-react";
 
 export function Navbar() {
@@ -22,41 +26,77 @@ export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const navLinks = [
-    { name: "The Origin", href: "/#origin-philosophy" },
+  type NavLink = {
+    name: string;
+    href: string;
+    badge?: string;
+    children?: { name: string; href: string; desc: string }[];
+  };
+
+  const navLinks: NavLink[] = [
+    {
+      name: "Shop",
+      href: "/products",
+      children: [
+        { name: "All Collections", href: "/products", desc: "Browse full collection" },
+        { name: "Rudraksha", href: "/products?category=rudraksha", desc: "Himalayan seed malas" },
+        { name: "Tulsi Wood", href: "/products?category=tulsi", desc: "Sacred wood from Vrindavan" },
+        { name: "Gemstones", href: "/products?category=gemstones", desc: "Earth-mined crystal energy" },
+      ],
+    },
     {
       name: "Sacred Materials",
       href: "/#material-journeys",
       children: [
-        { name: "Rudraksha Seeds", href: "/#material-journeys", desc: "Wild Himalayan Elaeocarpus" },
-        { name: "Tulsi Sacred Wood", href: "/#material-journeys", desc: "Naturally seasoned Vrindavan wood" },
-        { name: "Earth Gemstones", href: "/#material-journeys", desc: "Raw unheated natural minerals" },
-        { name: "Consecrated Cords", href: "/#material-journeys", desc: "Hand-twisted unbleached cotton & silk" },
+        { name: "Rudraksha Seeds", href: "/#material-journeys-rudraksha", desc: "Wild Himalayan Elaeocarpus" },
+        { name: "Tulsi Sacred Wood", href: "/#material-journeys-tulsi", desc: "Naturally seasoned Vrindavan wood" },
+        { name: "Earth Gemstones", href: "/#material-journeys-gemstones", desc: "Raw unheated natural minerals" },
       ],
     },
-    { name: "Material Journeys", href: "/#material-journeys", badge: "" },
-    { name: "Feel the Material", href: "/#tactile-showcase" },
-    { name: "Know Your Tradition", href: "/#know-your-tradition", badge: "" },
-    { name: "The Collection", href: "/#products-section" },
-    { name: "Trust & Provenance", href: "/#trust-provenance" },
+    { name: "Know Your Tradition", href: "/#know-your-tradition" },
+    { name: "The Origin", href: "/#trust-provenance" },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
   ];
+
 
   return (
     <>
-      {/* Top Heritage Provenance Bar */}
-      <div className="bg-[#0C161D] text-[#ECEADE] py-2.5 px-4 text-center text-[11px] tracking-[0.18em] uppercase border-b border-[#C5A880]/20 flex items-center justify-center gap-3">
-        <span className="font-light text-[#C5A880]">
-          House of Sacred Indian Materials &bull; Sourced from Nature, Honored by Hand &bull; Certified Origin
-        </span>
+      {/* Top Announcement Marquee Bar */}
+      <div className="bg-[#1A1815] text-[#FAF8F5] py-2.5 overflow-hidden border-b border-[#C5A880]/20 select-none">
+        <div className="animate-marquee flex items-center whitespace-nowrap">
+          {[...Array(4)].map((_, groupIdx) => (
+            <div
+              key={groupIdx}
+              className="flex items-center gap-8 md:gap-14 mx-4 md:mx-7 text-[11px] font-medium tracking-[0.14em] uppercase"
+            >
+              <div className="flex items-center gap-2">
+                <Leaf className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                <span>HONORED BY NATURE, BLESSED BY HAND</span>
+              </div>
+              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                <span>CERTIFIED SACRED BOTANICALS &amp; GEMS</span>
+              </div>
+              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+              <div className="flex items-center gap-2">
+                <Truck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                <span>COMPLIMENTARY SHIPPING OVER ₹1999</span>
+              </div>
+              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Main Sticky Navigation */}
       <header className="sticky top-0 z-40 bg-[#F9F8F5]/95 backdrop-blur-md border-b border-[#E2DEC9] transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="w-full px-5 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#132F47] hover:bg-[#ECEADE] rounded-lg transition-colors"
+            className="lg:hidden p-2 text-[#1A1815] hover:text-[#C5A880] transition-colors -ml-2"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -77,8 +117,8 @@ export function Navbar() {
                   </span>
                 )}
 
-                {link.children ? (
-                  <div className="flex items-center gap-1 cursor-pointer py-2 text-sm font-medium text-[#132F47] hover:text-[#C5A880] transition-colors">
+                  {link.children ? (
+                  <div className="flex items-center gap-1 cursor-pointer py-2 text-sm font-medium text-[#1A1815] hover:text-[#C5A880] transition-colors">
                     {link.name}
                     <ChevronDown className="w-3.5 h-3.5" />
 
@@ -86,7 +126,7 @@ export function Navbar() {
                     <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 overflow-hidden">
                       <div className="py-2">
                         {link.children.map((child) => (
-                          <Link
+                          <a
                             key={child.name}
                             href={child.href}
                             className="block px-4 py-2.5 hover:bg-[#F9F8F5] transition-colors text-stone-700 hover:text-[#0C161D]"
@@ -95,7 +135,7 @@ export function Navbar() {
                               <span className="font-medium text-xs text-[#0C161D]">{child.name}</span>
                               {child.desc && <span className="text-[10px] text-stone-400 font-light">{child.desc}</span>}
                             </div>
-                          </Link>
+                          </a>
                         ))}
                       </div>
                     </div>
@@ -103,7 +143,7 @@ export function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-sm font-medium text-[#132F47] hover:text-[#C5A880] transition-colors duration-200 py-2 relative block"
+                    className="text-sm font-medium text-[#1A1815] hover:text-[#C5A880] transition-colors duration-200 py-2 relative block"
                   >
                     {link.name}
                     <span className="absolute bottom-1 left-0 w-0 h-0.5 bg-[#C5A880] transition-all duration-300 group-hover:w-full" />
@@ -114,26 +154,37 @@ export function Navbar() {
           </nav>
 
           {/* Right Action Icons */}
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Search Button */}
+          <div className="flex items-center space-x-4 sm:space-x-5 text-[#1A1815]">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 text-[#132F47] hover:text-[#C5A880] hover:bg-[#ECEADE] rounded-full transition-colors"
-              title="Search gemstones & intentions"
+              className="hover:text-[#C5A880] transition-colors"
+              title="Search"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5 stroke-[1.5]" />
+            </button>
+            
+            <button
+              className="hover:text-[#C5A880] transition-colors"
+              title="Account"
+            >
+              <User className="w-5 h-5 stroke-[1.5]" />
+            </button>
+            
+            <button
+              className="hover:text-[#C5A880] transition-colors"
+              title="Wishlist"
+            >
+              <Heart className="w-5 h-5 stroke-[1.5]" />
             </button>
 
-            {/* Cart Icon */}
             <button
               onClick={openCart}
-              className="relative p-2.5 bg-[#132F47] text-[#ECEADE] rounded-full hover:bg-[#1A3F5E] shadow-sm transition-all active:scale-95 flex items-center gap-2"
-              title="Sacred Bag"
+              className="relative hover:text-[#C5A880] transition-colors"
+              title="Bag"
             >
-              <ShoppingBag className="w-4 h-4 text-[#C5A880]" />
-              <span className="hidden sm:inline text-xs font-semibold pr-1">Bag</span>
+              <ShoppingBag className="w-5 h-5 stroke-[1.5]" />
               {totalCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#C5A880] text-[#111111] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-xs">
+                <span className="absolute -top-1.5 -right-2 bg-[#C5A880] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalCount}
                 </span>
               )}
@@ -171,17 +222,17 @@ export function Navbar() {
               <div key={link.name} className="border-b border-[#E2DEC9]/40">
                 {link.children ? (
                   <div className="py-2">
-                    <span className="block text-base font-medium text-[#132F47] mb-2">{link.name}</span>
+                    <span className="block text-base font-medium text-[#1A1815] mb-2">{link.name}</span>
                     <div className="pl-4 space-y-2 border-l-2 border-[#C5A880]/30">
                       {link.children.map((child) => (
-                        <Link
+                        <a
                           key={child.name}
                           href={child.href}
                           onClick={() => setMobileMenuOpen(false)}
                           className="block text-sm py-1 text-stone-600 hover:text-[#0C161D]"
                         >
                           {child.name}
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -189,7 +240,7 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block text-base font-medium text-[#132F47] hover:text-[#C5A880] py-2 relative"
+                    className="block text-base font-medium text-[#1A1815] hover:text-[#C5A880] py-2 relative"
                   >
                     {link.name}
                     {link.badge && (

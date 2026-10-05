@@ -20,6 +20,8 @@ interface MaterialStory {
   botanical: string;
   origin: string;
   summary: string;
+  heading: React.ReactNode;
+  subheading: string;
   fourStages: JourneyStageItem[];
 }
 
@@ -30,6 +32,13 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     botanical: "Elaeocarpus ganitrus Roxb.",
     origin: "Upper Himalayan Cloud Forests (2,200m)",
     summary: "From high altitude wild flowers to lab-certified sacred malas.",
+    heading: (
+      <>
+        Before it was a mala, <br />
+        <span className="italic text-[#DFCAAB] font-light">it was a fruit.</span>
+      </>
+    ),
+    subheading: "Witness the authentic 4-step transformation. Minimal text, maximum documentary visual proof.",
     fourStages: [
       {
         stageNumber: "01",
@@ -75,6 +84,13 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     botanical: "Ocimum sanctum L.",
     origin: "Vrindavan & Sacred Braj Groves",
     summary: "Aromatic holy basil aged naturally into serene tactile beads.",
+    heading: (
+      <>
+        Seed &rarr; Soil &rarr; Plant &rarr; Leaves &rarr;{" "}
+        <span className="italic text-[#DFCAAB] font-light">Harvest &rarr; Drying &rarr; Mala</span>
+      </>
+    ),
+    subheading: "From temple courtyards in Vrindavan to warm, soothing beads of daily quietude. Authentic Indian holy basil heritage.",
     fourStages: [
       {
         stageNumber: "01",
@@ -120,6 +136,15 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     botanical: "Natural Mineral Geology",
     origin: "Himalayan Strata & Jaipur Lapidary",
     summary: "Untreated raw minerals cut without glass or synthetic fillers.",
+    heading: (
+      <>
+        Earth &rarr; Rough Stone &rarr; <br className="hidden sm:inline" />
+        <span className="italic text-[#DFCAAB] font-light">
+          Cutting &rarr; Polishing &rarr; Bracelet
+        </span>
+      </>
+    ),
+    subheading: "Untreated raw minerals shaped by human hands and water wheels.",
     fourStages: [
       {
         stageNumber: "01",
@@ -163,31 +188,47 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
 
 export function MaterialJourneys() {
   const [activeTab, setActiveTab] = useState<"rudraksha" | "tulsi" | "gemstones">("rudraksha");
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = window.innerWidth * 0.75;
+      scrollRef.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  React.useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === "#material-journeys-tulsi") setActiveTab("tulsi");
+      else if (hash === "#material-journeys-gemstones") setActiveTab("gemstones");
+      else if (hash === "#material-journeys-rudraksha") setActiveTab("rudraksha");
+    };
+    
+    window.addEventListener("hashchange", onHashChange);
+    onHashChange();
+    
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   const story = MATERIAL_STORIES[activeTab];
 
   return (
-    <section id="material-journeys" className="py-20 sm:py-28 lg:py-32 bg-[#0C161D] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
+    <section id="material-journeys" className="py-12 sm:py-16 lg:py-20 bg-[#0C161D] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
+      <div id="material-journeys-rudraksha" className="absolute -top-32" />
+      <div id="material-journeys-tulsi" className="absolute -top-32" />
+      <div id="material-journeys-gemstones" className="absolute -top-32" />
+      
       {/* Background Subtle Organic Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+      <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         {/* Header Block: Minimal Luxury Editorial */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#18232C] border border-[#C5A880]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.25em] uppercase text-[#DFCAAB]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
-              <span>3. Journey of Sacred Materials</span>
-            </div>
-
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-white leading-[1.12] tracking-tight">
-              Nature &rarr; Raw Material &rarr; <br className="hidden sm:inline" />
-              <span className="italic text-[#DFCAAB] font-light">Human Craft &rarr; Finished Form</span>
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="max-w-full xl:max-w-4xl space-y-3">
+            <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-normal text-white leading-[1.2] tracking-tight">
+              {story.heading}
             </h2>
-
-            <p className="text-stone-300 font-light text-sm sm:text-base max-w-xl">
-              Witness the authentic 4-step transformation. Minimal text, maximum documentary visual proof.
-            </p>
           </div>
 
           {/* Material Category Switcher Tabs */}
@@ -196,7 +237,7 @@ export function MaterialJourneys() {
               <button
                 key={mat}
                 onClick={() => setActiveTab(mat)}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
+                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 ${
                   activeTab === mat
                     ? "bg-[#C5A880] text-[#0C161D] font-bold shadow-lg"
                     : "text-stone-300 hover:text-white hover:bg-white/5"
@@ -208,47 +249,68 @@ export function MaterialJourneys() {
           </div>
         </div>
 
-        {/* 4-Step Linear Progression Cards (Mobile Horizontal Swipe / Desktop 4-col Grid) */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0">
-          {story.fourStages.map((stage) => (
-            <div
-              key={stage.stageNumber}
-              className="group relative rounded-2xl overflow-hidden bg-[#141E26] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 w-[78vw] xs:w-[68vw] sm:w-auto snap-center"
-            >
-              {/* Clean Image Container */}
-              <div className="relative w-full aspect-[4/5] overflow-hidden bg-black">
-                <Image
-                  src={stage.image}
-                  alt={stage.headline}
-                  fill
-                  className="object-cover brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
+        {/* 4-Step Linear Progression Cards */}
+        <div className="relative group/carousel">
+          <div 
+            ref={scrollRef}
+            className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0"
+          >
+            {story.fourStages.map((stage) => (
+              <div
+                key={stage.stageNumber}
+                className="group relative rounded-2xl overflow-hidden bg-[#141E26] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
+              >
+                {/* Clean Image Container */}
+                <div className="relative w-full aspect-[4/5] overflow-hidden bg-black">
+                  <Image
+                    src={stage.image}
+                    alt={stage.headline}
+                    fill
+                    className="object-cover brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
 
-              {/* Minimal Clean Headline Below Image */}
-              <div className="p-4 bg-[#141E26] flex items-center justify-between border-t border-white/5">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#C5A880] block">
-                    STAGE {stage.stageNumber} &bull; {stage.stageName}
-                  </span>
-                  <h3 className="font-serif text-base font-normal text-white leading-snug">
-                    {stage.headline}
-                  </h3>
+                {/* Minimal Clean Headline Below Image */}
+                <div className="p-4 bg-[#141E26] flex items-center justify-between border-t border-white/5">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#C5A880] block">
+                      STAGE {stage.stageNumber} &bull; {stage.stageName}
+                    </span>
+                    <h3 className="font-serif text-base font-normal text-white leading-snug">
+                      {stage.headline}
+                    </h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          {/* Right Scroll Button */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:-right-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
+            <button 
+              onClick={() => scroll('right')} 
+              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+          
+          {/* Left Scroll Button */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:-left-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
+            <button 
+              onClick={() => scroll('left')} 
+              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+          </div>
         </div>
 
         {/* Bottom Provenance & Next Action Bar */}
-        <div className="mt-12 pt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-4 text-xs text-stone-400 font-mono">
-          <div className="flex items-center gap-2 text-[#DFCAAB]">
-            <span className="w-2 h-2 rounded-full bg-[#C5A880] animate-ping" />
-            <span className="uppercase tracking-widest">
-              {story.name} &bull; {story.origin}
-            </span>
-          </div>
+        <div className="mt-12 pt-6 border-t border-white/15 flex flex-wrap items-center justify-end gap-4 text-xs text-stone-400 font-mono">
 
           <a
             href="#featured-products"

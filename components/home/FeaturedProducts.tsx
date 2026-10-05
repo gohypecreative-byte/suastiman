@@ -1,197 +1,341 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, ArrowRight, CheckCircle2, Sparkles, Compass } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
-export interface ProductItem {
+export interface CategoryShowcaseItem {
   id: string;
   name: string;
-  category: "all" | "rudraksha" | "tulsi" | "gemstones";
-  material: string;
-  origin: string;
-  price: number;
-  originalPrice: number;
+  category: "rudraksha" | "tulsi" | "gemstones";
+  subtitle: string;
   image: string;
-  badge: string;
-  specs: string[];
+  itemCount: string;
+  href: string;
 }
 
-const PRODUCTS: ProductItem[] = [
+const CATEGORIES: CategoryShowcaseItem[] = [
   {
-    id: "prod-rudraksha-108",
-    name: "108-Seed Himalayan 5-Mukhi Rudraksha Mala",
+    id: "cat-rudraksha",
+    name: "Sacred Rudraksha",
     category: "rudraksha",
-    material: "Wild Nepal Elaeocarpus & Unbleached Cotton",
-    origin: "Taplejung, East Nepal (2,200m)",
-    price: 2899,
-    originalPrice: 3499,
-    image: "/images/origin/stage9_svastiman.jpg",
-    badge: "100% Wild Sourced",
-    specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
+    subtitle: "Wild Himalayan Endocarp Malas & Seeds",
+    image: "/images/products/prod1.webp",
+    itemCount: "8 Authentic Pieces",
+    href: "/products?category=rudraksha",
   },
   {
-    id: "prod-tulsi-japa",
-    name: "Aged Krishna Tulsi Wood 108 Japa Mala",
+    id: "cat-tulsi",
+    name: "Vrindavan Tulsi",
     category: "tulsi",
-    material: "Naturally Cured Holy Basil Heartwood",
-    origin: "Vrindavan Temple Groves, UP",
-    price: 1899,
-    originalPrice: 2299,
-    image: "/images/origin/tulsi_heritage_plant.jpg",
-    badge: "Temple Soil Harvest",
-    specs: ["Hand-Turned Micro Lathe", "Raw Beeswax Buffed", "Natural Eugenol Scent"],
+    subtitle: "Naturally Cured Holy Basil Heartwood",
+    image: "/images/products/prod2.webp",
+    itemCount: "6 Sacred Pieces",
+    href: "/products?category=tulsi",
   },
   {
-    id: "prod-lapis-bracelet",
-    name: "Raw Earth Lapis Lazuli & Brass Bracelet",
+    id: "cat-gemstones",
+    name: "Earth Gemstones",
     category: "gemstones",
-    material: "Untreated Metamorphic Lapis with Pyrite",
-    origin: "Jaipur Water Lapidary Craft",
-    price: 1999,
-    originalPrice: 2499,
-    image: "/images/origin/brand_macro_detail.jpg",
-    badge: "Zero Chemical Dye",
-    specs: ["Certified Mineralogy", "Natural Pyrite Veins", "High-Tensile Resilient Cord"],
-  },
-  {
-    id: "prod-rudraksha-wrist",
-    name: "Raw 5-Mukhi Rudraksha Tactile Wrist Mala",
-    category: "rudraksha",
-    material: "Direct Himalayan Endocarp Beads",
-    origin: "Himalayan Spring Wash Guild",
-    price: 1499,
-    originalPrice: 1899,
-    image: "/images/origin/hero_journey_seed.jpg",
-    badge: "Raw Woodstone",
-    specs: ["Natural Furrowed Mukhis", "Specific Gravity > 1.2", "Daily Mindful Wear"],
+    subtitle: "Untreated Metamorphic Matrix & Crystals",
+    image: "/images/products/prod3.webp",
+    itemCount: "12 Certified Pieces",
+    href: "/products?category=gemstones",
   },
 ];
 
 export function FeaturedProducts() {
-  const [filter, setFilter] = useState<"all" | "rudraksha" | "tulsi" | "gemstones">("all");
-  const { addToCart } = useCart();
+  const targetProgressRef = useRef(1); // default center card: Tulsi (idx 1)
+  const animatedProgressRef = useRef(1);
+  const [renderProgress, setRenderProgress] = useState(1);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  const filtered = filter === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
+  // Helper: Normalize difference into [-1.5, 1.5] for shortest path
+  const getNormalizedDiff = (targetIdx: number, fromProgress: number) => {
+    let diff = (targetIdx - fromProgress) % 3;
+    while (diff > 1.5) diff -= 3;
+    while (diff < -1.5) diff += 3;
+    return diff;
+  };
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.includes("rudraksha")) goToCategory(0);
+      else if (hash.includes("tulsi")) goToCategory(1);
+      else if (hash.includes("gemstones")) goToCategory(2);
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    onHashChange();
+
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  // Responsive, crisp lerp loop (~500ms smooth transition)
+  useEffect(() => {
+    let animId: number;
+    const updateLoop = () => {
+      const diff = targetProgressRef.current - animatedProgressRef.current;
+      if (Math.abs(diff) > 0.0005) {
+        animatedProgressRef.current += diff * 0.085;
+        setRenderProgress(animatedProgressRef.current);
+      }
+      animId = requestAnimationFrame(updateLoop);
+    };
+    animId = requestAnimationFrame(updateLoop);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
+  // Infinite Next Slide
+  const nextSlide = () => {
+    targetProgressRef.current += 1;
+  };
+
+  // Infinite Prev Slide
+  const prevSlide = () => {
+    targetProgressRef.current -= 1;
+  };
+
+  // Rotate to specific category via the shortest circular path
+  const goToCategory = (targetIdx: number) => {
+    const diff = getNormalizedDiff(targetIdx, targetProgressRef.current);
+    targetProgressRef.current += diff;
+  };
+
+  // Touch Swipe on mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 45) {
+      nextSlide();
+    } else if (distance < -45) {
+      prevSlide();
+    }
+    setTouchStart(null);
+  };
+
+  const handleCardClick = (idx: number, cat: CategoryShowcaseItem) => {
+    const diff = getNormalizedDiff(idx, targetProgressRef.current);
+    if (Math.abs(diff) < 0.25) {
+      // Front center card: Navigate to products catalog
+      window.location.href = cat.href;
+    } else {
+      // Rotate clicked card to front center
+      targetProgressRef.current += diff;
+    }
+  };
+
+  // Active index for indicators (modulo mapped to 0, 1, 2)
+  const activeIndex = ((Math.round(renderProgress) % 3) + 3) % 3;
 
   return (
-    <section id="featured-products" className="py-20 sm:py-28 bg-[#FBF9F5] text-[#0C161D] relative overflow-hidden border-b border-[#E8E2D5]">
+    <section
+      id="featured-products"
+      className="relative bg-[#FBF9F5] text-[#1A1815] border-b border-[#E8E2D5] select-none py-12 sm:py-16 md:py-20 overflow-hidden"
+    >
+      <div id="featured-products-all" className="absolute -top-32" />
+      <div id="featured-products-rudraksha" className="absolute -top-32" />
+      <div id="featured-products-tulsi" className="absolute -top-32" />
+      <div id="featured-products-gemstones" className="absolute -top-32" />
+
       {/* Background Subtle Organic Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-        {/* Section Header: Minimal & Tactile Focus */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EFECE5] border border-[#C5A880]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.25em] uppercase text-[#7A6242]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8E704F]" />
-              <span>7. Product Showcase</span>
-            </div>
-
-            <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
-              Tactile Sacred Objects, <br className="hidden sm:inline" />
+      {/* Main Container */}
+      <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-between max-w-7xl relative z-10">
+        {/* Section Header & Filters */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 sm:mb-8 max-w-7xl mx-auto w-full shrink-0">
+          <div className="space-y-1.5">
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
+              Sacred Categories, <br className="hidden sm:inline" />
               <span className="italic text-[#7A6242] font-light">rooted in honest origin.</span>
             </h2>
-
-            <p className="text-stone-600 font-light text-sm sm:text-base max-w-xl">
-              Extreme detailed macro photography showcasing raw natural textures. Zero plastic coatings or artificial dyes.
-            </p>
           </div>
 
-          {/* Filter Pills */}
+          {/* Category Filter Pills */}
           <div className="flex items-center gap-2 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] self-start lg:self-end">
-            {(["all", "rudraksha", "tulsi", "gemstones"] as const).map((cat) => (
+            <Link
+              href="/products"
+              className="px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/50"
+            >
+              All Products
+            </Link>
+            {CATEGORIES.map((cat, idx) => (
               <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
-                  filter === cat
-                    ? "bg-[#0C161D] text-white font-semibold shadow-md"
+                key={cat.id}
+                onClick={() => goToCategory(idx)}
+                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                  activeIndex === idx
+                    ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
                     : "text-stone-600 hover:text-black hover:bg-white/50"
                 }`}
               >
-                {cat === "all" ? "All Pieces" : cat === "rudraksha" ? "Rudraksha" : cat === "tulsi" ? "Tulsi" : "Gemstones"}
+                {cat.category === "rudraksha"
+                  ? "Rudraksha"
+                  : cat.category === "tulsi"
+                  ? "Tulsi"
+                  : "Gemstones"}
               </button>
             ))}
           </div>
         </div>
 
-        {/* 4-Product (Mobile Horizontal Swipe Carousel / Desktop 4-col Grid) */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0">
-          {filtered.map((prod) => (
-            <div
-              key={prod.id}
-              className="group relative rounded-2xl overflow-hidden bg-white border border-[#E0D9CA] hover:border-[#C5A880] shadow-md hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 w-[78vw] xs:w-[68vw] sm:w-auto snap-center"
-            >
-              {/* Product Macro Image (70% Visual) */}
-              <div className="relative w-full aspect-[4/5] overflow-hidden bg-stone-900">
-                <Image
-                  src={prod.image}
-                  alt={prod.name}
-                  fill
-                  className="object-cover brightness-[0.96] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+        {/* 3D Cylindrical Wheel Stage */}
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          style={{
+            perspective: "1400px",
+            transformStyle: "preserve-3d",
+          }}
+          className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] flex items-center justify-center overflow-visible my-6 sm:my-8"
+        >
+          {/* Left Scroll Button */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6] hover:bg-[#1A1815] text-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+            aria-label="Previous category"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-                {/* Bottom Origin On Image */}
-                <div className="absolute bottom-3 left-3.5 right-3.5 pointer-events-none">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-stone-200 block truncate">
-                    {prod.origin}
-                  </span>
-                </div>
-              </div>
+          {/* Right Scroll Button */}
+          <button
+            onClick={nextSlide}
+            className="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6] hover:bg-[#1A1815] text-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+            aria-label="Next category"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-              {/* Product Info (30% Minimal Text) */}
-              <div className="p-4 sm:p-5 space-y-3 bg-white flex flex-col justify-between flex-1">
-                <div className="space-y-1.5">
-                  <h3 className="font-serif text-base sm:text-lg font-normal text-[#1A1815] leading-snug group-hover:text-[#7A6242] transition-colors line-clamp-2">
-                    {prod.name}
-                  </h3>
-                  <p className="text-xs text-stone-500 font-light truncate">
-                    {prod.material}
-                  </p>
-                </div>
+          {/* 3D Cylindrical Cards Wrapper */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {CATEGORIES.map((cat, idx) => {
+              const diff = getNormalizedDiff(idx, renderProgress);
+              const absDiff = Math.abs(diff);
 
-                {/* Spec Pills */}
-                <div className="flex flex-wrap gap-1">
-                  {prod.specs.slice(0, 2).map((s, i) => (
-                    <span key={i} className="px-2 py-0.5 rounded bg-[#F4F1EA] text-[10px] font-mono text-stone-600">
-                      {s}
-                    </span>
-                  ))}
-                </div>
+              // 3D positioning:
+              const rotateY = -diff * 22;
+              const translateZ = `${30 - Math.min(absDiff, 1.4) * 140}px`;
+              const translateX = `calc(-50% + ${diff * 68}%)`;
 
-                {/* Price and Add to Bag */}
-                <div className="pt-3 border-t border-[#EAE5D8] flex items-center justify-between">
-                  <div>
-                    <span className="text-base font-semibold text-[#1A1815]">₹{prod.price}</span>
-                    <span className="text-xs text-stone-400 line-through ml-2">₹{prod.originalPrice}</span>
+              // Scaling: compact and subtle on sides
+              const scaleX = Math.max(0.48, 1 - Math.min(absDiff, 1.3) * 0.38);
+              const scaleY = Math.max(0.40, 1 - Math.min(absDiff, 1.3) * 0.46);
+
+              // Subtle visibility transition:
+              // - Center card is 1.0 (primary focus)
+              // - Side cards are 0.85
+              // - When leaving side to back: "thoda sa" dikhta hai aur silently deep back me fade ho jata hai (zero distraction)
+              // - When approaching next position: gracefully fades in and docks smoothly into the side slot
+              let opacity = 1;
+              if (absDiff <= 1.0) {
+                opacity = 1 - absDiff * 0.15;
+              } else if (absDiff < 1.32) {
+                // Gentle fade into back / gentle emergence from back
+                opacity = Math.max(0, 0.85 * (1 - (absDiff - 1.0) / 0.32));
+              } else {
+                opacity = 0; // deep back: zero distraction, center card remains the complete focus
+              }
+
+              const brightness = 1 - Math.min(0.35, absDiff * 0.25);
+              const zIndex = Math.round(30 - Math.min(absDiff, 1.5) * 16);
+
+              const isCentered = absDiff < 0.35;
+              const boxShadow = isCentered
+                ? "0 30px 65px -15px rgba(0,0,0,0.55), 0 10px 30px -10px rgba(0,0,0,0.3)"
+                : "0 20px 45px -15px rgba(0,0,0,0.4)";
+
+              return (
+                <div
+                  key={cat.id}
+                  onClick={() => handleCardClick(idx, cat)}
+                  style={{
+                    transform: `translate3d(${translateX}, -50%, ${translateZ}) rotateY(${rotateY}deg) scale(${scaleX}, ${scaleY})`,
+                    zIndex,
+                    opacity,
+                    filter: `brightness(${brightness})`,
+                    boxShadow,
+                    transformStyle: "preserve-3d",
+                    willChange: "transform, opacity",
+                  }}
+                  className="absolute top-1/2 left-1/2 w-[86vw] sm:w-[540px] md:w-[660px] lg:w-[740px] xl:w-[800px] aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border-0 cursor-pointer group/card"
+                >
+                  {/* Category Background Image */}
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    priority={isCentered}
+                    className="object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 660px, 800px"
+                  />
+
+                  {/* Dark Gradient Overlay at Bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
+
+                  {/* Bottom Content Area: Large Centered Luxury Serif Title */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 md:p-9 flex flex-col items-center text-center">
+                    <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-lg mb-1.5 transition-transform duration-300">
+                      {cat.name}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm text-[#DFCAAB] font-light tracking-wide mb-4 drop-shadow">
+                      {cat.subtitle}
+                    </p>
+
+                    {/* Explore Collection Action Button (Active Card Only) */}
+                    <div
+                      className={`transition-all duration-300 ${
+                        isCentered
+                          ? "opacity-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 translate-y-2 pointer-events-none"
+                      }`}
+                    >
+                      <Link
+                        href={cat.href}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 shadow-2xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
+                      >
+                        <span>Explore Collection</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      </Link>
+                    </div>
                   </div>
-
-                  <button
-                    onClick={() =>
-                      addToCart({
-                        id: prod.id,
-                        name: prod.name,
-                        price: prod.price,
-                        image: prod.image,
-                        originalPrice: prod.originalPrice,
-                      })
-                    }
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0C161D] hover:bg-[#7A6242] text-[#ECEADE] text-[11px] font-mono uppercase tracking-wider transition-colors shadow-sm"
-                  >
-                    <ShoppingBag className="w-3 h-3" />
-                    <span>Acquire</span>
-                  </button>
                 </div>
-              </div>
-            </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom Horizontal Dash Indicators */}
+        <div className="flex items-center justify-center gap-2 sm:gap-2.5 mt-4 sm:mt-6 shrink-0">
+          {CATEGORIES.map((_, idx) => (
+            <button
+              key={catIdx(idx)}
+              onClick={() => goToCategory(idx)}
+              aria-label={`Go to category ${idx + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-400 cursor-pointer ${
+                idx === activeIndex
+                  ? "w-10 sm:w-12 bg-[#1A1815]"
+                  : "w-5 sm:w-6 bg-[#DCD6C7] hover:bg-[#C5A880]"
+              }`}
+            />
           ))}
         </div>
       </div>
     </section>
   );
+}
+
+// Key helper
+function catIdx(i: number) {
+  return `ind-${i}`;
 }
