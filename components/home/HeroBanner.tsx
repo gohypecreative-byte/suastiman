@@ -125,7 +125,7 @@ export function HeroBanner() {
   const current = NINE_STAGES[activeIndex];
 
   return (
-    <section className="relative w-full min-h-[660px] lg:min-h-[780px] bg-[#0C161D] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
+    <section className="relative w-full h-[calc(100vh-116px)] min-h-[700px] bg-[#122E46] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
       {/* Background Photography with Smooth Crossfade & High Natural Clarity (Light & Bright) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {NINE_STAGES.map((stage, idx) => (
@@ -147,8 +147,8 @@ export function HeroBanner() {
         ))}
 
         {/* Soft, light organic gradient for clear text contrast without turning image dark */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0C161D]/90 via-[#0C161D]/25 to-black/20 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0C161D]/85 via-[#0C161D]/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#122E46]/90 via-[#122E46]/25 to-black/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#122E46]/85 via-[#122E46]/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Top Header Area (Empty but keeping padding to maintain structure) */}
@@ -156,7 +156,7 @@ export function HeroBanner() {
       </div>
 
       {/* Main Content Area: The Original Exact Copy & Structure */}
-      <div className="relative z-10 px-6 sm:px-12 lg:px-16 pb-12 sm:pb-16 max-w-4xl">
+      <div className="relative z-10 px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16 lg:pb-20 max-w-4xl">
         <div className="space-y-4">
           <p className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#DFCAAB] drop-shadow-sm flex items-center gap-2">
             <span className="w-8 h-[1px] bg-[#DFCAAB]" />
@@ -170,7 +170,7 @@ export function HeroBanner() {
           <div className="pt-6 flex flex-wrap items-center gap-4">
             <a
               href="#origin-philosophy"
-              className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#F9F8F5] text-[#0C161D] text-xs font-semibold tracking-[0.15em] uppercase rounded-sm hover:bg-[#C5A880] transition-colors duration-300 group/btn shadow-lg"
+              className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#F9F8F5] text-[#122E46] text-xs font-semibold tracking-[0.15em] uppercase rounded-sm hover:bg-[#C5A880] hover:text-white transition-colors duration-300 group/btn shadow-lg"
             >
               <span>Explore The Origin Journey</span>
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />

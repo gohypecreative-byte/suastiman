@@ -86,8 +86,8 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     summary: "Aromatic holy basil aged naturally into serene tactile beads.",
     heading: (
       <>
-        Before it was a mala, <br />
-        <span className="italic text-[#DFCAAB] font-light">it was sacred wood.</span>
+        From holy Vrindavan groves, <br />
+        <span className="italic text-[#DFCAAB] font-light">to quiet beads of devotion.</span>
       </>
     ),
     subheading: "From temple courtyards in Vrindavan to warm, soothing beads of daily quietude. Authentic Indian holy basil heritage.",
@@ -138,8 +138,8 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     summary: "Untreated raw minerals cut without glass or synthetic fillers.",
     heading: (
       <>
-        Before it was a bracelet, <br />
-        <span className="italic text-[#DFCAAB] font-light">it was raw earth.</span>
+        Born in deep tectonic earth, <br />
+        <span className="italic text-[#DFCAAB] font-light">cut by water, never heat.</span>
       </>
     ),
     subheading: "Untreated raw minerals shaped by human hands and water wheels.",
