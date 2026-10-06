@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 export interface CategoryShowcaseItem {
   id: string;
   name: string;
-  category: "rudraksha" | "tulsi" | "gemstones";
+  category: "bracelets" | "malas" | "zodiac" | "botanicals" | "gemstones";
   subtitle: string;
   image: string;
   itemCount: string;
@@ -17,54 +17,75 @@ export interface CategoryShowcaseItem {
 
 const CATEGORIES: CategoryShowcaseItem[] = [
   {
-    id: "cat-rudraksha",
-    name: "Sacred Rudraksha",
-    category: "rudraksha",
-    subtitle: "Wild Himalayan Endocarp Malas & Seeds",
-    image: "/images/products/prod1.webp",
-    itemCount: "8 Authentic Pieces",
-    href: "/products?category=rudraksha",
+    id: "cat-bracelets",
+    name: "Spiritual Bracelets",
+    category: "bracelets",
+    subtitle: "Energy Alignment & Daily Mindful Touch",
+    image: "/images/products/prod2.webp",
+    itemCount: "12 Authentic Pieces",
+    href: "/products?category=bracelets",
   },
   {
-    id: "cat-tulsi",
-    name: "Vrindavan Tulsi",
-    category: "tulsi",
-    subtitle: "Naturally Cured Holy Basil Heartwood",
-    image: "/images/products/prod2.webp",
-    itemCount: "6 Sacred Pieces",
-    href: "/products?category=tulsi",
+    id: "cat-malas",
+    name: "Sacred 108 Malas",
+    category: "malas",
+    subtitle: "Hand-Knotted Rudraksha & Vrindavan Tulsi Beads",
+    image: "/images/products/prod1.webp",
+    itemCount: "8 Sacred Pieces",
+    href: "/products?category=malas",
+  },
+  {
+    id: "cat-zodiac",
+    name: "Zodiac Jewellery",
+    category: "zodiac",
+    subtitle: "Aligned With Your Astrological Birth Chart",
+    image: "/images/origin/zodiac_pendant_centered.jpg",
+    itemCount: "12 Zodiac Signs",
+    href: "#zodiac-finder",
+  },
+  {
+    id: "cat-botanicals",
+    name: "Sacred Botanicals",
+    category: "botanicals",
+    subtitle: "Wild Himalayan Rudraksha & Vrindavan Tulsi",
+    image: "/images/origin/hero_journey_fruit.jpg",
+    itemCount: "14 Authentic Seeds & Wood",
+    href: "/products?category=rudraksha",
   },
   {
     id: "cat-gemstones",
     name: "Earth Gemstones",
     category: "gemstones",
-    subtitle: "Untreated Metamorphic Matrix & Crystals",
+    subtitle: "Untreated Metamorphic Matrix & Healing Crystals",
     image: "/images/products/prod3.webp",
-    itemCount: "12 Certified Pieces",
+    itemCount: "10 Certified Pieces",
     href: "/products?category=gemstones",
   },
 ];
 
 export function FeaturedProducts() {
-  const targetProgressRef = useRef(1); // default center card: Tulsi (idx 1)
-  const animatedProgressRef = useRef(1);
-  const [renderProgress, setRenderProgress] = useState(1);
+  const N = CATEGORIES.length;
+  const targetProgressRef = useRef(0); // default center card: Spiritual Bracelets (idx 0)
+  const animatedProgressRef = useRef(0);
+  const [renderProgress, setRenderProgress] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
 
-  // Helper: Normalize difference into [-1.5, 1.5] for shortest path
+  // Helper: Normalize difference into [-N/2, N/2] for shortest circular path
   const getNormalizedDiff = (targetIdx: number, fromProgress: number) => {
-    let diff = (targetIdx - fromProgress) % 3;
-    while (diff > 1.5) diff -= 3;
-    while (diff < -1.5) diff += 3;
+    let diff = (targetIdx - fromProgress) % N;
+    while (diff > N / 2) diff -= N;
+    while (diff < -N / 2) diff += N;
     return diff;
   };
 
   useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash;
-      if (hash.includes("rudraksha")) goToCategory(0);
-      else if (hash.includes("tulsi")) goToCategory(1);
-      else if (hash.includes("gemstones")) goToCategory(2);
+      if (hash.includes("bracelets")) goToCategory(0);
+      else if (hash.includes("malas")) goToCategory(1);
+      else if (hash.includes("zodiac")) goToCategory(2);
+      else if (hash.includes("botanicals") || hash.includes("rudraksha") || hash.includes("tulsi")) goToCategory(3);
+      else if (hash.includes("gemstones")) goToCategory(4);
     };
 
     window.addEventListener("hashchange", onHashChange);
@@ -124,16 +145,21 @@ export function FeaturedProducts() {
   const handleCardClick = (idx: number, cat: CategoryShowcaseItem) => {
     const diff = getNormalizedDiff(idx, targetProgressRef.current);
     if (Math.abs(diff) < 0.25) {
-      // Front center card: Navigate to products catalog
-      window.location.href = cat.href;
+      // Front center card: Navigate to products catalog or section
+      if (cat.href.startsWith("#")) {
+        const el = document.querySelector(cat.href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = cat.href;
+      }
     } else {
       // Rotate clicked card to front center
       targetProgressRef.current += diff;
     }
   };
 
-  // Active index for indicators (modulo mapped to 0, 1, 2)
-  const activeIndex = ((Math.round(renderProgress) % 3) + 3) % 3;
+  // Active index for indicators (modulo mapped to 0, 1, 2, 3, 4)
+  const activeIndex = ((Math.round(renderProgress) % N) + N) % N;
 
   return (
     <section
@@ -141,49 +167,57 @@ export function FeaturedProducts() {
       className="relative bg-[#FBF9F5] text-[#1A1815] border-b border-[#E8E2D5] select-none py-12 sm:py-16 md:py-20 overflow-hidden"
     >
       <div id="featured-products-all" className="absolute -top-32" />
-      <div id="featured-products-rudraksha" className="absolute -top-32" />
-      <div id="featured-products-tulsi" className="absolute -top-32" />
+      <div id="featured-products-bracelets" className="absolute -top-32" />
+      <div id="featured-products-malas" className="absolute -top-32" />
+      <div id="featured-products-zodiac" className="absolute -top-32" />
+      <div id="featured-products-botanicals" className="absolute -top-32" />
       <div id="featured-products-gemstones" className="absolute -top-32" />
 
       {/* Background Subtle Organic Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
-      {/* Main Container */}
-      <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-between max-w-7xl relative z-10">
+      {/* Main Container - Full Width End-to-End Header */}
+      <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-between relative z-10">
         {/* Section Header & Filters */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6 sm:mb-8 max-w-7xl mx-auto w-full shrink-0">
-          <div className="space-y-1.5">
-            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
-              Sacred Categories, <br className="hidden sm:inline" />
-              <span className="italic text-[#7A6242] font-light">rooted in honest origin.</span>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10 w-full shrink-0">
+          <div className="text-left max-w-2xl">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
+              Sacred Collections,{" "}
+              <span className="italic text-[#7A6242] font-light block sm:inline">
+                crafted for daily spiritual wear.
+              </span>
             </h2>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] self-start lg:self-end">
+          {/* Category Filter Pills - Flushed to Right */}
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] shrink-0 overflow-x-auto scrollbar-none self-start lg:self-end lg:ml-auto max-w-full">
             <Link
               href="/products"
-              className="px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/50"
+              className="px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
             >
-              All Products
+              All
             </Link>
-            {CATEGORIES.map((cat, idx) => (
-              <button
-                key={cat.id}
-                onClick={() => goToCategory(idx)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-                  activeIndex === idx
-                    ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
-                    : "text-stone-600 hover:text-black hover:bg-white/50"
-                }`}
-              >
-                {cat.category === "rudraksha"
-                  ? "Rudraksha"
-                  : cat.category === "tulsi"
-                  ? "Tulsi"
-                  : "Gemstones"}
-              </button>
-            ))}
+            {CATEGORIES.map((cat, idx) => {
+              const label = cat.name
+                .replace("Spiritual ", "")
+                .replace("Sacred ", "")
+                .replace("Earth ", "")
+                .replace(" Jewellery", "");
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => goToCategory(idx)}
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
+                    activeIndex === idx
+                      ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
+                      : "text-stone-600 hover:text-black hover:bg-white/60"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -195,7 +229,7 @@ export function FeaturedProducts() {
             perspective: "1400px",
             transformStyle: "preserve-3d",
           }}
-          className="relative w-full h-[380px] sm:h-[480px] md:h-[540px] flex items-center justify-center overflow-visible my-6 sm:my-8"
+          className="relative w-full h-[420px] sm:h-[520px] md:h-[580px] flex items-center justify-center overflow-visible my-6 sm:my-8"
         >
           {/* Left Scroll Button */}
           <button
@@ -226,9 +260,8 @@ export function FeaturedProducts() {
               const translateZ = `${30 - Math.min(absDiff, 1.4) * 140}px`;
               const translateX = `calc(-50% + ${diff * 68}%)`;
 
-              // Scaling: compact and subtle on sides
-              const scaleX = Math.max(0.48, 1 - Math.min(absDiff, 1.3) * 0.38);
-              const scaleY = Math.max(0.40, 1 - Math.min(absDiff, 1.3) * 0.46);
+              // Uniform scaling to avoid distortion
+              const scale = Math.max(0.60, 1 - Math.min(absDiff, 1.3) * 0.32);
 
               // Subtle visibility transition:
               // - Center card is 1.0 (primary focus)
@@ -258,7 +291,7 @@ export function FeaturedProducts() {
                   key={cat.id}
                   onClick={() => handleCardClick(idx, cat)}
                   style={{
-                    transform: `translate3d(${translateX}, -50%, ${translateZ}) rotateY(${rotateY}deg) scale(${scaleX}, ${scaleY})`,
+                    transform: `translate3d(${translateX}, -50%, ${translateZ}) rotateY(${rotateY}deg) scale(${scale})`,
                     zIndex,
                     opacity,
                     filter: `brightness(${brightness})`,
@@ -266,28 +299,28 @@ export function FeaturedProducts() {
                     transformStyle: "preserve-3d",
                     willChange: "transform, opacity",
                   }}
-                  className="absolute top-1/2 left-1/2 w-[86vw] sm:w-[540px] md:w-[660px] lg:w-[740px] xl:w-[800px] aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border-0 cursor-pointer group/card"
+                  className="absolute top-1/2 left-1/2 w-[84vw] sm:w-[440px] md:w-[500px] lg:w-[560px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E0D8CB]/40 shadow-2xl cursor-pointer group/card"
                 >
-                  {/* Category Background Image */}
+                  {/* Full-bleed Category Image - 100% full fit edge-to-edge */}
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
                     priority={isCentered}
                     className="object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 660px, 800px"
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 500px, 560px"
                   />
 
-                  {/* Dark Gradient Overlay at Bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
+                  {/* Subtle Bottom Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 via-40% to-transparent pointer-events-none" />
 
                   {/* Bottom Content Area: Large Centered Luxury Serif Title */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 md:p-9 flex flex-col items-center text-center">
-                    <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-lg mb-1.5 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
+                    <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-lg mb-1 transition-transform duration-300">
                       {cat.name}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#DFCAAB] font-light tracking-wide mb-4 drop-shadow">
+                    <p className="text-xs sm:text-sm text-[#DFCAAB] font-light tracking-wide mb-3.5 drop-shadow">
                       {cat.subtitle}
                     </p>
 

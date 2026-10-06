@@ -101,15 +101,17 @@ export function BestSellers() {
                 key={product.id}
                 className="group/card flex-none w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-[280px] xl:w-[250px] snap-start flex flex-col"
               >
-                {/* Image Container */}
-                <Link href={`/products/${product.id}`} className="relative aspect-square w-full bg-[#111111] overflow-hidden block mb-4 border border-[#132F47]/10 rounded-[7px]">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover group-hover/card:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 25vw"
-                  />
+                {/* Image Container - 100% visible */}
+                <Link href={`/products/${product.id}`} className="relative aspect-square w-full bg-[#FAF8F5] overflow-hidden block mb-4 border border-[#132F47]/10 rounded-[7px] p-2">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-contain object-center group-hover/card:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                  </div>
                   
                   {/* Badge */}
                   {product.badge && (

@@ -39,9 +39,11 @@ export function Navbar() {
       href: "/products",
       children: [
         { name: "All Collections", href: "/products", desc: "Browse full collection" },
-        { name: "Rudraksha", href: "/products?category=rudraksha", desc: "Himalayan seed malas" },
-        { name: "Tulsi Wood", href: "/products?category=tulsi", desc: "Sacred wood from Vrindavan" },
-        { name: "Gemstones", href: "/products?category=gemstones", desc: "Earth-mined crystal energy" },
+        { name: "Spiritual Bracelets", href: "/products?category=bracelets", desc: "Energy & chakra wristwear" },
+        { name: "108 Japa Malas", href: "/products?category=malas", desc: "Traditional prayer & meditation" },
+        { name: "Zodiac Jewellery", href: "/#zodiac-finder", desc: "Astrological chart & birthstones" },
+        { name: "Sacred Botanicals", href: "/products?category=rudraksha", desc: "Wild Rudraksha & Vrindavan Tulsi" },
+        { name: "Healing Gemstones", href: "/products?category=gemstones", desc: "Earth-mined crystal energy" },
       ],
     },
     {

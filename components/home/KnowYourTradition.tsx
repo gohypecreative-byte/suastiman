@@ -64,7 +64,7 @@ export function KnowYourTradition() {
   const active = TRADITION_KNOWLEDGE.find((item) => item.id === activeId) || TRADITION_KNOWLEDGE[0];
 
   return (
-    <section id="know-your-tradition" className="py-20 sm:py-28 bg-[#F6F4EE] text-[#0C161D] relative overflow-hidden border-b border-[#E2DDD0]">
+    <section id="know-your-tradition" className="py-20 sm:py-28 bg-[#F6F4EE] text-[#0C161D] relative overflow-hidden">
       {/* Subtle Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
@@ -119,11 +119,6 @@ export function KnowYourTradition() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
 
-              <div className="absolute top-6 left-6 pointer-events-none">
-                <span className="px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-xs font-mono tracking-widest uppercase text-[#DFCAAB]">
-                  {active.reference}
-                </span>
-              </div>
 
               <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
                 <p className="text-base sm:text-xl font-serif italic text-stone-100 leading-relaxed drop-shadow-lg">

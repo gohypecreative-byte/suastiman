@@ -50,12 +50,12 @@ export function CartDrawer() {
             <div className="divide-y divide-[#EAE6DF] px-6 py-2">
               {items.map((item) => (
                 <div key={item.id} className="py-4 flex gap-4 items-start">
-                  <div className="relative w-18 h-18 rounded-lg overflow-hidden bg-[#FAF8F5] shrink-0 border border-[#E2DEC9]">
+                  <div className="relative w-18 h-18 rounded-lg overflow-hidden bg-[#FAF8F5] shrink-0 border border-[#E2DEC9] p-1">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-cover"
+                      className="object-contain object-center"
                       sizes="72px"
                     />
                   </div>
@@ -127,32 +127,22 @@ export function CartDrawer() {
             Taxes &amp; shipping calculated at checkout.
           </p>
 
-          <div className="flex gap-3">
-            <button
-              onClick={closeCart}
-              className="flex-1 py-3 px-4 border border-[#1A1815]/30 rounded-lg flex items-center justify-center gap-1.5 text-xs font-semibold tracking-wider text-[#1A1815] hover:bg-[#FAF8F5] uppercase transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5 stroke-[2]" />
-              <span>CONTINUE</span>
-            </button>
-
-            <button
-              disabled={items.length === 0}
-              onClick={() => {
-                if (items.length > 0) {
-                  alert("Proceeding to secure checkout...");
-                }
-              }}
-              className={`flex-1 py-3 px-4 rounded-lg flex items-center justify-center gap-1.5 text-xs font-semibold tracking-wider uppercase transition-colors ${
-                items.length === 0
-                  ? "bg-[#1A1815]/40 text-white/80 cursor-not-allowed"
-                  : "bg-[#1A1815] hover:bg-[#2C2723] text-white active:scale-[0.99] shadow-sm"
-              }`}
-            >
-              <Lock className="w-3.5 h-3.5 stroke-[2] text-[#C5A880]" />
-              <span>CHECKOUT</span>
-            </button>
-          </div>
+          <button
+            disabled={items.length === 0}
+            onClick={() => {
+              if (items.length > 0) {
+                alert("Proceeding to secure checkout...");
+              }
+            }}
+            className={`w-full py-3.5 px-4 rounded-lg flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase transition-colors ${
+              items.length === 0
+                ? "bg-[#1A1815]/40 text-white/80 cursor-not-allowed"
+                : "bg-[#1A1815] hover:bg-[#2C2723] text-white active:scale-[0.99] shadow-sm cursor-pointer"
+            }`}
+          >
+            <Lock className="w-3.5 h-3.5 stroke-[2] text-[#C5A880]" />
+            <span>CHECKOUT</span>
+          </button>
         </div>
       </div>
     </div>

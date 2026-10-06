@@ -95,9 +95,9 @@ export function Craftsmanship() {
   };
 
   return (
-    <section id="craftsmanship" className="py-20 sm:py-28 bg-[#0C161D] text-[#ECEADE] relative overflow-hidden border-b border-[#C5A880]/20">
+    <section id="craftsmanship" className="py-20 sm:py-28 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-b border-[#C5A880]/20">
       {/* Background Subtle Texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.06] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
 
       <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
@@ -117,7 +117,7 @@ export function Craftsmanship() {
             {CRAFT_STEPS.map((craft) => (
               <div
                 key={craft.step}
-                className="group relative rounded-2xl overflow-hidden bg-[#141E26] border border-white/10 shadow-xl transition-all duration-500 flex flex-col justify-between shrink-0 w-[85vw] sm:w-[45vw] lg:w-[calc(33.333vw-2rem)] snap-start"
+                className="group relative rounded-2xl overflow-hidden bg-[#0D2335] border border-white/10 hover:border-[#C5A880]/50 shadow-xl transition-all duration-500 flex flex-col justify-between shrink-0 w-[85vw] sm:w-[45vw] lg:w-[calc(33.333vw-2rem)] snap-start"
               >
                 {/* Image */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-black">
@@ -125,20 +125,20 @@ export function Craftsmanship() {
                     src={craft.image}
                     alt={craft.name}
                     fill
-                    className="object-cover brightness-[0.92] contrast-[1.04]"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#141E26] via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D2335] via-transparent to-transparent pointer-events-none" />
 
                   <div className="absolute bottom-2.5 left-3.5 right-3.5 pointer-events-none">
-                    <span className="text-xs font-mono uppercase tracking-wider text-[#C5A880] block">
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#C5A880] font-medium block drop-shadow-sm">
                       {craft.action}
                     </span>
                   </div>
                 </div>
 
                 {/* Minimal Text Context */}
-                <div className="p-4 bg-[#141E26] flex items-center justify-center gap-2 border-t border-white/5">
+                <div className="p-4 bg-[#0D2335] flex items-center justify-center gap-2 border-t border-white/10">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A880] shrink-0" />
                   <span className="text-[#DFCAAB] text-[10px] sm:text-[11px] font-mono tracking-wide text-center">
                     {craft.provenance}
@@ -152,7 +152,7 @@ export function Craftsmanship() {
           <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:-right-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
             <button 
               onClick={() => manualScroll('right')} 
-              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
               aria-label="Scroll right"
             >
               <ChevronRight className="w-6 h-6" />
@@ -163,7 +163,7 @@ export function Craftsmanship() {
           <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:-left-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
             <button 
               onClick={() => manualScroll('left')} 
-              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
               aria-label="Scroll left"
             >
               <ChevronLeft className="w-6 h-6" />

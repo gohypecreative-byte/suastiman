@@ -160,32 +160,10 @@ export default function BlogPage() {
       <div className="min-h-screen flex flex-col bg-[#F9F8F5] text-[#111111]">
         <Navbar />
 
-        <main className="flex-1 pt-28 sm:pt-32 pb-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto w-full">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-stone-500 mb-6">
-            <Link href="/" className="hover:text-black transition-colors flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" /> Home
-            </Link>
-            <span>/</span>
-            <span className="text-[#1A1815] font-semibold">Sacred Archive &amp; Blog</span>
-          </div>
-
-          {/* Section Header */}
-          <div className="border-b border-[#E8E2D5] pb-8 mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFECE6] border border-[#DCD6C7] text-xs font-mono uppercase tracking-[0.2em] text-[#7A6242] mb-3">
-              <BookOpen className="w-3.5 h-3.5 text-[#C5A880]" />
-              <span>THE SACRED ARCHIVE</span>
-            </div>
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] tracking-tight mb-4">
-              Chronicles of Botanical <br className="hidden sm:inline" />
-              <span className="italic text-[#7A6242] font-light">&amp; Vedic Wisdom.</span>
-            </h1>
-            <p className="text-stone-600 text-sm sm:text-base max-w-2xl leading-relaxed">
-              Documentary research, laboratory verification, and ancient scriptural context exploring the genuine origin of Rudraksha, Tulsi, and untreated Earth Gemstones.
-            </p>
-
-            {/* Category Filter Pills & Search */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-8">
+        <main className="flex-1 pt-6 sm:pt-8 pb-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto w-full">
+          {/* Category Filter Pills & Search */}
+          <div className="border-b border-[#E8E2D5] pb-6 mb-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
                 {[
                   { id: "all", label: "All Chronicles" },

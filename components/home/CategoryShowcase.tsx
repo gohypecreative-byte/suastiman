@@ -16,6 +16,33 @@ interface CategoryItem {
 
 const CATEGORIES: CategoryItem[] = [
   {
+    id: "cat-bracelets",
+    name: "Spiritual Bracelets",
+    count: "Energy Alignment & Mindful Wear",
+    image: "/images/origin/brand_macro_detail.jpg",
+    hoverImage: "/images/products/prod4.webp",
+    href: "#featured-products",
+    tagline: "High-Tensile Resilient Cord",
+  },
+  {
+    id: "cat-malas",
+    name: "Sacred Japa Malas",
+    count: "108 Hand-Knotted Beads",
+    image: "/images/origin/stage9_svastiman.jpg",
+    hoverImage: "/images/products/prod1.webp",
+    href: "#featured-products",
+    tagline: "Daily Contemplative Wear",
+  },
+  {
+    id: "cat-zodiac",
+    name: "Zodiac Jewellery",
+    count: "Astrological & Birthstone Energy",
+    image: "/images/origin/zodiac_pendant_centered.jpg",
+    hoverImage: "/images/womens_new_arrival_final.jpg",
+    href: "#zodiac-finder",
+    tagline: "Aligned With Your Astrological Chart",
+  },
+  {
     id: "cat-rudraksha",
     name: "Sacred Rudraksha",
     count: "Wild Himalayan Endocarp",
@@ -27,7 +54,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "cat-tulsi",
     name: "Vrindavan Tulsi",
-    count: "Naturally Cured Wood",
+    count: "Naturally Cured Sacred Wood",
     image: "/images/origin/tulsi_heritage_plant.jpg",
     hoverImage: "/images/origin/know_tulsi_wood.jpg",
     href: "#tulsi-journey",
@@ -35,30 +62,12 @@ const CATEGORIES: CategoryItem[] = [
   },
   {
     id: "cat-gemstones",
-    name: "Earth Gemstones",
-    count: "Untreated Mineral Matrix",
+    name: "Healing Gemstones",
+    count: "Untreated Earth Minerals & Crystals",
     image: "/images/origin/raw_gemstone_craft.jpg",
     hoverImage: "/images/products/prod3.webp",
     href: "#gemstone-journey",
     tagline: "Jaipur Water Lapidary",
-  },
-  {
-    id: "cat-malas",
-    name: "108 Japa Malas",
-    count: "Hand-Knotted Brahmagranthi",
-    image: "/images/origin/stage9_svastiman.jpg",
-    hoverImage: "/images/products/prod1.webp",
-    href: "#featured-products",
-    tagline: "Daily Contemplative Wear",
-  },
-  {
-    id: "cat-bracelets",
-    name: "Tactile Bracelets",
-    count: "Certified Natural Strata",
-    image: "/images/origin/brand_macro_detail.jpg",
-    hoverImage: "/images/products/prod4.webp",
-    href: "#featured-products",
-    tagline: "High-Tensile Resilient Cord",
   },
 ];
 
@@ -84,10 +93,16 @@ export function CategoryShowcase() {
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
       <div className="w-full mx-auto relative z-10">
-        {/* Header - Unified Message */}
-        <div className="mb-8 sm:mb-12 max-w-4xl px-5 sm:px-8 lg:px-12">
+        {/* Header - Aligned with Client's "Wear Your Energy" Brand Brief */}
+        <div className="mb-8 sm:mb-12 max-w-4xl px-5 sm:px-8 lg:px-12 space-y-2">
+          <span className="text-xs sm:text-sm font-mono tracking-[0.2em] uppercase text-[#7A6242] block">
+            Curated Collections
+          </span>
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
-            A modern heritage house <span className="italic text-[#7A6242] font-light">built on untouched origins.</span>
+            Wear Your Energy. <br className="hidden sm:inline" />
+            <span className="italic text-[#7A6242] font-light">
+              Crafted for mindfulness &amp; energy alignment.
+            </span>
           </h2>
         </div>
 
@@ -103,23 +118,23 @@ export function CategoryShowcase() {
                 href={cat.href}
                 className="group block relative rounded-2xl overflow-hidden bg-white border border-[#E0D9CA] hover:border-[#C5A880] shadow-md hover:shadow-2xl transition-all duration-500 shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
               >
-                {/* Image Container with Hover Crossfade Flip Effect */}
-                <div className="relative w-full aspect-[1/1.15] overflow-hidden bg-stone-900">
-                  {/* Primary Base Image */}
+                {/* Image Container with Hover Crossfade Flip Effect - Exact 1:1 Square Full Fit */}
+                <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8F5]">
+                  {/* Primary Base Image - Full Fit */}
                   <Image
                     src={cat.image}
                     alt={cat.name}
                     fill
-                    className="object-cover brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
+                    className="object-cover object-center brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
                   />
 
-                  {/* Secondary Hover Image (Reveals on Hover) */}
+                  {/* Secondary Hover Image (Reveals on Hover) - Full Fit */}
                   <Image
                     src={cat.hoverImage}
                     alt={`${cat.name} craft perspective`}
                     fill
-                    className="object-cover brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out opacity-0 scale-100 group-hover:opacity-100 group-hover:scale-105"
+                    className="object-cover object-center brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out opacity-0 scale-100 group-hover:opacity-100 group-hover:scale-105"
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>

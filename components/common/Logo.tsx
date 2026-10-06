@@ -13,8 +13,8 @@ export function Logo({ variant = "full", className = "", theme = "auto" }: LogoP
     theme === "light"
       ? "text-[#ECEADE]"
       : theme === "dark"
-      ? "text-[#132F47]"
-      : "text-[#132F47] dark:text-[#ECEADE]";
+      ? "text-[#122E46]"
+      : "text-[#122E46] dark:text-[#ECEADE]";
 
   return (
     <Link href="/" className={`inline-flex items-center group ${className}`}>

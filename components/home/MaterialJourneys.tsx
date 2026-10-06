@@ -86,8 +86,8 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     summary: "Aromatic holy basil aged naturally into serene tactile beads.",
     heading: (
       <>
-        Seed &rarr; Soil &rarr; Plant &rarr; Leaves &rarr;{" "}
-        <span className="italic text-[#DFCAAB] font-light">Harvest &rarr; Drying &rarr; Mala</span>
+        Before it was a mala, <br />
+        <span className="italic text-[#DFCAAB] font-light">it was sacred wood.</span>
       </>
     ),
     subheading: "From temple courtyards in Vrindavan to warm, soothing beads of daily quietude. Authentic Indian holy basil heritage.",
@@ -138,10 +138,8 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     summary: "Untreated raw minerals cut without glass or synthetic fillers.",
     heading: (
       <>
-        Earth &rarr; Rough Stone &rarr; <br className="hidden sm:inline" />
-        <span className="italic text-[#DFCAAB] font-light">
-          Cutting &rarr; Polishing &rarr; Bracelet
-        </span>
+        Before it was a bracelet, <br />
+        <span className="italic text-[#DFCAAB] font-light">it was raw earth.</span>
       </>
     ),
     subheading: "Untreated raw minerals shaped by human hands and water wheels.",
@@ -214,7 +212,7 @@ export function MaterialJourneys() {
   const story = MATERIAL_STORIES[activeTab];
 
   return (
-    <section id="material-journeys" className="py-12 sm:py-16 lg:py-20 bg-[#0C161D] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
+    <section id="material-journeys" className="py-12 sm:py-16 lg:py-20 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
       <div id="material-journeys-rudraksha" className="absolute -top-32" />
       <div id="material-journeys-tulsi" className="absolute -top-32" />
       <div id="material-journeys-gemstones" className="absolute -top-32" />
@@ -232,14 +230,14 @@ export function MaterialJourneys() {
           </div>
 
           {/* Material Category Switcher Tabs */}
-          <div className="flex items-center gap-2 bg-[#162028] p-1.5 rounded-full border border-white/10 self-start lg:self-end shadow-xl">
+          <div className="flex items-center gap-2 bg-[#0D2335] p-1.5 rounded-full border border-white/15 self-start lg:self-end shadow-xl">
             {(["rudraksha", "tulsi", "gemstones"] as const).map((mat) => (
               <button
                 key={mat}
                 onClick={() => setActiveTab(mat)}
                 className={`px-4 sm:px-5 py-2 rounded-full text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 ${
                   activeTab === mat
-                    ? "bg-[#C5A880] text-[#0C161D] font-bold shadow-lg"
+                    ? "bg-[#C5A880] text-[#122E46] font-bold shadow-lg"
                     : "text-stone-300 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -258,29 +256,24 @@ export function MaterialJourneys() {
             {story.fourStages.map((stage) => (
               <div
                 key={stage.stageNumber}
-                className="group relative rounded-2xl overflow-hidden bg-[#141E26] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
+                className="group relative rounded-2xl overflow-hidden bg-[#0D2335] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
               >
-                {/* Clean Image Container */}
-                <div className="relative w-full aspect-[4/5] overflow-hidden bg-black">
+                {/* Clean Image Container - 100% visible, no horizontal clipping */}
+                <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-black">
                   <Image
                     src={stage.image}
                     alt={stage.headline}
                     fill
-                    className="object-cover brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="object-cover object-center brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-700 ease-out"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
 
                 {/* Minimal Clean Headline Below Image */}
-                <div className="p-4 bg-[#141E26] flex items-center justify-between border-t border-white/5">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#C5A880] block">
-                      STAGE {stage.stageNumber} &bull; {stage.stageName}
-                    </span>
-                    <h3 className="font-serif text-base font-normal text-white leading-snug">
-                      {stage.headline}
-                    </h3>
-                  </div>
+                <div className="p-4 sm:p-5 bg-[#0D2335] flex items-center justify-between border-t border-white/10">
+                  <h3 className="font-serif text-base sm:text-lg font-normal text-white leading-snug">
+                    {stage.headline}
+                  </h3>
                 </div>
               </div>
             ))}
@@ -290,7 +283,7 @@ export function MaterialJourneys() {
           <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:-right-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
             <button 
               onClick={() => scroll('right')} 
-              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
               aria-label="Scroll right"
             >
               <ChevronRight className="w-6 h-6" />
@@ -301,7 +294,7 @@ export function MaterialJourneys() {
           <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:-left-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
             <button 
               onClick={() => scroll('left')} 
-              className="p-3 rounded-full bg-white/10 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#0C161D] transition-all text-white backdrop-blur-md"
+              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
               aria-label="Scroll left"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -314,7 +307,7 @@ export function MaterialJourneys() {
 
           <a
             href="#featured-products"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F7F5F0] hover:bg-[#C5A880] text-[#0C161D] text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md group"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F7F5F0] hover:bg-[#C5A880] text-[#122E46] hover:text-white text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md group"
           >
             <span>View Finished Collection</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

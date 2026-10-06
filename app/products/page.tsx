@@ -122,22 +122,28 @@ const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
 ];
 
+type CategoryFilter = "all" | "bracelets" | "malas" | "rudraksha" | "tulsi" | "gemstones";
+
 function ProductsCatalog() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category");
   
-  const [activeCategory, setActiveCategory] = useState<"all" | "rudraksha" | "tulsi" | "gemstones">("all");
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [addedId, setAddedId] = useState<string | null>(null);
   const { addToCart } = useCart();
 
   useEffect(() => {
-    if (initialCategory && ["rudraksha", "tulsi", "gemstones"].includes(initialCategory)) {
-      setActiveCategory(initialCategory as "rudraksha" | "tulsi" | "gemstones");
+    if (initialCategory && ["bracelets", "malas", "rudraksha", "tulsi", "gemstones"].includes(initialCategory)) {
+      setActiveCategory(initialCategory as CategoryFilter);
     }
   }, [initialCategory]);
 
   const filteredProducts = activeCategory === "all"
     ? CATALOG_PRODUCTS
+    : activeCategory === "bracelets"
+    ? CATALOG_PRODUCTS.filter((p) => p.name.toLowerCase().includes("bracelet") || p.name.toLowerCase().includes("wrist"))
+    : activeCategory === "malas"
+    ? CATALOG_PRODUCTS.filter((p) => p.name.toLowerCase().includes("mala") || p.name.toLowerCase().includes("kanthi"))
     : CATALOG_PRODUCTS.filter((p) => p.category === activeCategory);
 
   const handleAddToCart = (e: React.MouseEvent, prod: CatalogProduct) => {
@@ -155,6 +161,16 @@ function ProductsCatalog() {
 
   const getCategoryTitle = () => {
     switch (activeCategory) {
+      case "bracelets":
+        return {
+          title: "Spiritual Bracelets",
+          subtitle: "Tactile wristwear designed for chakra balance, vitality, and continuous mindfulness.",
+        };
+      case "malas":
+        return {
+          title: "Sacred 108 Japa Malas",
+          subtitle: "Hand-knotted 108 contemplation beads structured with traditional Brahmagranthi ties.",
+        };
       case "rudraksha":
         return {
           title: "Sacred Rudraksha Collection",
@@ -184,31 +200,19 @@ function ProductsCatalog() {
     <div className="min-h-screen flex flex-col bg-[#F9F8F5] text-[#111111]">
       <Navbar />
 
-      <main className="flex-1 pt-28 sm:pt-32 pb-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto w-full">
-        {/* Breadcrumb & Navigation */}
-        <div className="flex items-center gap-2 text-xs text-stone-500 mb-6">
-          <Link href="/" className="hover:text-black transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
-          </Link>
-          <span>/</span>
-          <span>Collections</span>
-          <span>/</span>
-          <span className="text-[#1A1815] font-semibold capitalize">{activeCategory}</span>
-        </div>
-
+      <main className="flex-1 pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 w-full">
         {/* Page Header */}
-        <div className="border-b border-[#E8E2D5] pb-8 mb-10">
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] tracking-tight mb-3">
+        <div className="border-b border-[#E8E2D5] pb-6 mb-8">
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] tracking-tight mb-4">
             {headerInfo.title}
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base max-w-2xl leading-relaxed">
-            {headerInfo.subtitle}
-          </p>
 
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 mt-8 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
             {[
               { id: "all", label: "All Collections" },
+              { id: "bracelets", label: "Spiritual Bracelets" },
+              { id: "malas", label: "108 Japa Malas" },
               { id: "rudraksha", label: "Sacred Rudraksha" },
               { id: "tulsi", label: "Vrindavan Tulsi" },
               { id: "gemstones", label: "Earth Gemstones" },
@@ -228,25 +232,20 @@ function ProductsCatalog() {
           </div>
         </div>
 
-        {/* Products Count Indicator */}
-        <div className="flex items-center justify-between text-xs text-stone-500 mb-8">
-          <span>Showing {filteredProducts.length} authentic pieces</span>
-        </div>
-
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+        {/* Products Grid - Exactly 4 Cards Per Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {filteredProducts.map((prod) => (
             <div
               key={prod.id}
               className="group bg-white rounded-2xl overflow-hidden border border-[#E8E2D5] shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
             >
-              {/* Image Container */}
-              <Link href={`/products/${prod.id}`} className="relative aspect-[4/3] bg-stone-100 overflow-hidden block">
+              {/* Image Container - Full Fit edge-to-edge */}
+              <Link href={`/products/${prod.id}`} className="relative aspect-square bg-[#FAF8F5] overflow-hidden block">
                 <Image
                   src={prod.image}
                   alt={prod.name}
                   fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </Link>

@@ -114,15 +114,17 @@ export function ProductDetailsClient({ id }: { id: string }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         {/* Left: Image Gallery */}
         <div className="space-y-4">
-          <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#ECEADE] border border-[#E2DEC9]">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E2DEC9] p-4 sm:p-6 flex items-center justify-center">
+            <div className="relative w-full h-full">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-contain object-center"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             {product.badge && (
               <div className="absolute top-4 left-4 bg-[#132F47] text-[#ECEADE] text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded border border-[#C5A880]/40 shadow-md">
                 {product.badge}
@@ -132,12 +134,12 @@ export function ProductDetailsClient({ id }: { id: string }) {
           {/* Thumbnails (Mocked) */}
           <div className="grid grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer border-2 transition-colors ${i === 1 ? 'border-[#C5A880]' : 'border-transparent hover:border-[#E2DEC9]'}`}>
+              <div key={i} className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer border-2 transition-colors bg-[#FAF8F5] p-1 ${i === 1 ? 'border-[#C5A880]' : 'border-transparent hover:border-[#E2DEC9]'}`}>
                 <Image
                   src={product.image}
                   alt={`${product.name} view ${i}`}
                   fill
-                  className="object-cover opacity-80 hover:opacity-100 transition-opacity"
+                  className="object-contain opacity-80 hover:opacity-100 transition-opacity"
                 />
               </div>
             ))}

@@ -10,7 +10,7 @@
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
   
-  --color-navy: #132F47;
+  --color-navy: #122E46;
   --color-navy-dark: #0A1B2A;
   --color-navy-light: #1D4263;
   --color-ivory: #ECEADE;
@@ -56,18 +56,18 @@
   --card-foreground: #111111;
   --popover: #FFFFFF;
   --popover-foreground: #111111;
-  --primary: #132F47;
+  --primary: #122E46;
   --primary-foreground: #ECEADE;
   --secondary: #ECEADE;
-  --secondary-foreground: #132F47;
+  --secondary-foreground: #122E46;
   --muted: #F0EEE6;
   --muted-foreground: #5C6773;
   --accent: #E5DFC8;
-  --accent-foreground: #132F47;
+  --accent-foreground: #122E46;
   --destructive: #A32D2D;
   --border: #E2DEC9;
   --input: #E2DEC9;
-  --ring: #132F47;
+  --ring: #122E46;
   --radius: 0.5rem;
 }
 
@@ -147,5 +147,15 @@
 }
 
 .animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 85s linear infinite;
+}
+
+.animate-marquee-slow:hover {
   animation-play-state: paused;
 }
