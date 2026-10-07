@@ -16,7 +16,6 @@ import { TrustProvenance } from "@/components/home/TrustProvenance";
 import { FinalBrandCTA } from "@/components/home/FinalBrandCTA";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
-import { BottomNav } from "@/components/layout/BottomNav";
 
 export default function Home() {
   const [footerHeight, setFooterHeight] = React.useState(0);
@@ -132,9 +131,6 @@ export default function Home() {
 
         {/* Global Cart Slideout Drawer */}
         <CartDrawer />
-
-        {/* Mobile Sticky Bottom Navigation */}
-        <BottomNav />
       </div>
     </CartProvider>
   );

@@ -18,7 +18,7 @@ export function Logo({ variant = "full", className = "", theme = "auto" }: LogoP
 
   return (
     <Link href="/" className={`inline-flex items-center group ${className}`}>
-      <span className={`font-serif text-2xl sm:text-3xl font-medium tracking-wide ${textColor}`}>
+      <span className={`font-serif text-3xl font-medium tracking-wide ${textColor}`}>
         Svastimān
       </span>
     </Link>

@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
-import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider, useCart, WishlistItem } from "@/context/CartContext";
 import {
   Heart,
@@ -257,7 +256,6 @@ export default function WishlistPage() {
         <WishlistContent />
         <Footer />
         <CartDrawer />
-        <BottomNav />
       </div>
     </CartProvider>
   );

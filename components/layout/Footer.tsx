@@ -71,8 +71,8 @@ export function Footer() {
         </div>
 
         {/* Big Slogan / Statement Banner (Simple White with Traveling Blue Wave Animation) */}
-        <div className="mt-6 sm:mt-12 overflow-hidden py-2">
-          <h2 className="font-serif text-2xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-[5.5rem] font-normal tracking-tight select-none leading-none">
+        <div className="mt-8 sm:mt-12 overflow-hidden py-2">
+          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[5.5rem] font-normal tracking-tight select-none leading-none">
             <span className="inline-block animate-blue-travel filter drop-shadow-[0_2px_6px_rgba(18,46,70,0.18)] drop-shadow-[0_1px_2px_rgba(18,46,70,0.22)]">
               From Nature <span className="italic font-light">#RootedInTradition</span>
             </span>
@@ -81,8 +81,8 @@ export function Footer() {
       </div>
 
       {/* 4-COLUMN CONTENT SECTION - Full Width End-to-End */}
-      <div className="w-full px-5 sm:px-10 md:px-14 lg:px-16 xl:px-20 2xl:px-24 pb-20 lg:pb-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-10 xl:gap-14 2xl:gap-20 pt-8 sm:pt-10 border-t border-[#E0D8CB]/80">
+      <div className="w-full px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20 2xl:px-24 pb-12 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-10 xl:gap-14 2xl:gap-20 pt-10 border-t border-[#E0D8CB]/80">
           
           {/* Col 1: Customer Service / Sacred Materials */}
           <div className="space-y-4">
@@ -288,7 +288,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Svastimān Heritage Private Limited. All rights reserved.
           </p>
 
-          <div className="order-1 md:order-3 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs">
+          <div className="order-3 flex items-center gap-4 text-xs">
             <a href="#trust-provenance" className="hover:text-[#8C6D46] transition-colors">
               Authenticity Charter
             </a>
