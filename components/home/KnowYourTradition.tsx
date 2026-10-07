@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { BookOpen, Sparkles, Compass, ShieldCheck, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
+import { BookOpen, Compass, ShieldCheck, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 
 interface TraditionCard {
   id: string;

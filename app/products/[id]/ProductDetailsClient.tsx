@@ -74,7 +74,7 @@ const mockProducts = [
 ];
 
 export function ProductDetailsClient({ id }: { id: string }) {
-  const { addToCart } = useCart();
+  const { addToCart, toggleWishlist, isInWishlist } = useCart();
   const [activeAccordion, setActiveAccordion] = useState<string | null>("description");
   const [quantity, setQuantity] = useState(1);
 
@@ -212,8 +212,30 @@ export function ProductDetailsClient({ id }: { id: string }) {
               Add to Sacred Bag
             </button>
             
-            <button className="p-3.5 rounded-xl border border-[#E2DEC9] bg-white text-stone-400 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all flex items-center justify-center">
-              <Heart className="w-5 h-5" />
+            <button
+              onClick={() =>
+                toggleWishlist({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  originalPrice: product.originalPrice,
+                  image: product.image,
+                  category: product.category,
+                  material: product.crystal,
+                })
+              }
+              title={isInWishlist(product.id) ? "Remove from wishlist" : "Save to wishlist"}
+              className={`p-3.5 rounded-xl border transition-all flex items-center justify-center cursor-pointer ${
+                isInWishlist(product.id)
+                  ? "border-rose-300 bg-rose-50 text-rose-600 shadow-sm"
+                  : "border-[#E2DEC9] bg-white text-stone-400 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50/50"
+              }`}
+            >
+              <Heart
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  isInWishlist(product.id) ? "fill-rose-600 stroke-rose-600 scale-110" : ""
+                }`}
+              />
             </button>
           </div>
 

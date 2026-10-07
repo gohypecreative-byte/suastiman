@@ -13,6 +13,19 @@ export interface CartItem {
   crystal?: string;
 }
 
+export interface WishlistItem {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  category?: string;
+  material?: string;
+  origin?: string;
+  badge?: string;
+  specs?: string[];
+}
+
 interface CartContextType {
   items: CartItem[];
   isOpen: boolean;
@@ -23,24 +36,44 @@ interface CartContextType {
   updateQuantity: (id: string, delta: number) => void;
   totalCount: number;
   subtotal: number;
+  // Wishlist
+  wishlist: WishlistItem[];
+  addToWishlist: (item: WishlistItem) => void;
+  removeFromWishlist: (id: string) => void;
+  toggleWishlist: (item: WishlistItem) => void;
+  isInWishlist: (id: string) => boolean;
+  wishlistCount: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Default initial wishlist items
+  const [wishlist, setWishlist] = useState<WishlistItem[]>([
     {
-      id: "prod-1",
-      name: "Zodiac Celestial Tiger Eye Bracelet",
-      price: 1899,
+      id: "prod-rudraksha-108",
+      name: "Himalayan Rudraksha 108 Japa Mala",
+      price: 2899,
+      originalPrice: 3499,
+      image: "/images/products/prod1.webp",
+      category: "rudraksha",
+      badge: "100% Wild Sourced",
+      specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
+    },
+    {
+      id: "prod-lapis-bracelet",
+      name: "Raw Earth Lapis Lazuli Bracelet",
+      price: 1999,
       originalPrice: 2499,
-      image: "https://images.unsplash.com/photo-1611591475102-4f107c164a27?auto=format&fit=crop&w=600&q=80",
-      quantity: 1,
-      intention: "Protection & Willpower",
-      crystal: "Golden Tiger Eye + Black Onyx",
+      image: "/images/products/prod3.webp",
+      category: "gemstones",
+      badge: "Zero Chemical Dye",
+      specs: ["Untreated Metamorphic Matrix", "Natural Pyrite Specks", "Hand-Strung"],
     },
   ]);
-  const [isOpen, setIsOpen] = useState(false);
 
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
@@ -79,6 +112,33 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const totalCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  // Wishlist actions
+  const addToWishlist = (item: WishlistItem) => {
+    setWishlist((prev) => {
+      if (prev.some((w) => w.id === item.id)) return prev;
+      return [...prev, item];
+    });
+  };
+
+  const removeFromWishlist = (id: string) => {
+    setWishlist((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const toggleWishlist = (item: WishlistItem) => {
+    setWishlist((prev) => {
+      if (prev.some((w) => w.id === item.id)) {
+        return prev.filter((w) => w.id !== item.id);
+      }
+      return [...prev, item];
+    });
+  };
+
+  const isInWishlist = (id: string) => {
+    return wishlist.some((item) => item.id === id);
+  };
+
+  const wishlistCount = wishlist.length;
+
   return (
     <CartContext.Provider
       value={{
@@ -91,6 +151,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         updateQuantity,
         totalCount,
         subtotal,
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        toggleWishlist,
+        isInWishlist,
+        wishlistCount,
       }}
     >
       {children}

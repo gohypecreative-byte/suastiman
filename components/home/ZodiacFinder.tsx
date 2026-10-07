@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Sparkles, Compass, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-react";
+import { Compass, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 interface ZodiacData {

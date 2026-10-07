@@ -14,7 +14,6 @@ import {
   ArrowRight,
   ArrowLeft,
   Search,
-  Sparkles,
   Share2,
   CheckCircle2,
   X,

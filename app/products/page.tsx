@@ -8,7 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider, useCart } from "@/context/CartContext";
-import { ShoppingBag, Check, ArrowLeft, Filter } from "lucide-react";
+import { ShoppingBag, Check, ArrowLeft, Filter, Heart } from "lucide-react";
 
 export interface CatalogProduct {
   id: string;

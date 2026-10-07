@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ChevronLeft, ChevronRight, Compass, Layers, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Compass, Layers, CheckCircle2 } from "lucide-react";
 
 interface JourneyStageItem {
   stageNumber: string;

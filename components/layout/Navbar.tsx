@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 export function Navbar() {
-  const { openCart, totalCount } = useCart();
+  const { openCart, totalCount, wishlistCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -222,19 +222,26 @@ export function Navbar() {
               <Search className="w-5 h-5 stroke-[1.5]" />
             </button>
             
-            <button
+            <Link
+              href="/account"
               className="hover:text-[#C5A880] transition-colors"
-              title="Account"
+              title="My Account & Sanctuary"
             >
               <User className="w-5 h-5 stroke-[1.5]" />
-            </button>
+            </Link>
             
-            <button
-              className="hover:text-[#C5A880] transition-colors"
-              title="Wishlist"
+            <Link
+              href="/wishlist"
+              className="relative hover:text-[#C5A880] transition-colors"
+              title="Sacred Wishlist"
             >
               <Heart className="w-5 h-5 stroke-[1.5]" />
-            </button>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-[#C5A880] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
 
             <button
               onClick={openCart}
@@ -311,7 +318,32 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <div className="pt-2">
+            <div className="pt-3 border-t border-[#E2DEC9]/60 flex flex-col gap-2">
+              <Link
+                href="/account"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2.5 text-sm font-medium text-[#1A1815] hover:text-[#C5A880] py-1"
+              >
+                <User className="w-4 h-4 text-[#C5A880]" />
+                <span>My Account &amp; Sanctuary</span>
+              </Link>
+              <Link
+                href="/wishlist"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between text-sm font-medium text-[#1A1815] hover:text-[#C5A880] py-1"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Heart className="w-4 h-4 text-[#C5A880]" />
+                  <span>Sacred Wishlist</span>
+                </div>
+                {wishlistCount > 0 && (
+                  <span className="bg-[#C5A880] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+            </div>
+            <div className="pt-1">
               <p className="text-xs text-stone-500 font-serif italic mb-2">
                 &ldquo;Wear what aligns with your soul.&rdquo;
               </p>

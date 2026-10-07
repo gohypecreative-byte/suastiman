@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Sparkles, ArrowUpRight, Shield, Zap, Heart, Eye, Orbit } from "lucide-react";
+import { ArrowUpRight, Shield, Zap, Heart, Eye, Orbit } from "lucide-react";
 
 interface IntentionItem {
   id: string;

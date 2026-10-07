@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { ShieldCheck, Award, Eye, FileText, CheckCircle2, Microscope, Compass, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShieldCheck, Award, Eye, FileText, CheckCircle2, Microscope, Compass, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface TrustPillar {
   title: string;

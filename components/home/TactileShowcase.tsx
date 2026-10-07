@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ZoomIn, Sparkles, ShieldCheck, Fingerprint, Eye } from "lucide-react";
+import { ZoomIn, ShieldCheck, Fingerprint, Eye } from "lucide-react";
 
 interface TactileMaterial {
   id: string;
