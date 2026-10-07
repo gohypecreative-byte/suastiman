@@ -76,7 +76,7 @@ export default function Home() {
         {/* Main Content Wrapper (Slides UP with rounded bottom corners to reveal footer underneath) */}
         <div 
           style={{ marginBottom: footerHeight ? `${footerHeight}px` : undefined }}
-          className="relative z-10 bg-[#F7F5F0] rounded-b-[36px] sm:rounded-b-[56px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-hidden"
+          className="relative z-10 bg-[#F7F5F0] rounded-b-[36px] sm:rounded-b-[56px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-clip"
         >
           {/* Navigation Bar */}
           <Navbar />

@@ -95,9 +95,6 @@ export function CategoryShowcase() {
       <div className="w-full mx-auto relative z-10">
         {/* Header - Aligned with Client's "Wear Your Energy" Brand Brief */}
         <div className="mb-8 sm:mb-12 max-w-4xl px-5 sm:px-8 lg:px-12 space-y-2">
-          <span className="text-xs sm:text-sm font-mono tracking-[0.2em] uppercase text-[#7A6242] block">
-            Curated Collections
-          </span>
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
             Wear Your Energy. <br className="hidden sm:inline" />
             <span className="italic text-[#7A6242] font-light">

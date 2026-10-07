@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/common/Logo";
 import { useCart } from "@/context/CartContext";
@@ -25,6 +25,50 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Track whether page is scrolled for subtle bottom shadow
+      setIsScrolled(currentScrollY > 15);
+
+      // When at or near the top (within 30px), always keep navbar visible
+      if (currentScrollY <= 30) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // If mobile menu or search drawer is open, don't hide
+      if (mobileMenuOpen || searchOpen) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      const diff = currentScrollY - lastScrollY.current;
+
+      // Ignore micro-jitters
+      if (Math.abs(diff) < 6) return;
+
+      if (diff > 0) {
+        // Scrolling DOWN -> Hide smoothly
+        setIsVisible(false);
+      } else {
+        // Scrolling UP -> Reveal smoothly
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileMenuOpen, searchOpen]);
 
   type NavLink = {
     name: string;
@@ -64,36 +108,49 @@ export function Navbar() {
 
   return (
     <>
-      {/* Top Announcement Marquee Bar */}
-      <div className="bg-[#1A1815] text-[#FAF8F5] py-2.5 overflow-hidden border-b border-[#C5A880]/20 select-none">
-        <div className="animate-marquee flex items-center whitespace-nowrap">
-          {[...Array(4)].map((_, groupIdx) => (
-            <div
-              key={groupIdx}
-              className="flex items-center gap-8 md:gap-14 mx-4 md:mx-7 text-[11px] font-medium tracking-[0.14em] uppercase"
-            >
-              <div className="flex items-center gap-2">
-                <Leaf className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
-                <span>HONORED BY NATURE, BLESSED BY HAND</span>
-              </div>
-              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
-                <span>CERTIFIED SACRED BOTANICALS &amp; GEMS</span>
-              </div>
-              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
-              <div className="flex items-center gap-2">
-                <Truck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
-                <span>COMPLIMENTARY SHIPPING OVER ₹1999</span>
-              </div>
-              <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Layout Spacer to match navbar height and prevent any layout jump */}
+      <div className="w-full h-[116px] pointer-events-none" aria-hidden="true" />
 
-      {/* Main Sticky Navigation */}
-      <header className="sticky top-0 z-40 bg-[#F9F8F5]/95 backdrop-blur-md border-b border-[#E2DEC9] transition-all">
+      {/* Floating Smart Header Wrapper (fixed to browser viewport) */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        {/* Top Announcement Marquee Bar */}
+        <div className="bg-[#1A1815] text-[#FAF8F5] py-2.5 overflow-hidden border-b border-[#C5A880]/20 select-none">
+          <div className="animate-marquee flex items-center whitespace-nowrap">
+            {[...Array(4)].map((_, groupIdx) => (
+              <div
+                key={groupIdx}
+                className="flex items-center gap-8 md:gap-14 mx-4 md:mx-7 text-[11px] font-medium tracking-[0.14em] uppercase"
+              >
+                <div className="flex items-center gap-2">
+                  <Leaf className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                  <span>HONORED BY NATURE, BLESSED BY HAND</span>
+                </div>
+                <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                  <span>CERTIFIED SACRED BOTANICALS &amp; GEMS</span>
+                </div>
+                <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+                <div className="flex items-center gap-2">
+                  <Truck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
+                  <span>COMPLIMENTARY SHIPPING OVER ₹1999</span>
+                </div>
+                <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Main Sticky Navigation */}
+        <header
+          className={`w-full bg-[#F9F8F5] border-b border-[#E2DEC9] transition-shadow duration-300 ${
+            isScrolled ? "shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]" : ""
+          }`}
+        >
         <div className="w-full px-5 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
           {/* Mobile Menu Button */}
           <button
@@ -262,6 +319,7 @@ export function Navbar() {
           </div>
         )}
       </header>
+      </div>
     </>
   );
 }

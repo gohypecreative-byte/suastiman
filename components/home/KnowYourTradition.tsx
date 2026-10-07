@@ -87,10 +87,10 @@ export function KnowYourTradition() {
                 <button
                   key={item.id}
                   onClick={() => setActiveId(item.id)}
-                  className={`w-full p-4 sm:p-5 rounded-2xl border text-left transition-all duration-300 flex items-start justify-between gap-4 ${
+                  className={`w-full p-4 sm:p-5 rounded-2xl border text-left transition-all duration-300 flex items-start justify-between gap-4 cursor-pointer ${
                     isSelected
-                      ? "bg-[#0C161D] text-[#ECEADE] border-[#0C161D] shadow-xl"
-                      : "bg-white text-stone-800 border-[#E0D9CA] hover:border-stone-400"
+                      ? "bg-[#122E46] text-[#ECEADE] border-[#122E46] shadow-xl shadow-[#122E46]/20"
+                      : "bg-white text-stone-800 border-[#E0D9CA] hover:border-stone-400 hover:shadow-md"
                   }`}
                 >
                   <div className="space-y-1">

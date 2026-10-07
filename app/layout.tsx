@@ -37,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("h-full antialiased", serifFont.variable, sansFont.variable)}>
-      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans selection:bg-[#132F47] selection:text-[#ECEADE] px-[4px]">
+    <html lang="en" className={cn("h-full antialiased bg-[#F9F8F5]", serifFont.variable, sansFont.variable)}>
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans selection:bg-[#132F47] selection:text-[#ECEADE]">
         {children}
       </body>
     </html>
