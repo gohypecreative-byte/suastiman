@@ -212,7 +212,7 @@ export function MaterialJourneys() {
   const story = MATERIAL_STORIES[activeTab];
 
   return (
-    <section id="material-journeys" className="py-12 sm:py-16 lg:py-20 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
+    <section id="material-journeys" className="py-10 sm:py-16 lg:py-20 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
       <div id="material-journeys-rudraksha" className="absolute -top-32" />
       <div id="material-journeys-tulsi" className="absolute -top-32" />
       <div id="material-journeys-gemstones" className="absolute -top-32" />
@@ -220,22 +220,22 @@ export function MaterialJourneys() {
       {/* Background Subtle Organic Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
 
-      <div className="w-full mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+      <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Header Block: Minimal Luxury Editorial */}
-        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-full xl:max-w-4xl space-y-3">
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-5 sm:gap-6 mb-8 sm:mb-16">
+          <div className="max-w-full xl:max-w-4xl space-y-2 sm:space-y-3">
             <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-normal text-white leading-[1.2] tracking-tight">
               {story.heading}
             </h2>
           </div>
 
           {/* Material Category Switcher Tabs */}
-          <div className="flex items-center gap-2 bg-[#0D2335] p-1.5 rounded-full border border-white/15 self-start lg:self-end shadow-xl">
+          <div className="flex items-center gap-1.5 sm:gap-2 bg-[#0D2335] p-1 sm:p-1.5 rounded-full border border-white/15 self-start overflow-x-auto max-w-full scrollbar-none shadow-xl -mx-4 px-4 sm:mx-0 sm:px-1.5">
             {(["rudraksha", "tulsi", "gemstones"] as const).map((mat) => (
               <button
                 key={mat}
                 onClick={() => setActiveTab(mat)}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 ${
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 ${
                   activeTab === mat
                     ? "bg-[#C5A880] text-[#122E46] font-bold shadow-lg"
                     : "text-stone-300 hover:text-white hover:bg-white/5"
@@ -251,12 +251,12 @@ export function MaterialJourneys() {
         <div className="relative group/carousel">
           <div 
             ref={scrollRef}
-            className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0"
+            className="flex gap-3.5 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 sm:pb-0"
           >
             {story.fourStages.map((stage) => (
               <div
                 key={stage.stageNumber}
-                className="group relative rounded-2xl overflow-hidden bg-[#0D2335] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
+                className="group relative rounded-2xl overflow-hidden bg-[#0D2335] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[76vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
               >
                 {/* Clean Image Container - 100% visible, no horizontal clipping */}
                 <div className="relative w-full aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-black">
@@ -303,11 +303,10 @@ export function MaterialJourneys() {
         </div>
 
         {/* Bottom Provenance & Next Action Bar */}
-        <div className="mt-12 pt-6 border-t border-white/15 flex flex-wrap items-center justify-end gap-4 text-xs text-stone-400 font-mono">
-
+        <div className="mt-8 sm:mt-12 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-4 text-xs text-stone-400 font-mono">
           <a
             href="#featured-products"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F7F5F0] hover:bg-[#C5A880] text-[#122E46] hover:text-white text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md group"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F7F5F0] hover:bg-[#C5A880] text-[#122E46] hover:text-white text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md group w-full sm:w-auto"
           >
             <span>View Finished Collection</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

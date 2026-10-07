@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider } from "@/context/CartContext";
 import {
   User,
@@ -321,9 +322,9 @@ export default function AccountPage() {
               </div>
 
               {/* Main Tabbed Layout */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Left Column: Navigation Sidebar */}
-                <div className="lg:col-span-3 bg-white rounded-2xl border border-[#E2DEC9] p-2 sm:p-3 shadow-md space-y-1">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                {/* Left Column: Navigation Sidebar (Horizontal on mobile, vertical on desktop) */}
+                <div className="lg:col-span-3 bg-white rounded-2xl border border-[#E2DEC9] p-2 sm:p-3 shadow-md flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1.5 lg:gap-1 scrollbar-none max-w-full">
                   {[
                     { id: "orders", label: "My Orders", icon: Package, badge: "1 Active" },
                     { id: "spiritual", label: "Spiritual Profile", icon: Compass },
@@ -337,13 +338,13 @@ export default function AccountPage() {
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id as AccountTab)}
-                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-medium tracking-wide transition-all cursor-pointer ${
+                        className={`shrink-0 lg:shrink lg:w-full flex items-center justify-between gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs font-medium tracking-wide transition-all cursor-pointer whitespace-nowrap ${
                           isActive
                             ? "bg-[#122E46] text-[#FAF8F5] shadow-sm font-semibold"
                             : "text-stone-700 hover:bg-[#FAF8F5] hover:text-[#122E46]"
                         }`}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5 sm:gap-3">
                           <Icon className={`w-4 h-4 ${isActive ? "text-[#C5A880]" : "text-stone-400"}`} />
                           <span>{tab.label}</span>
                         </div>
@@ -362,7 +363,7 @@ export default function AccountPage() {
                     );
                   })}
 
-                  <div className="pt-3 mt-3 border-t border-[#E8E2D5]">
+                  <div className="pt-3 mt-3 border-t border-[#E8E2D5] hidden lg:block">
                     <button
                       onClick={() => setIsSignedIn(false)}
                       className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
@@ -948,6 +949,7 @@ export default function AccountPage() {
 
         <Footer />
         <CartDrawer />
+        <BottomNav />
       </div>
     </CartProvider>
   );

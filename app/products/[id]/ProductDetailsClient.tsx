@@ -191,52 +191,56 @@ export function ProductDetailsClient({ id }: { id: string }) {
           </div>
 
           {/* Quantity & Add to Cart */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-10">
-            <div className="flex items-center border border-[#E2DEC9] rounded-xl bg-white">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10">
+            <div className="flex items-center justify-between sm:justify-center border border-[#E2DEC9] rounded-xl bg-white px-3 sm:px-0">
               <button 
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="px-4 py-3 text-stone-500 hover:text-[#132F47] transition-colors"
+                className="px-3 sm:px-4 py-3 text-stone-500 hover:text-[#132F47] transition-colors"
+                aria-label="Decrease quantity"
               >-</button>
               <span className="w-10 text-center font-medium text-[#132F47]">{quantity}</span>
               <button 
                 onClick={() => setQuantity(quantity + 1)}
-                className="px-4 py-3 text-stone-500 hover:text-[#132F47] transition-colors"
+                className="px-3 sm:px-4 py-3 text-stone-500 hover:text-[#132F47] transition-colors"
+                aria-label="Increase quantity"
               >+</button>
             </div>
             
-            <button
-              onClick={handleAddToCart}
-              className="flex-1 bg-[#132F47] hover:bg-[#0A1B2A] text-[#ECEADE] py-3.5 px-6 rounded-xl font-semibold shadow-lg shadow-[#132F47]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-            >
-              <ShoppingBag className="w-5 h-5 text-[#C5A880]" />
-              Add to Sacred Bag
-            </button>
-            
-            <button
-              onClick={() =>
-                toggleWishlist({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                  originalPrice: product.originalPrice,
-                  image: product.image,
-                  category: product.category,
-                  material: product.crystal,
-                })
-              }
-              title={isInWishlist(product.id) ? "Remove from wishlist" : "Save to wishlist"}
-              className={`p-3.5 rounded-xl border transition-all flex items-center justify-center cursor-pointer ${
-                isInWishlist(product.id)
-                  ? "border-rose-300 bg-rose-50 text-rose-600 shadow-sm"
-                  : "border-[#E2DEC9] bg-white text-stone-400 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50/50"
-              }`}
-            >
-              <Heart
-                className={`w-5 h-5 transition-transform duration-200 ${
-                  isInWishlist(product.id) ? "fill-rose-600 stroke-rose-600 scale-110" : ""
+            <div className="flex items-center gap-3 flex-1">
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 bg-[#132F47] hover:bg-[#0A1B2A] text-[#ECEADE] py-3.5 px-4 sm:px-6 rounded-xl font-semibold shadow-lg shadow-[#132F47]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer text-xs sm:text-sm"
+              >
+                <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A880]" />
+                <span>Add to Sacred Bag</span>
+              </button>
+              
+              <button
+                onClick={() =>
+                  toggleWishlist({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    originalPrice: product.originalPrice,
+                    image: product.image,
+                    category: product.category,
+                    material: product.crystal,
+                  })
+                }
+                title={isInWishlist(product.id) ? "Remove from wishlist" : "Save to wishlist"}
+                className={`p-3.5 rounded-xl border transition-all flex items-center justify-center shrink-0 cursor-pointer ${
+                  isInWishlist(product.id)
+                    ? "border-rose-300 bg-rose-50 text-rose-600 shadow-sm"
+                    : "border-[#E2DEC9] bg-white text-stone-400 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50/50"
                 }`}
-              />
-            </button>
+              >
+                <Heart
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    isInWishlist(product.id) ? "fill-rose-600 stroke-rose-600 scale-110" : ""
+                  }`}
+                />
+              </button>
+            </div>
           </div>
 
           {/* Guarantees */}

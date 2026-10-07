@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider, useCart } from "@/context/CartContext";
 import { ShoppingBag, Check, ArrowLeft, Filter, Heart } from "lucide-react";
 
@@ -297,6 +298,7 @@ function ProductsCatalog() {
 
       <Footer />
       <CartDrawer />
+      <BottomNav />
     </div>
   );
 }

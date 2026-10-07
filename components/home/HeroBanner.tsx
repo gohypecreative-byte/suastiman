@@ -125,7 +125,7 @@ export function HeroBanner() {
   const current = NINE_STAGES[activeIndex];
 
   return (
-    <section className="relative w-full h-[calc(100vh-116px)] min-h-[700px] bg-[#122E46] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
+    <section className="relative w-full h-[calc(100dvh-96px)] sm:h-[calc(100vh-116px)] min-h-[520px] sm:min-h-[660px] bg-[#122E46] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
       {/* Background Photography with Smooth Crossfade & High Natural Clarity (Light & Bright) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {NINE_STAGES.map((stage, idx) => (
@@ -152,25 +152,25 @@ export function HeroBanner() {
       </div>
 
       {/* Top Header Area (Empty but keeping padding to maintain structure) */}
-      <div className="relative z-10 p-6 sm:p-10 flex flex-wrap items-center justify-end gap-4">
+      <div className="relative z-10 p-4 sm:p-10 flex flex-wrap items-center justify-end gap-4">
       </div>
 
       {/* Main Content Area: The Original Exact Copy & Structure */}
-      <div className="relative z-10 px-6 sm:px-12 lg:px-16 pb-14 sm:pb-16 lg:pb-20 max-w-4xl">
-        <div className="space-y-4">
-          <p className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-[#DFCAAB] drop-shadow-sm flex items-center gap-2">
-            <span className="w-8 h-[1px] bg-[#DFCAAB]" />
+      <div className="relative z-10 px-5 sm:px-12 lg:px-16 pb-10 sm:pb-16 lg:pb-20 max-w-4xl">
+        <div className="space-y-3 sm:space-y-4">
+          <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#DFCAAB] drop-shadow-sm flex items-center gap-2">
+            <span className="w-6 sm:w-8 h-[1px] bg-[#DFCAAB]" />
             {current.tagline}
           </p>
 
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight drop-shadow-md">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-7xl font-normal text-white leading-[1.12] tracking-tight drop-shadow-md">
             {current.title}
           </h1>
 
-          <div className="pt-6 flex flex-wrap items-center gap-4">
+          <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <a
               href="#origin-philosophy"
-              className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#F9F8F5] text-[#122E46] text-xs font-semibold tracking-[0.15em] uppercase rounded-sm hover:bg-[#C5A880] hover:text-white transition-colors duration-300 group/btn shadow-lg"
+              className="inline-flex items-center justify-center gap-3 px-6 sm:px-7 py-3.5 bg-[#F9F8F5] text-[#122E46] text-xs font-semibold tracking-[0.15em] uppercase rounded-sm hover:bg-[#C5A880] hover:text-white transition-colors duration-300 group/btn shadow-lg w-full sm:w-auto"
             >
               <span>Explore The Origin Journey</span>
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -178,7 +178,7 @@ export function HeroBanner() {
 
             <a
               href="#material-journeys"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-black/40 hover:bg-black/60 text-[#ECEADE] text-xs font-medium tracking-[0.15em] uppercase rounded-sm backdrop-blur-md border border-white/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-black/40 hover:bg-black/60 text-[#ECEADE] text-xs font-medium tracking-[0.15em] uppercase rounded-sm backdrop-blur-md border border-white/20 transition-colors w-full sm:w-auto text-center"
             >
               <span>Material Archives</span>
             </a>
