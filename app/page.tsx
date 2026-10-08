@@ -20,14 +20,22 @@ import { BottomNav } from "@/components/layout/BottomNav";
 
 export default function Home() {
   const [footerHeight, setFooterHeight] = React.useState(0);
+  const [isDesktop, setIsDesktop] = React.useState(false);
   const footerContainerRef = React.useRef<HTMLDivElement>(null);
   const footerInnerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const updateHeight = () => {
-      if (footerContainerRef.current) {
+      const desktop = window.innerWidth >= 1024;
+      setIsDesktop(desktop);
+      if (desktop && footerContainerRef.current) {
         const h = footerContainerRef.current.offsetHeight;
         setFooterHeight(h);
+      } else {
+        setFooterHeight(0);
+        if (footerInnerRef.current) {
+          footerInnerRef.current.style.transform = "none";
+        }
       }
     };
 
@@ -37,6 +45,7 @@ export default function Home() {
 
     let ticking = false;
     const handleScroll = () => {
+      if (window.innerWidth < 1024) return;
       if (!ticking) {
         window.requestAnimationFrame(() => {
           if (footerInnerRef.current) {
@@ -74,10 +83,10 @@ export default function Home() {
   return (
     <CartProvider>
       <div className="relative min-h-screen bg-[#F7F5F0] text-[#0C161D]">
-        {/* Main Content Wrapper (Slides UP with rounded bottom corners to reveal footer underneath) */}
+        {/* Main Content Wrapper (Slides UP with rounded bottom corners on desktop to reveal footer underneath) */}
         <div 
-          style={{ marginBottom: footerHeight ? `${footerHeight}px` : undefined }}
-          className="relative z-10 bg-[#F7F5F0] rounded-b-[36px] sm:rounded-b-[56px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-clip"
+          style={{ marginBottom: isDesktop && footerHeight ? `${footerHeight}px` : undefined }}
+          className="relative z-10 bg-[#F7F5F0] rounded-b-[24px] lg:rounded-b-[56px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-clip"
         >
           {/* Navigation Bar */}
           <Navbar />
@@ -113,16 +122,16 @@ export default function Home() {
           </main>
         </div>
 
-        {/* Parallax Reveal Footer (Direct GPU transform without React re-renders) */}
+        {/* Footer: Normal in-flow on Mobile (<1024px) so it fully scrolls; Parallax Reveal on Desktop (>=1024px) */}
         <div 
           ref={footerContainerRef}
-          className="fixed bottom-0 left-0 right-0 z-0 w-full pointer-events-auto"
+          className="relative z-10 w-full lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:z-0 lg:pointer-events-auto"
         >
           <div 
             ref={footerInnerRef}
             style={{
-              transform: "translate3d(0, 30%, 0)",
-              willChange: "transform",
+              transform: isDesktop ? "translate3d(0, 30%, 0)" : "none",
+              willChange: isDesktop ? "transform" : "auto",
             }}
             className="w-full"
           >
