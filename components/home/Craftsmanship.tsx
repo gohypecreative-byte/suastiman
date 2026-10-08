@@ -108,8 +108,47 @@ export function Craftsmanship() {
           </h2>
         </div>
 
-        {/* 6-Craftsmanship Steps Timeline (Auto-scroll 3 at a time) */}
-        <div className="relative group/carousel">
+        {/* Mobile View: 2-Column Portrait Card Grid matching reference format */}
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-4 lg:hidden">
+          {CRAFT_STEPS.map((craft) => (
+            <div
+              key={craft.step}
+              className="group block text-center"
+            >
+              {/* Tall Portrait Rounded Image Container */}
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#0D2335] border border-white/10 shadow-xs group-hover:border-[#C5A880]/50 transition-all duration-300">
+                <Image
+                  src={craft.image}
+                  alt={craft.name}
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
+
+                <div className="absolute bottom-2 left-2 right-2 pointer-events-none">
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#C5A880] font-medium block drop-shadow-sm">
+                    {craft.action}
+                  </span>
+                </div>
+              </div>
+
+              {/* Text Below Image */}
+              <div className="mt-2 space-y-0.5 px-0.5">
+                <h3 className="font-serif text-xs font-normal text-white leading-snug line-clamp-1">
+                  {craft.name}
+                </h3>
+                <div className="flex items-center justify-center gap-1 text-[9px] font-mono text-[#DFCAAB]/80">
+                  <CheckCircle2 className="w-2.5 h-2.5 text-[#C5A880] shrink-0" />
+                  <span className="truncate">{craft.provenance}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Preserved Exact Carousel (Web Unchanged) */}
+        <div className="hidden lg:block relative group/carousel">
           <div 
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto no-scrollbar pb-6 snap-x snap-mandatory scroll-smooth"

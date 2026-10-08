@@ -224,35 +224,37 @@ export function FeaturedProducts() {
             </h2>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-1 sm:gap-1.5 bg-[#EFECE6] p-1 sm:p-1.5 rounded-full border border-[#DCD6C7] shrink-0 overflow-x-auto scrollbar-none self-start lg:self-end lg:ml-auto max-w-full -mx-4 px-4 sm:mx-0 sm:px-1.5">
-            <Link
-              href="/products"
-              className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
-            >
-              All
-            </Link>
-            {CATEGORIES.map((cat, idx) => {
-              const label = cat.name
-                .replace("Spiritual ", "")
-                .replace("Sacred ", "")
-                .replace("Earth ", "")
-                .replace(" Jewellery", "");
+          {/* Category Filter Pills - Wrapped so rounded border never clips content */}
+          <div className="w-full lg:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 self-start lg:self-end lg:ml-auto pb-1">
+            <div className="inline-flex items-center gap-1 sm:gap-1.5 bg-[#EFECE6] p-1 sm:p-1.5 rounded-full border border-[#DCD6C7] shrink-0 shadow-xs">
+              <Link
+                href="/products"
+                className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
+              >
+                All
+              </Link>
+              {CATEGORIES.map((cat, idx) => {
+                const label = cat.name
+                  .replace("Spiritual ", "")
+                  .replace("Sacred ", "")
+                  .replace("Earth ", "")
+                  .replace(" Jewellery", "");
 
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => scrollToCategory(idx)}
-                  className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
-                    activeIndex === idx
-                      ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
-                      : "text-stone-600 hover:text-black hover:bg-white/60"
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => scrollToCategory(idx)}
+                    className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
+                      activeIndex === idx
+                        ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
+                        : "text-stone-600 hover:text-black hover:bg-white/60"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 

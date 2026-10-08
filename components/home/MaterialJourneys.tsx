@@ -229,26 +229,63 @@ export function MaterialJourneys() {
             </h2>
           </div>
 
-          {/* Material Category Switcher Tabs */}
-          <div className="flex items-center gap-1.5 sm:gap-2 bg-[#0D2335] p-1 sm:p-1.5 rounded-full border border-white/15 self-start overflow-x-auto max-w-full scrollbar-none shadow-xl -mx-4 px-4 sm:mx-0 sm:px-1.5">
-            {(["rudraksha", "tulsi", "gemstones"] as const).map((mat) => (
-              <button
-                key={mat}
-                onClick={() => setActiveTab(mat)}
-                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 ${
-                  activeTab === mat
-                    ? "bg-[#C5A880] text-[#122E46] font-bold shadow-lg"
-                    : "text-stone-300 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                {mat === "rudraksha" ? "Rudraksha" : mat === "tulsi" ? "Tulsi Wood" : "Earth Gemstones"}
-              </button>
-            ))}
+          {/* Material Category Switcher Tabs - Wrapped so rounded border never clips content */}
+          <div className="w-full xl:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
+            <div className="inline-flex items-center gap-1 sm:gap-2 bg-[#0D2335] p-1 sm:p-1.5 rounded-full border border-white/15 shrink-0 shadow-xl">
+              {(["rudraksha", "tulsi", "gemstones"] as const).map((mat) => (
+                <button
+                  key={mat}
+                  onClick={() => setActiveTab(mat)}
+                  className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                    activeTab === mat
+                      ? "bg-[#C5A880] text-[#122E46] font-bold shadow-lg"
+                      : "text-stone-300 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {mat === "rudraksha" ? "Rudraksha" : mat === "tulsi" ? "Tulsi Wood" : "Earth Gemstones"}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* 4-Step Linear Progression Cards */}
-        <div className="relative group/carousel">
+        {/* Mobile View: 2-Column Portrait Card Grid matching reference format */}
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-4 lg:hidden">
+          {story.fourStages.map((stage) => (
+            <div
+              key={stage.stageNumber}
+              className="group block text-center"
+            >
+              {/* Tall Portrait Rounded Image Container */}
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-black border border-[#C5A880]/20 shadow-xs group-hover:border-[#C5A880]/60 transition-all duration-300">
+                <Image
+                  src={stage.image}
+                  alt={stage.headline}
+                  fill
+                  className="object-cover object-center brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                <div className="absolute bottom-2 left-2 right-2 pointer-events-none">
+                  <span className="text-[9px] font-mono uppercase tracking-wider text-[#C5A880] font-medium block drop-shadow-sm truncate">
+                    STAGE {stage.stageNumber} • {stage.stageName}
+                  </span>
+                </div>
+              </div>
+
+              {/* Text Below Image */}
+              <div className="mt-2 space-y-0.5 px-0.5">
+                <h3 className="font-serif text-xs sm:text-sm font-normal text-white leading-snug line-clamp-2">
+                  {stage.headline}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Preserved Exact 4-Step Progression Carousel (Web Unchanged) */}
+        <div className="hidden lg:block relative group/carousel">
           <div 
             ref={scrollRef}
             className="flex gap-3.5 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 sm:pb-0"

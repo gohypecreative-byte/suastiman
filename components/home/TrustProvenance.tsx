@@ -68,8 +68,39 @@ export function TrustProvenance() {
           </h2>
         </div>
 
-        {/* 4 Trust Pillars Carousel */}
-        <div className="relative group/carousel">
+        {/* Mobile View: 2-Column Portrait Card Grid matching reference format */}
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-4 lg:hidden">
+          {TRUST_PILLARS.map((pillar, i) => (
+            <div
+              key={i}
+              className="group block text-center"
+            >
+              {/* Tall Portrait Rounded Image Container */}
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E0D8CB]/60 shadow-xs group-hover:border-[#C5A880] transition-all duration-300">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.title}
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+              </div>
+
+              {/* Text Below Image */}
+              <div className="mt-2 space-y-0.5 px-0.5">
+                <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#9B7D52] block font-medium">
+                  {pillar.category}
+                </span>
+                <h3 className="font-serif text-xs sm:text-sm font-normal text-[#1A1815] leading-snug line-clamp-2">
+                  {pillar.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Preserved Exact Carousel (Web Unchanged) */}
+        <div className="hidden lg:block relative group/carousel">
           <div 
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0 pb-4 sm:pb-0"
