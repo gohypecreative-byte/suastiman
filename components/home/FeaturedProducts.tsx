@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export interface CategoryShowcaseItem {
   id: string;
@@ -225,66 +225,15 @@ export function FeaturedProducts() {
             </h2>
           </div>
 
-          {/* Mobile Filter Chips: Individual pills that scroll cleanly without chopped capsule */}
-          <div className="flex lg:hidden items-center gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 w-[calc(100%+2rem)] shrink-0">
+          {/* All Collections Link */}
+          <div className="self-start lg:self-end lg:ml-auto shrink-0">
             <Link
               href="/products"
-              className="px-3.5 py-1.5 rounded-full text-[11px] font-medium tracking-wider uppercase transition-all duration-300 whitespace-nowrap shrink-0 bg-[#EFECE6] text-stone-700 hover:text-black border border-[#DCD6C7]"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 bg-[#1A1815] hover:bg-[#C5A880] text-[#FAF8F5] shadow-xs cursor-pointer group"
             >
-              All
+              <span>All</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            {CATEGORIES.map((cat, idx) => {
-              const label = cat.name
-                .replace("Spiritual ", "")
-                .replace("Sacred ", "")
-                .replace("Earth ", "")
-                .replace(" Jewellery", "");
-
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => scrollToCategory(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-[11px] font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
-                    activeIndex === idx
-                      ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-xs border border-[#1A1815]"
-                      : "bg-[#EFECE6] text-stone-700 hover:text-black border border-[#DCD6C7]"
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Desktop Filter Capsule: Preserved exact single enclosed capsule (Web 100% Unchanged) */}
-          <div className="hidden lg:inline-flex items-center gap-1.5 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] shrink-0 shadow-xs ml-auto">
-            <Link
-              href="/products"
-              className="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
-            >
-              All
-            </Link>
-            {CATEGORIES.map((cat, idx) => {
-              const label = cat.name
-                .replace("Spiritual ", "")
-                .replace("Sacred ", "")
-                .replace("Earth ", "")
-                .replace(" Jewellery", "");
-
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => scrollToCategory(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
-                    activeIndex === idx
-                      ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
-                      : "text-stone-600 hover:text-black hover:bg-white/60"
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
           </div>
         </div>
 
@@ -298,34 +247,6 @@ export function FeaturedProducts() {
           }}
           className="relative w-full h-[330px] sm:h-[460px] md:h-[510px] lg:h-[550px] flex items-center justify-center overflow-visible my-auto"
         >
-          {/* Left Scroll Button */}
-          <button
-            onClick={prevSlide}
-            disabled={activeIndex === 0}
-            className={`absolute left-1.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6]/95 text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
-              activeIndex === 0
-                ? "opacity-20 cursor-not-allowed"
-                : "hover:bg-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] hover:scale-110 active:scale-95 cursor-pointer"
-            }`}
-            aria-label="Previous category"
-          >
-            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Right Scroll Button */}
-          <button
-            onClick={nextSlide}
-            disabled={activeIndex === N - 1}
-            className={`absolute right-1.5 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6]/95 text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
-              activeIndex === N - 1
-                ? "opacity-20 cursor-not-allowed"
-                : "hover:bg-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] hover:scale-110 active:scale-95 cursor-pointer"
-            }`}
-            aria-label="Next category"
-          >
-            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-          </button>
-
           {/* 3D Cylindrical Cards Wrapper */}
           <div className="relative w-full h-full flex items-center justify-center">
             {CATEGORIES.map((cat, idx) => {
