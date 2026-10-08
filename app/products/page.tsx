@@ -9,7 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider, useCart } from "@/context/CartContext";
-import { ShoppingBag, Check, ArrowLeft, Filter, Heart } from "lucide-react";
+import { ShoppingBag, Check, ArrowLeft, Filter, Heart, Plus, Bookmark } from "lucide-react";
 
 export interface CatalogProduct {
   id: string;
@@ -131,7 +131,7 @@ function ProductsCatalog() {
   
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [addedId, setAddedId] = useState<string | null>(null);
-  const { addToCart } = useCart();
+  const { addToCart, toggleWishlist, isInWishlist } = useCart();
 
   useEffect(() => {
     if (initialCategory && ["bracelets", "malas", "rudraksha", "tulsi", "gemstones"].includes(initialCategory)) {
@@ -233,66 +233,89 @@ function ProductsCatalog() {
           </div>
         </div>
 
-        {/* Products Grid - 2-Col Mobile Portrait Format, 4-Col Desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {filteredProducts.map((prod) => (
-            <div
-              key={prod.id}
-              className="group bg-white rounded-2xl overflow-hidden border border-[#E8E2D5] shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
-            >
-              {/* Image Container - Portrait aspect-[3/4] on mobile, aspect-square on desktop */}
-              <Link href={`/products/${prod.id}`} className="relative aspect-[3/4] sm:aspect-square bg-[#FAF8F5] overflow-hidden block">
-                <Image
-                  src={prod.image}
-                  alt={prod.name}
-                  fill
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </Link>
+        {/* Products Grid - Minimal Luxury Reference Design */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-7">
+          {filteredProducts.map((prod) => {
+            const isSaved = isInWishlist(prod.id);
 
-              {/* Product Info */}
-              <div className="p-3 sm:p-5 flex flex-col flex-1 justify-between">
-                <div>
-                  <Link href={`/products/${prod.id}`}>
-                    <h3 className="font-serif text-xs sm:text-base lg:text-lg text-[#1A1815] group-hover:text-[#7A6242] transition-colors leading-snug line-clamp-2">
-                      {prod.name}
-                    </h3>
+            return (
+              <div
+                key={prod.id}
+                className="group flex flex-col select-none"
+              >
+                {/* Rounded Image Container (matching reference card) */}
+                <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E8E2D5]/70 group-hover:border-[#C5A880]/70 transition-all duration-300">
+                  <Link href={`/products/${prod.id}`} className="absolute inset-0 block">
+                    <Image
+                      src={prod.image}
+                      alt={prod.name}
+                      fill
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
                   </Link>
+
+                  {/* Bookmark Button in top-right corner (matching reference image) */}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleWishlist({
+                        id: prod.id,
+                        name: prod.name,
+                        price: prod.price,
+                        originalPrice: prod.originalPrice,
+                        image: prod.image,
+                        category: prod.category,
+                      });
+                    }}
+                    className="absolute top-2.5 right-2.5 z-10 p-1.5 rounded-full bg-white/80 hover:bg-white text-stone-700 hover:text-black backdrop-blur-xs transition-colors shadow-xs cursor-pointer"
+                    aria-label="Save to Wishlist"
+                  >
+                    <Bookmark
+                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
+                        isSaved ? "fill-[#1A1815] text-[#1A1815]" : "text-stone-700"
+                      }`}
+                    />
+                  </button>
                 </div>
 
-                {/* Price and Cart Button */}
-                <div className="pt-2 sm:pt-4 mt-2 sm:mt-4 border-t border-stone-100 flex items-center justify-between gap-1">
-                  <div>
-                    <span className="text-xs sm:text-base font-semibold text-[#1A1815]">
-                      ₹{prod.price.toLocaleString("en-IN")}
-                    </span>
-                    {prod.originalPrice && (
-                      <span className="text-[10px] sm:text-xs text-stone-400 line-through ml-1 sm:ml-2">
-                        ₹{prod.originalPrice.toLocaleString("en-IN")}
+                {/* Below-Image Product Info (No separator line, clean title/price on left, + button on right) */}
+                <div className="mt-2.5 sm:mt-3 flex items-start justify-between gap-2 px-0.5">
+                  <div className="min-w-0 flex-1">
+                    <Link href={`/products/${prod.id}`}>
+                      <h3 className="font-sans text-xs sm:text-sm font-medium text-[#1A1815] group-hover:text-[#7A6242] transition-colors line-clamp-1 leading-snug">
+                        {prod.name}
+                      </h3>
+                    </Link>
+                    <div className="mt-0.5 sm:mt-1 flex items-baseline gap-1.5">
+                      <span className="text-xs sm:text-sm font-semibold text-[#1A1815]">
+                        ₹{prod.price.toLocaleString("en-IN")}
                       </span>
-                    )}
+                      {prod.originalPrice && (
+                        <span className="text-[10px] sm:text-xs text-stone-400 line-through">
+                          ₹{prod.originalPrice.toLocaleString("en-IN")}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
+                  {/* Plus Action Button on right (matching reference image) */}
                   <button
                     onClick={(e) => handleAddToCart(e, prod)}
-                    className={`p-2 sm:p-2.5 rounded-full transition-all duration-300 shadow-xs cursor-pointer ${
-                      addedId === prod.id
-                        ? "bg-emerald-700 text-white scale-95"
-                        : "bg-[#1A1815] hover:bg-[#C5A880] text-white"
-                    }`}
-                    aria-label="Add to bag"
+                    className="p-1 sm:p-1.5 text-stone-800 hover:text-black hover:scale-110 active:scale-90 transition-transform cursor-pointer shrink-0 -mr-1"
+                    aria-label="Add to cart"
                   >
                     {addedId === prod.id ? (
-                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 stroke-[2.5]" />
                     ) : (
-                      <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <Plus className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
                     )}
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </main>
 
