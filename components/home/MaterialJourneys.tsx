@@ -229,20 +229,24 @@ export function MaterialJourneys() {
             </h2>
           </div>
 
-          {/* Material Category Switcher Tabs - Wrapped so rounded border never clips content */}
-          <div className="w-full xl:w-auto overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
-            <div className="inline-flex items-center gap-1 sm:gap-2 bg-[#0D2335] p-1 sm:p-1.5 rounded-full border border-white/15 shrink-0 shadow-xl">
+          {/* Material Category Switcher Tabs - Perfectly fitted 3-tab segmented control on mobile, inline-flex on desktop */}
+          <div className="w-full xl:w-auto">
+            <div className="grid grid-cols-3 sm:inline-flex items-center gap-1 sm:gap-2 bg-[#0D2335] p-1 sm:p-1.5 rounded-full border border-white/15 shadow-xl w-full sm:w-auto">
               {(["rudraksha", "tulsi", "gemstones"] as const).map((mat) => (
                 <button
                   key={mat}
                   onClick={() => setActiveTab(mat)}
-                  className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                  className={`w-full sm:w-auto px-1 sm:px-5 py-1.5 sm:py-2 rounded-full text-[9.5px] xs:text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer text-center whitespace-nowrap ${
                     activeTab === mat
                       ? "bg-[#C5A880] text-[#122E46] font-bold shadow-lg"
                       : "text-stone-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
-                  {mat === "rudraksha" ? "Rudraksha" : mat === "tulsi" ? "Tulsi Wood" : "Earth Gemstones"}
+                  {mat === "rudraksha"
+                    ? "Rudraksha"
+                    : mat === "tulsi"
+                    ? "Tulsi Wood"
+                    : "Gemstones"}
                 </button>
               ))}
             </div>
@@ -253,7 +257,7 @@ export function MaterialJourneys() {
         <div className="grid grid-cols-2 gap-3.5 sm:gap-4 lg:hidden">
           {story.fourStages.map((stage) => (
             <div
-              key={stage.stageNumber}
+              key={`${story.id}-${stage.stageNumber}`}
               className="group block text-center"
             >
               {/* Tall Portrait Rounded Image Container */}
@@ -262,6 +266,7 @@ export function MaterialJourneys() {
                   src={stage.image}
                   alt={stage.headline}
                   fill
+                  priority
                   className="object-cover object-center brightness-[0.92] contrast-[1.04] group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 50vw, 25vw"
                 />
@@ -292,7 +297,7 @@ export function MaterialJourneys() {
           >
             {story.fourStages.map((stage) => (
               <div
-                key={stage.stageNumber}
+                key={`${story.id}-${stage.stageNumber}`}
                 className="group relative rounded-2xl overflow-hidden bg-[#0D2335] border border-[#C5A880]/20 hover:border-[#C5A880]/60 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col justify-between shrink-0 snap-center w-[76vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
               >
                 {/* Clean Image Container - 100% visible, no horizontal clipping */}

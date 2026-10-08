@@ -117,6 +117,7 @@ export function CategoryShowcase() {
                   src={cat.image}
                   alt={cat.name}
                   fill
+                  priority
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 50vw, 25vw"
                 />

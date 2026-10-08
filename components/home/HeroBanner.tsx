@@ -139,7 +139,7 @@ export function HeroBanner() {
               src={stage.image}
               alt={stage.title}
               fill
-              priority={idx === 5 || idx === 0}
+              priority
               className="object-cover object-center brightness-[0.93] contrast-[1.03] transition-transform duration-[10000ms] ease-out scale-105"
               sizes="100vw"
             />
