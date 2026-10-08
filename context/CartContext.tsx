@@ -43,37 +43,86 @@ interface CartContextType {
   toggleWishlist: (item: WishlistItem) => void;
   isInWishlist: (id: string) => boolean;
   wishlistCount: number;
+  isHydrated: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  const existingContext = useContext(CartContext);
+  if (existingContext) {
+    return <>{children}</>;
+  }
+
+  return <CartProviderInternal>{children}</CartProviderInternal>;
+}
+
+function CartProviderInternal({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+  const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
 
-  // Default initial wishlist items
-  const [wishlist, setWishlist] = useState<WishlistItem[]>([
-    {
-      id: "prod-rudraksha-108",
-      name: "Himalayan Rudraksha 108 Japa Mala",
-      price: 2899,
-      originalPrice: 3499,
-      image: "/images/products/prod1.webp",
-      category: "rudraksha",
-      badge: "100% Wild Sourced",
-      specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
-    },
-    {
-      id: "prod-lapis-bracelet",
-      name: "Raw Earth Lapis Lazuli Bracelet",
-      price: 1999,
-      originalPrice: 2499,
-      image: "/images/products/prod3.webp",
-      category: "gemstones",
-      badge: "Zero Chemical Dye",
-      specs: ["Untreated Metamorphic Matrix", "Natural Pyrite Specks", "Hand-Strung"],
-    },
-  ]);
+  // Hydrate from localStorage on client mount
+  useEffect(() => {
+    try {
+      const storedWishlist = localStorage.getItem("svastiman_wishlist");
+      if (storedWishlist) {
+        setWishlist(JSON.parse(storedWishlist));
+      } else {
+        // Default initial items on first visit
+        setWishlist([
+          {
+            id: "prod-rudraksha-108",
+            name: "Himalayan Rudraksha 108 Japa Mala",
+            price: 2899,
+            originalPrice: 3499,
+            image: "/images/products/prod1.webp",
+            category: "rudraksha",
+            badge: "100% Wild Sourced",
+            specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
+          },
+          {
+            id: "prod-lapis-bracelet",
+            name: "Raw Earth Lapis Lazuli Bracelet",
+            price: 1999,
+            originalPrice: 2499,
+            image: "/images/products/prod3.webp",
+            category: "gemstones",
+            badge: "Zero Chemical Dye",
+            specs: ["Untreated Metamorphic Matrix", "Natural Pyrite Specks", "Hand-Strung"],
+          },
+        ]);
+      }
+      const storedCart = localStorage.getItem("svastiman_cart");
+      if (storedCart) {
+        setItems(JSON.parse(storedCart));
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Save wishlist changes to localStorage
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem("svastiman_wishlist", JSON.stringify(wishlist));
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, [wishlist, isHydrated]);
+
+  // Save cart changes to localStorage
+  useEffect(() => {
+    if (!isHydrated) return;
+    try {
+      localStorage.setItem("svastiman_cart", JSON.stringify(items));
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, [items, isHydrated]);
 
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
@@ -157,6 +206,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         toggleWishlist,
         isInWishlist,
         wishlistCount,
+        isHydrated,
       }}
     >
       {children}

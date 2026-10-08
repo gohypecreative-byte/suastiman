@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 
 export function BottomNav() {
   const pathname = usePathname();
-  const { openCart, totalCount, wishlistCount } = useCart();
+  const { openCart, totalCount, wishlistCount, isHydrated } = useCart();
 
   const navItems = [
     { label: "Home", href: "/", icon: Home },
@@ -32,7 +32,7 @@ export function BottomNav() {
                   isActive ? "text-[#122E46] stroke-[2.2]" : "text-stone-600 stroke-[1.6]"
                 }`}
               />
-              {typeof item.badge === "number" && item.badge > 0 ? (
+              {isHydrated && typeof item.badge === "number" && item.badge > 0 ? (
                 <span className="absolute -top-1.5 -right-2 bg-[#122E46] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                   {item.badge}
                 </span>

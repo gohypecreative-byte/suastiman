@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 export function Navbar() {
-  const { openCart, totalCount, wishlistCount } = useCart();
+  const { openCart, totalCount, wishlistCount, isHydrated } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -235,7 +235,7 @@ export function Navbar() {
               title="Sacred Wishlist"
             >
               <Heart className="w-5 h-5 stroke-[1.6]" />
-              {wishlistCount > 0 && (
+              {isHydrated && wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {wishlistCount}
                 </span>
@@ -248,7 +248,7 @@ export function Navbar() {
               title="Bag"
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.6]" />
-              {totalCount > 0 && (
+              {isHydrated && totalCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalCount}
                 </span>
@@ -335,7 +335,7 @@ export function Navbar() {
                   <Heart className="w-4 h-4 text-[#122E46]" />
                   <span>Sacred Wishlist</span>
                 </div>
-                {wishlistCount > 0 && (
+                {isHydrated && wishlistCount > 0 && (
                   <span className="bg-[#122E46] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {wishlistCount}
                   </span>
