@@ -177,7 +177,7 @@ export function Navbar() {
                 )}
 
                 {link.children ? (
-                  <div className="flex items-center gap-1.5 cursor-pointer px-2.5 py-1.5 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] group-hover:text-[#C5A880] transition-colors">
+                  <div className="flex items-center gap-1.5 cursor-pointer px-3 py-1.5 rounded-[4px] border border-transparent hover:border-[#122E46]/30 group-hover:border-[#122E46]/30 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] group-hover:text-[#C5A880] transition-all duration-200">
                     <span>{link.name}</span>
                     <ChevronDown className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:rotate-180 text-[#122E46] group-hover:text-[#C5A880]" />
 
@@ -202,7 +202,7 @@ export function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="px-2.5 py-1.5 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] transition-colors duration-200 block"
+                    className="px-3 py-1.5 rounded-[4px] border border-transparent hover:border-[#122E46]/30 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] transition-all duration-200 block"
                   >
                     {link.name}
                   </Link>
