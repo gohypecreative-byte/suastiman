@@ -119,29 +119,29 @@ function WishlistContent() {
            WISHLIST GRID VIEW
            ========================================================================= */
         <div className="space-y-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8">
             {wishlist.map((item) => (
               <div
                 key={item.id}
-                className="group relative bg-white rounded-3xl overflow-hidden border border-[#E2DEC9] hover:border-[#C5A880] transition-all duration-300 shadow-md hover:shadow-xl flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E2DEC9] hover:border-[#C5A880] transition-all duration-300 shadow-xs hover:shadow-xl flex flex-col justify-between"
               >
-                {/* Top Image Container */}
-                <div className="relative aspect-square w-full bg-[#FAF8F5] overflow-hidden">
+                {/* Top Image Container - Aspect-[3/4] on mobile, square on desktop */}
+                <div className="relative aspect-[3/4] sm:aspect-square w-full bg-[#FAF8F5] overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
                     className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
                   />
 
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
 
                   {/* Top Badges */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex items-center justify-between pointer-events-none">
                     {item.badge ? (
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase bg-white/90 backdrop-blur-sm text-[#1A1815] font-semibold border border-white/40 shadow-xs pointer-events-auto">
+                      <span className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[8px] sm:text-[10px] font-mono tracking-wider uppercase bg-white/90 backdrop-blur-sm text-[#1A1815] font-semibold border border-white/40 shadow-xs pointer-events-auto">
                         {item.badge}
                       </span>
                     ) : (
@@ -152,50 +152,45 @@ function WishlistContent() {
                     <button
                       onClick={() => removeFromWishlist(item.id)}
                       title="Remove from Sanctuary"
-                      className="w-8 h-8 rounded-full bg-white/85 hover:bg-red-50 text-stone-600 hover:text-red-600 border border-white/50 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm pointer-events-auto cursor-pointer"
+                      className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/85 hover:bg-red-50 text-stone-600 hover:text-red-600 border border-white/50 backdrop-blur-sm flex items-center justify-center transition-colors shadow-sm pointer-events-auto cursor-pointer"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
                   </div>
 
                   {/* Bottom Category Subtitle on Image */}
-                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#DFCAAB] block drop-shadow">
+                  <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4 text-white pointer-events-none">
+                    <span className="text-[8px] sm:text-[10px] font-mono tracking-widest uppercase text-[#DFCAAB] block drop-shadow line-clamp-1">
                       {item.category ? `Category • ${item.category}` : "Authentic Sacred Form"}
                     </span>
                   </div>
                 </div>
 
                 {/* Card Details & Actions */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="font-serif text-lg sm:text-xl font-normal text-[#1A1815] leading-snug group-hover:text-[#7A6242] transition-colors">
+                <div className="p-3 sm:p-6 flex flex-col flex-1 justify-between space-y-2 sm:space-y-4">
+                  <div className="space-y-1 sm:space-y-2">
+                    <h3 className="font-serif text-xs sm:text-xl font-normal text-[#1A1815] leading-snug group-hover:text-[#7A6242] transition-colors line-clamp-2">
                       {item.name}
                     </h3>
                   </div>
 
                   {/* Pricing and Move to Cart */}
-                  <div className="pt-3 border-t border-[#EAE5D8] space-y-3">
-                    <div className="flex items-baseline gap-2.5">
-                      <span className="font-serif text-xl sm:text-2xl font-normal text-[#1A1815]">
+                  <div className="pt-2 sm:pt-3 border-t border-[#EAE5D8] space-y-2 sm:space-y-3">
+                    <div className="flex items-baseline gap-1 sm:gap-2.5">
+                      <span className="font-serif text-sm sm:text-2xl font-normal text-[#1A1815]">
                         ₹{item.price.toLocaleString("en-IN")}
                       </span>
                       {item.originalPrice && item.originalPrice > item.price && (
-                        <>
-                          <span className="text-xs text-stone-400 line-through">
-                            ₹{item.originalPrice.toLocaleString("en-IN")}
-                          </span>
-                          <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
-                            SAVE ₹{(item.originalPrice - item.price).toLocaleString("en-IN")}
-                          </span>
-                        </>
+                        <span className="text-[10px] sm:text-xs text-stone-400 line-through">
+                          ₹{item.originalPrice.toLocaleString("en-IN")}
+                        </span>
                       )}
                     </div>
 
                     <button
                       onClick={() => handleMoveToCart(item)}
                       disabled={movedId === item.id}
-                      className={`w-full py-3 px-4 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-md cursor-pointer ${
+                      className={`w-full py-2 sm:py-3 px-2 sm:px-4 rounded-full text-[10px] sm:text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 shadow-md cursor-pointer ${
                         movedId === item.id
                           ? "bg-emerald-700 text-white"
                           : "bg-[#122E46] hover:bg-[#C5A880] text-white"
@@ -203,13 +198,13 @@ function WishlistContent() {
                     >
                       {movedId === item.id ? (
                         <>
-                          <CheckCircle2 className="w-4 h-4" />
-                          <span>Moved to Sacred Bag!</span>
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Moved to Bag</span>
                         </>
                       ) : (
                         <>
-                          <ShoppingBag className="w-4 h-4" />
-                          <span>Move to Sacred Bag</span>
+                          <ShoppingBag className="w-3.5 h-3.5" />
+                          <span>Move to Bag</span>
                         </>
                       )}
                     </button>

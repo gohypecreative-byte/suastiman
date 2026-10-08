@@ -103,8 +103,35 @@ export function CategoryShowcase() {
           </h2>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative group/carousel">
+        {/* Mobile View: 2-Column Portrait Card Grid matching reference format */}
+        <div className="grid grid-cols-2 gap-3.5 sm:gap-4 px-4 sm:px-8 lg:hidden">
+          {CATEGORIES.map((cat) => (
+            <a
+              key={cat.id}
+              href={cat.href}
+              className="group block text-center cursor-pointer"
+            >
+              {/* Tall Portrait Rounded Image Container */}
+              <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#EADBCA]/60 shadow-xs group-hover:shadow-md transition-all duration-300">
+                <Image
+                  src={cat.image}
+                  alt={cat.name}
+                  fill
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                />
+              </div>
+
+              {/* Clean Uppercase Title Centered Directly Below Image */}
+              <h3 className="font-sans text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase text-[#1A1815] mt-2.5 px-1 group-hover:text-[#8C6D46] transition-colors leading-snug">
+                {cat.name}
+              </h3>
+            </a>
+          ))}
+        </div>
+
+        {/* Desktop View: Preserved Exact Horizontal Carousel (Web Unchanged) */}
+        <div className="hidden lg:block relative group/carousel">
           <div
             ref={scrollRef}
             className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar px-5 sm:px-8 lg:px-12 pb-6"

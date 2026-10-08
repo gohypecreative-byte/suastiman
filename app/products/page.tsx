@@ -233,42 +233,42 @@ function ProductsCatalog() {
           </div>
         </div>
 
-        {/* Products Grid - Exactly 4 Cards Per Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        {/* Products Grid - 2-Col Mobile Portrait Format, 4-Col Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {filteredProducts.map((prod) => (
             <div
               key={prod.id}
-              className="group bg-white rounded-2xl overflow-hidden border border-[#E8E2D5] shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col"
+              className="group bg-white rounded-2xl overflow-hidden border border-[#E8E2D5] shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
             >
-              {/* Image Container - Full Fit edge-to-edge */}
-              <Link href={`/products/${prod.id}`} className="relative aspect-square bg-[#FAF8F5] overflow-hidden block">
+              {/* Image Container - Portrait aspect-[3/4] on mobile, aspect-square on desktop */}
+              <Link href={`/products/${prod.id}`} className="relative aspect-[3/4] sm:aspect-square bg-[#FAF8F5] overflow-hidden block">
                 <Image
                   src={prod.image}
                   alt={prod.name}
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </Link>
 
               {/* Product Info */}
-              <div className="p-5 flex flex-col flex-1 justify-between">
+              <div className="p-3 sm:p-5 flex flex-col flex-1 justify-between">
                 <div>
                   <Link href={`/products/${prod.id}`}>
-                    <h3 className="font-serif text-lg text-[#1A1815] group-hover:text-[#7A6242] transition-colors leading-snug line-clamp-2">
+                    <h3 className="font-serif text-xs sm:text-base lg:text-lg text-[#1A1815] group-hover:text-[#7A6242] transition-colors leading-snug line-clamp-2">
                       {prod.name}
                     </h3>
                   </Link>
                 </div>
 
                 {/* Price and Cart Button */}
-                <div className="pt-4 mt-4 border-t border-stone-100 flex items-center justify-between">
+                <div className="pt-2 sm:pt-4 mt-2 sm:mt-4 border-t border-stone-100 flex items-center justify-between gap-1">
                   <div>
-                    <span className="text-base font-semibold text-[#1A1815]">
+                    <span className="text-xs sm:text-base font-semibold text-[#1A1815]">
                       ₹{prod.price.toLocaleString("en-IN")}
                     </span>
                     {prod.originalPrice && (
-                      <span className="text-xs text-stone-400 line-through ml-2">
+                      <span className="text-[10px] sm:text-xs text-stone-400 line-through ml-1 sm:ml-2">
                         ₹{prod.originalPrice.toLocaleString("en-IN")}
                       </span>
                     )}
@@ -276,7 +276,7 @@ function ProductsCatalog() {
 
                   <button
                     onClick={(e) => handleAddToCart(e, prod)}
-                    className={`p-2.5 rounded-full transition-all duration-300 shadow cursor-pointer ${
+                    className={`p-2 sm:p-2.5 rounded-full transition-all duration-300 shadow-xs cursor-pointer ${
                       addedId === prod.id
                         ? "bg-emerald-700 text-white scale-95"
                         : "bg-[#1A1815] hover:bg-[#C5A880] text-white"
@@ -284,9 +284,9 @@ function ProductsCatalog() {
                     aria-label="Add to bag"
                   >
                     {addedId === prod.id ? (
-                      <Check className="w-4 h-4 stroke-[2.5]" />
+                      <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                     ) : (
-                      <ShoppingBag className="w-4 h-4" />
+                      <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     )}
                   </button>
                 </div>
