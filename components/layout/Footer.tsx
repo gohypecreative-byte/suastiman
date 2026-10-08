@@ -283,7 +283,7 @@ export function Footer() {
         </div>
 
         {/* BOTTOM COPYRIGHT & LEGAL BAR */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-600 font-normal pt-8 mt-8 border-t border-[#E0D8CB]/80">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-600 font-normal pt-8 mt-8 border-t border-[#E0D8CB]/80 pb-16 lg:pb-0">
           <p className="order-2 md:order-1 text-center md:text-left">
             &copy; {new Date().getFullYear()} Svastimān Heritage Private Limited. All rights reserved.
           </p>
