@@ -1,178 +1,203 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-interface CategoryItem {
+interface ShowcaseItem {
   id: string;
   name: string;
-  count: string;
+  subtitle: string;
   image: string;
-  hoverImage: string;
   href: string;
-  tagline: string;
 }
 
-const CATEGORIES: CategoryItem[] = [
+// Exactly formatted like the mobile reference design:
+// 2-column rounded cards with white square image container, bold title, and benefit subtitle
+const REAL_LIFE_CHALLENGES: ShowcaseItem[] = [
   {
-    id: "cat-bracelets",
+    id: "sol-sales",
+    name: "Increase Business Sales",
+    subtitle: "Attract more clients & opportunities.",
+    image: "/images/products/prod3.webp",
+    href: "/products?category=gemstones",
+  },
+  {
+    id: "sol-wealth",
+    name: "Improve Cash Flow",
+    subtitle: "Activate wealth energy & stabilise finances.",
+    image: "/images/products/prod4.webp",
+    href: "/products?category=bracelets",
+  },
+  {
+    id: "sol-protection",
+    name: "Remove Negative Energy",
+    subtitle: "Cleanse your space & create protection.",
+    image: "/images/products/prod1.webp",
+    href: "/products?category=rudraksha",
+  },
+  {
+    id: "sol-relationships",
+    name: "Better Relationships",
+    subtitle: "Bring harmony, love & understanding.",
+    image: "/images/products/prod2.webp",
+    href: "/products?category=tulsi",
+  },
+  {
+    id: "sol-peace",
+    name: "Mental Peace & Focus",
+    subtitle: "Quiet restlessness & cultivate daily mindfulness.",
+    image: "/images/origin/know_tulsi_wood.jpg",
+    href: "/products?category=tulsi",
+  },
+  {
+    id: "sol-zodiac",
+    name: "Zodiac Chart Alignment",
+    subtitle: "Harmonize astrological birth planetary energy.",
+    image: "/images/products/zodiac_bracelets_collection.jpg",
+    href: "/tools/energy-finder",
+  },
+];
+
+const SACRED_MATERIALS: ShowcaseItem[] = [
+  {
+    id: "mat-bracelets",
     name: "Spiritual Bracelets",
-    count: "Energy Alignment & Mindful Wear",
+    subtitle: "Daily energy alignment & mindful touch.",
     image: "/images/origin/brand_macro_detail.jpg",
-    hoverImage: "/images/products/prod4.webp",
-    href: "#featured-products",
-    tagline: "High-Tensile Resilient Cord",
+    href: "/products?category=bracelets",
   },
   {
-    id: "cat-malas",
-    name: "Sacred Japa Malas",
-    count: "108 Hand-Knotted Beads",
+    id: "mat-malas",
+    name: "Sacred 108 Malas",
+    subtitle: "Traditional hand-knotted contemplation beads.",
     image: "/images/origin/stage9_svastiman.jpg",
-    hoverImage: "/images/products/prod1.webp",
-    href: "#featured-products",
-    tagline: "Daily Contemplative Wear",
+    href: "/products?category=malas",
   },
   {
-    id: "cat-zodiac",
+    id: "mat-zodiac",
     name: "Zodiac Jewellery",
-    count: "Astrological & Birthstone Energy",
-    image: "/images/origin/zodiac_pendant_centered.jpg",
-    hoverImage: "/images/womens_new_arrival_final.jpg",
-    href: "#zodiac-finder",
-    tagline: "Aligned With Your Astrological Chart",
+    subtitle: "Astrological charts & birthstones.",
+    image: "/images/products/zodiac_bracelets_collection.jpg",
+    href: "/tools/energy-finder",
   },
   {
-    id: "cat-rudraksha",
+    id: "mat-rudraksha",
     name: "Sacred Rudraksha",
-    count: "Wild Himalayan Endocarp",
+    subtitle: "Wild Himalayan seeds with lab provenance.",
     image: "/images/origin/hero_journey_fruit.jpg",
-    hoverImage: "/images/origin/hero_journey_seed.jpg",
-    href: "#rudraksha-journey",
-    tagline: "Wild Botanical Origin",
+    href: "/products?category=rudraksha",
   },
   {
-    id: "cat-tulsi",
+    id: "mat-tulsi",
     name: "Vrindavan Tulsi",
-    count: "Naturally Cured Sacred Wood",
+    subtitle: "Naturally cured holy basil heartwood.",
     image: "/images/origin/tulsi_heritage_plant.jpg",
-    hoverImage: "/images/origin/know_tulsi_wood.jpg",
-    href: "#tulsi-journey",
-    tagline: "Sacred Soil Heritage",
+    href: "/products?category=tulsi",
   },
   {
-    id: "cat-gemstones",
+    id: "mat-gemstones",
     name: "Healing Gemstones",
-    count: "Untreated Earth Minerals & Crystals",
+    subtitle: "Untreated raw minerals cut with water lapidary.",
     image: "/images/origin/raw_gemstone_craft.jpg",
-    hoverImage: "/images/products/prod3.webp",
-    href: "#gemstone-journey",
-    tagline: "Jaipur Water Lapidary",
+    href: "/products?category=gemstones",
   },
 ];
 
 export function CategoryShowcase() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = window.innerWidth * 0.75;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
+  const [activeTab, setActiveTab] = useState<"challenges" | "materials">("challenges");
+  const items = activeTab === "challenges" ? REAL_LIFE_CHALLENGES : SACRED_MATERIALS;
 
   return (
     <section
       id="categories"
-      className="pt-10 sm:pt-12 pb-16 sm:pb-20 bg-[#FBF9F5] text-[#0C161D] relative overflow-hidden border-b border-[#E8E2D5]"
+      className="pt-10 sm:pt-14 pb-14 sm:pb-20 bg-[#FBF9F5] text-[#0C161D] relative overflow-hidden border-b border-[#E8E2D5]"
     >
       {/* Background Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
-      <div className="w-full mx-auto relative z-10">
-        {/* Header - Aligned with Client's "Wear Your Energy" Brand Brief */}
-        <div className="mb-8 sm:mb-12 max-w-4xl px-5 sm:px-8 lg:px-12 space-y-2">
-          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
-            Wear Your Energy. <br className="hidden sm:inline" />
-            <span className="italic text-[#7A6242] font-light">
-              Crafted for mindfulness &amp; energy alignment.
-            </span>
-          </h2>
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+        {/* Top Header Block matching reference */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+          <div>
+            <p className="text-[10px] sm:text-[11.5px] font-sans font-semibold tracking-[0.18em] uppercase text-[#8C6D46] mb-1">
+              SOLUTIONS DESIGNED FOR REAL-LIFE CHALLENGES
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-[#1A1815] leading-tight">
+              Wear Your Energy.{" "}
+              <span className="italic text-[#7A6242] font-light block sm:inline">
+                Crafted for mindfulness &amp; alignment.
+              </span>
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-4 self-start sm:self-auto">
+            {/* View All Link */}
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold tracking-wider text-[#8C6D46] hover:text-[#122E46] transition-colors shrink-0 group"
+            >
+              <span>View all</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative group/carousel">
-          <div
-            ref={scrollRef}
-            className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar px-5 sm:px-8 lg:px-12 pb-6"
+        {/* Tab Pills Switcher */}
+        <div className="flex items-center gap-2 mb-6 sm:mb-8 overflow-x-auto scrollbar-none pb-1">
+          <button
+            onClick={() => setActiveTab("challenges")}
+            className={`px-4 sm:px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
+              activeTab === "challenges"
+                ? "bg-[#122E46] text-[#FAF8F5] shadow-sm"
+                : "bg-[#EFECE6] text-stone-600 hover:text-black hover:bg-white/80 border border-[#DCD6C7]"
+            }`}
           >
-            {CATEGORIES.map((cat) => (
-              <a
-                key={cat.id}
-                href={cat.href}
-                className="group block relative rounded-2xl overflow-hidden bg-white border border-[#E0D9CA] hover:border-[#C5A880] shadow-md hover:shadow-2xl transition-all duration-500 shrink-0 snap-center w-[85vw] sm:w-[45vw] lg:w-[calc(25vw-2.75rem)]"
-              >
-                {/* Image Container with Hover Crossfade Flip Effect - Exact 1:1 Square Full Fit */}
-                <div className="relative w-full aspect-square overflow-hidden bg-[#FAF8F5]">
-                  {/* Primary Base Image - Full Fit */}
-                  <Image
-                    src={cat.image}
-                    alt={cat.name}
-                    fill
-                    className="object-cover object-center brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-0"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
-                  />
+            Real-Life Challenges
+          </button>
+          <button
+            onClick={() => setActiveTab("materials")}
+            className={`px-4 sm:px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer whitespace-nowrap ${
+              activeTab === "materials"
+                ? "bg-[#122E46] text-[#FAF8F5] shadow-sm"
+                : "bg-[#EFECE6] text-stone-600 hover:text-black hover:bg-white/80 border border-[#DCD6C7]"
+            }`}
+          >
+            Sacred Materials
+          </button>
+        </div>
 
-                  {/* Secondary Hover Image (Reveals on Hover) - Full Fit */}
-                  <Image
-                    src={cat.hoverImage}
-                    alt={`${cat.name} craft perspective`}
-                    fill
-                    className="object-cover object-center brightness-[0.95] contrast-[1.03] transition-all duration-700 ease-out opacity-0 scale-100 group-hover:opacity-100 group-hover:scale-105"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                </div>
-
-                {/* Clean Below-Image Label */}
-                <div className="p-4 sm:p-5 sm:py-6 bg-white flex items-center justify-between border-t border-[#EAE5D8]">
-                  <div className="min-w-0 pr-2">
-                    <h3 className="font-serif text-lg sm:text-xl font-normal text-[#1A1815] leading-snug group-hover:text-[#7A6242] transition-colors truncate">
-                      {cat.name}
-                    </h3>
-                    <span className="text-[11px] sm:text-xs font-mono text-stone-500 block pt-1 truncate">
-                      {cat.count}
-                    </span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-[#7A6242] group-hover:translate-x-1.5 transition-transform shrink-0" />
-                </div>
-              </a>
-            ))}
-          </div>
-
-          {/* Right Scroll Button */}
-          <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-6 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
-            <button
-              onClick={() => scroll("right")}
-              className="p-3 sm:p-4 rounded-full bg-white/95 shadow-2xl border border-[#E0D9CA] hover:bg-[#C5A880] hover:text-white transition-all text-[#1A1815] backdrop-blur-md cursor-pointer"
-              aria-label="Scroll right"
+        {/* 2-Column Mobile Grid, 3-Col Tablet, 6-Col Desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+          {items.map((item) => (
+            <Link
+              key={item.id}
+              href={item.href}
+              className="group bg-[#F6EFE3] hover:bg-[#EFE8DC] border border-[#EADBCA] hover:border-[#C5A880] rounded-[18px] sm:rounded-[20px] p-2.5 sm:p-3.5 flex flex-col justify-between transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
             >
-              <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
-            </button>
-          </div>
+              {/* Inner White Box with Centered Product Photo */}
+              <div className="w-full aspect-square bg-white rounded-xl overflow-hidden relative p-2.5 flex items-center justify-center border border-[#ECE5D8] group-hover:scale-[1.02] transition-transform duration-300 shadow-2xs">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="object-contain p-1.5 group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 18vw"
+                />
+              </div>
 
-          {/* Left Scroll Button */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-6 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
-            <button
-              onClick={() => scroll("left")}
-              className="p-3 sm:p-4 rounded-full bg-white/95 shadow-2xl border border-[#E0D9CA] hover:bg-[#C5A880] hover:text-white transition-all text-[#1A1815] backdrop-blur-md cursor-pointer"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
-            </button>
-          </div>
+              {/* Text Info Below Box */}
+              <div className="pt-2.5 pb-0.5 px-0.5 space-y-1">
+                <h3 className="font-sans text-[13px] sm:text-[14.5px] font-semibold text-[#1A1815] leading-snug group-hover:text-[#8C6D46] transition-colors line-clamp-2">
+                  {item.name}
+                </h3>
+                <p className="text-[11px] sm:text-xs text-stone-600 font-normal leading-snug line-clamp-2">
+                  {item.subtitle}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

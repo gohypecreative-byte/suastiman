@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 export interface CategoryShowcaseItem {
@@ -39,9 +40,9 @@ const CATEGORIES: CategoryShowcaseItem[] = [
     name: "Zodiac Jewellery",
     category: "zodiac",
     subtitle: "Aligned With Your Astrological Birth Chart",
-    image: "/images/origin/zodiac_pendant_centered.jpg",
+    image: "/images/products/zodiac_bracelets_collection.jpg",
     itemCount: "12 Zodiac Signs",
-    href: "#zodiac-finder",
+    href: "/tools/energy-finder",
   },
   {
     id: "cat-botanicals",
@@ -64,6 +65,7 @@ const CATEGORIES: CategoryShowcaseItem[] = [
 ];
 
 export function FeaturedProducts() {
+  const router = useRouter();
   const N = CATEGORIES.length;
   const sectionRef = useRef<HTMLElement>(null);
   const targetProgressRef = useRef(0);
@@ -181,7 +183,7 @@ export function FeaturedProducts() {
         const el = document.querySelector(cat.href);
         if (el) el.scrollIntoView({ behavior: "smooth" });
       } else {
-        window.location.href = cat.href;
+        router.push(cat.href);
       }
     } else {
       // Side card clicked: Scroll directly to this category
@@ -207,14 +209,14 @@ export function FeaturedProducts() {
       <div id="featured-products-gemstones" className="absolute bottom-0" />
 
       {/* Sticky Viewport Stage: Pinned in view while user scrolls through the 340vh track */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-between overflow-hidden py-5 sm:py-7 lg:py-8">
+      <div className="sticky top-0 h-[100dvh] sm:h-screen w-full flex flex-col justify-between overflow-hidden py-3 sm:py-7 lg:py-8">
         {/* Background Subtle Organic Texture */}
         <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
         {/* Section Header & Filters */}
-        <div className="w-full px-5 sm:px-8 lg:px-12 flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 relative z-10 shrink-0">
+        <div className="w-full px-4 sm:px-8 lg:px-12 flex flex-col lg:flex-row lg:items-end justify-between gap-3 sm:gap-6 relative z-10 shrink-0">
           <div className="text-left max-w-2xl">
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
+            <h2 className="font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
               Sacred Collections,{" "}
               <span className="italic text-[#7A6242] font-light block sm:inline">
                 crafted for daily spiritual wear.
@@ -223,10 +225,10 @@ export function FeaturedProducts() {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-1 sm:gap-1.5 bg-[#EFECE6] p-1.5 rounded-full border border-[#DCD6C7] shrink-0 overflow-x-auto scrollbar-none self-start lg:self-end lg:ml-auto max-w-full">
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-[#EFECE6] p-1 sm:p-1.5 rounded-full border border-[#DCD6C7] shrink-0 overflow-x-auto scrollbar-none self-start lg:self-end lg:ml-auto max-w-full -mx-4 px-4 sm:mx-0 sm:px-1.5">
             <Link
               href="/products"
-              className="px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
+              className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 text-stone-600 hover:text-black hover:bg-white/60 whitespace-nowrap shrink-0"
             >
               All
             </Link>
@@ -241,7 +243,7 @@ export function FeaturedProducts() {
                 <button
                   key={cat.id}
                   onClick={() => scrollToCategory(idx)}
-                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
+                  className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                     activeIndex === idx
                       ? "bg-[#1A1815] text-[#FAF8F5] font-semibold shadow-md"
                       : "text-stone-600 hover:text-black hover:bg-white/60"
@@ -262,34 +264,34 @@ export function FeaturedProducts() {
             perspective: "1400px",
             transformStyle: "preserve-3d",
           }}
-          className="relative w-full h-[390px] sm:h-[460px] md:h-[510px] lg:h-[550px] flex items-center justify-center overflow-visible my-auto"
+          className="relative w-full h-[330px] sm:h-[460px] md:h-[510px] lg:h-[550px] flex items-center justify-center overflow-visible my-auto"
         >
           {/* Left Scroll Button */}
           <button
             onClick={prevSlide}
             disabled={activeIndex === 0}
-            className={`absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6] text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
+            className={`absolute left-1.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6]/95 text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
               activeIndex === 0
-                ? "opacity-30 cursor-not-allowed"
+                ? "opacity-20 cursor-not-allowed"
                 : "hover:bg-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] hover:scale-110 active:scale-95 cursor-pointer"
             }`}
             aria-label="Previous category"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           {/* Right Scroll Button */}
           <button
             onClick={nextSlide}
             disabled={activeIndex === N - 1}
-            className={`absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6] text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
+            className={`absolute right-1.5 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-[#C5A880]/70 bg-[#F4EFE6]/95 text-[#1A1815] flex items-center justify-center shadow-lg transition-all duration-300 ${
               activeIndex === N - 1
-                ? "opacity-30 cursor-not-allowed"
+                ? "opacity-20 cursor-not-allowed"
                 : "hover:bg-[#1A1815] hover:text-[#DFCAAB] hover:border-[#1A1815] hover:scale-110 active:scale-95 cursor-pointer"
             }`}
             aria-label="Next category"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           {/* 3D Cylindrical Cards Wrapper */}
@@ -336,7 +338,7 @@ export function FeaturedProducts() {
                     transformStyle: "preserve-3d",
                     willChange: "transform, opacity",
                   }}
-                  className="absolute top-1/2 left-1/2 w-[84vw] sm:w-[410px] md:w-[460px] lg:w-[520px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E0D8CB]/40 shadow-2xl cursor-pointer group/card"
+                  className="absolute top-1/2 left-1/2 w-[82vw] max-w-[330px] sm:max-w-none sm:w-[410px] md:w-[460px] lg:w-[520px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E0D8CB]/40 shadow-2xl cursor-pointer group/card"
                 >
                   {/* Full-bleed Category Image */}
                   <Image
@@ -352,12 +354,12 @@ export function FeaturedProducts() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 via-40% to-transparent pointer-events-none" />
 
                   {/* Bottom Content Area */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
-                    <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-lg mb-1 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 flex flex-col items-center text-center">
+                    <h3 className="font-serif text-xl sm:text-3xl md:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-lg mb-1 transition-transform duration-300">
                       {cat.name}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#DFCAAB] font-light tracking-wide mb-3.5 drop-shadow">
+                    <p className="text-[11px] sm:text-sm text-[#DFCAAB] font-light tracking-wide mb-2.5 sm:mb-3.5 drop-shadow line-clamp-1">
                       {cat.subtitle}
                     </p>
 
@@ -372,7 +374,7 @@ export function FeaturedProducts() {
                       <Link
                         href={cat.href}
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full text-xs font-semibold tracking-widest uppercase transition-all duration-300 shadow-2xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
+                        className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-semibold tracking-widest uppercase transition-all duration-300 shadow-2xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
                       >
                         <span>Explore Collection</span>
                         <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />

@@ -208,7 +208,7 @@ export function ZodiacFinder() {
   };
 
   return (
-    <section id="energy-finder" className="py-20 bg-[#132F47] text-[#ECEADE] relative overflow-hidden">
+    <section id="zodiac-finder" className="py-20 bg-[#122E46] text-[#ECEADE] relative overflow-hidden">
       <div className="absolute inset-0 bg-celestial-pattern opacity-20 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
