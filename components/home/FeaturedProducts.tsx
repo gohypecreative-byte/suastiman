@@ -225,14 +225,14 @@ export function FeaturedProducts() {
             </h2>
           </div>
 
-          {/* All Collections Link */}
+          {/* View All Products Link */}
           <div className="self-start lg:self-end lg:ml-auto shrink-0">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 bg-[#1A1815] hover:bg-[#C5A880] text-[#FAF8F5] shadow-xs cursor-pointer group"
+              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 bg-[#122E46] hover:bg-[#1A3F5E] text-white shadow-sm hover:shadow-md border border-white/10 cursor-pointer group"
             >
-              <span>All</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              <span>View All Products</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#DFCAAB] group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
