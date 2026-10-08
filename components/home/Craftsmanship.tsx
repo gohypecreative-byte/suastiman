@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { CheckCircle2, Feather, ChevronLeft, ChevronRight } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 interface CraftStep {
   step: string;
@@ -87,13 +87,6 @@ export function Craftsmanship() {
     return () => clearInterval(interval);
   }, []);
 
-  const manualScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = window.innerWidth * 0.75;
-      scrollRef.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
-    }
-  };
-
   return (
     <section id="craftsmanship" className="py-20 sm:py-28 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-b border-[#C5A880]/20">
       {/* Background Subtle Texture */}
@@ -149,7 +142,7 @@ export function Craftsmanship() {
         </div>
 
         {/* Desktop View: Preserved Exact Carousel (Web Unchanged) */}
-        <div className="hidden lg:block relative group/carousel">
+        <div className="hidden lg:block relative">
           <div 
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto no-scrollbar pb-6 snap-x snap-mandatory scroll-smooth"
@@ -186,28 +179,6 @@ export function Craftsmanship() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Right Scroll Button */}
-          <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:-right-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
-            <button 
-              onClick={() => manualScroll('right')} 
-              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
-          
-          {/* Left Scroll Button */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:-left-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden lg:block">
-            <button 
-              onClick={() => manualScroll('left')} 
-              className="p-3 sm:p-4 rounded-full bg-[#0D2335]/90 shadow-2xl border border-white/20 hover:bg-[#C5A880] hover:text-[#122E46] transition-all text-white backdrop-blur-md cursor-pointer"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
           </div>
         </div>
       </div>
