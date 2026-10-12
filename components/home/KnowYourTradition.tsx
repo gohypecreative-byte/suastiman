@@ -64,23 +64,23 @@ export function KnowYourTradition() {
   const active = TRADITION_KNOWLEDGE.find((item) => item.id === activeId) || TRADITION_KNOWLEDGE[0];
 
   return (
-    <section id="know-your-tradition" className="py-12 sm:py-20 lg:py-28 bg-[#F6F4EE] text-[#0C161D] relative overflow-hidden">
+    <section id="know-your-tradition" className="pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-32 lg:pb-36 min-h-[calc(100vh-70px)] flex flex-col justify-center bg-[#F6F4EE] text-[#0C161D] relative overflow-hidden">
       {/* Subtle Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
       <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
-        <div className="max-w-3xl mb-8 sm:mb-12 lg:mb-16 space-y-2 sm:space-y-3">
-          <h2 className="font-serif text-2xl sm:text-4xl lg:text-6xl font-normal text-[#1A1815] leading-[1.15] sm:leading-[1.12] tracking-tight">
+        <div className="max-w-3xl mb-5 sm:mb-6 lg:mb-8 space-y-2 sm:space-y-3">
+          <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
             Vedic Wisdom &amp; Botanical Science, <br className="hidden sm:inline" />
             <span className="italic text-[#7A6242] font-light">grounded in scriptural truth.</span>
           </h2>
         </div>
 
         {/* 4 Knowledge Modules: Interactive Accordion on Mobile, Side-by-Side on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-stretch">
           {/* Left Column: Topics Selector (Accordion on Mobile, List on Desktop) */}
-          <div className="lg:col-span-5 space-y-3">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-3 sm:space-y-3.5 lg:space-y-4">
             {TRADITION_KNOWLEDGE.map((item) => {
               const isSelected = item.id === active.id;
               return (
@@ -94,9 +94,9 @@ export function KnowYourTradition() {
                 >
                   <button
                     onClick={() => setActiveId(item.id)}
-                    className="w-full p-4 sm:p-5 text-left flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
+                    className="w-full p-4.5 sm:p-5 lg:p-5.5 text-left flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
                   >
-                    <div className="space-y-1">
+                    <div className="space-y-1 sm:space-y-1.5">
                       <span className={`text-[9px] sm:text-[10px] font-mono tracking-widest uppercase block ${isSelected ? "text-[#C5A880]" : "text-stone-500"}`}>
                         {item.category}
                       </span>
@@ -116,15 +116,15 @@ export function KnowYourTradition() {
                   {/* Mobile-Only Expanded Visual Proof (Attached directly to active card on mobile) */}
                   {isSelected && (
                     <div className="lg:hidden px-4 pb-4 pt-1 space-y-3 border-t border-white/10">
-                      <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-stone-900 border border-white/10 shadow-md">
+                      <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-[#EAE5D9] border border-[#E0D9CA] shadow-md">
                         <Image
                           src={item.image}
                           alt={item.title}
                           fill
-                          className="object-cover brightness-[0.95] contrast-[1.03]"
+                          className="object-cover brightness-[1.10] contrast-[1.0] transition-all duration-500"
                           sizes="(max-width: 1024px) 100vw, 55vw"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
                         <div className="absolute bottom-3 left-3 right-3 text-white pointer-events-none">
                           <p className="text-xs sm:text-sm font-serif italic text-stone-100 leading-snug drop-shadow-md">
                             &ldquo;{item.subtitle}&rdquo;
@@ -147,23 +147,22 @@ export function KnowYourTradition() {
             })}
           </div>
 
-          {/* Desktop-Only Right Column: 100% Visual Proof Display (EXACTLY preserved for Web) */}
-          <div className="hidden lg:block lg:col-span-7 bg-white rounded-3xl overflow-hidden border border-[#E0D9CA] shadow-xl h-full min-h-[550px] relative">
-            <div className="absolute inset-0 w-full h-full bg-stone-900">
-              <Image
-                src={active.image}
-                alt={active.title}
-                fill
-                className="object-cover brightness-[0.95] contrast-[1.03]"
-                sizes="(max-width: 1024px) 100vw, 55vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+          {/* Desktop-Only Right Column: Expanded height & cinematic presence */}
+          <div className="hidden lg:block lg:col-span-7 bg-[#EAE5D9] rounded-3xl overflow-hidden border border-[#E0D9CA] shadow-xl relative min-h-[500px] lg:min-h-[530px]">
+            <Image
+              src={active.image}
+              alt={active.title}
+              fill
+              className="object-cover brightness-[1.12] contrast-[0.98] transition-all duration-500"
+              sizes="(max-width: 1024px) 100vw, 55vw"
+            />
+            {/* Soft, light gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />
 
-              <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
-                <p className="text-base sm:text-xl font-serif italic text-stone-100 leading-relaxed drop-shadow-lg">
-                  &ldquo;{active.subtitle}&rdquo;
-                </p>
-              </div>
+            <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+              <p className="text-base sm:text-xl font-serif italic text-[#FAF8F5] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                &ldquo;{active.subtitle}&rdquo;
+              </p>
             </div>
           </div>
         </div>

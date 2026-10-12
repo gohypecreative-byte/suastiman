@@ -199,7 +199,7 @@ function ProductCardItem({
   return (
     <div className="group flex flex-col select-none">
       {/* Rounded Image Container (Compact height, edge-to-edge perfect fit) */}
-      <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E8E2D5]/70 group-hover:border-[#C5A880]/70 transition-all duration-300">
+      <div className="relative aspect-square w-full rounded-[8px] overflow-hidden bg-[#FAF8F5] border border-[#E8E2D5]/70 group-hover:border-[#C5A880]/70 transition-all duration-300">
         <Link href={`/products/${prod.id}`} className="absolute inset-0 block">
           <Image
             src={images[currentIdx]}
