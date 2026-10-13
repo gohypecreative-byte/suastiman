@@ -80,9 +80,9 @@ export function KnowYourTradition() {
         {/* 4 Knowledge Modules: Interactive Accordion on Mobile, Side-by-Side on Desktop */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-stretch">
           {/* Left Column: Topics Selector (Accordion on Mobile, List on Desktop) */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-3 sm:space-y-3.5 lg:space-y-4">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-3 sm:gap-3.5 lg:gap-4">
             {TRADITION_KNOWLEDGE.map((item) => {
-              const isSelected = item.id === active.id;
+              const isSelected = item.id === activeId;
               return (
                 <div
                   key={item.id}
@@ -93,8 +93,14 @@ export function KnowYourTradition() {
                   }`}
                 >
                   <button
-                    onClick={() => setActiveId(item.id)}
-                    className="w-full p-4.5 sm:p-5 lg:p-5.5 text-left flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
+                    onClick={() => {
+                      if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+                        setActiveId(item.id);
+                      } else {
+                        setActiveId((prev) => (prev === item.id ? "" : item.id));
+                      }
+                    }}
+                    className="w-full p-4 sm:p-5 lg:p-6 text-left flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
                   >
                     <div className="space-y-1 sm:space-y-1.5">
                       <span className={`text-[9px] sm:text-[10px] font-mono tracking-widest uppercase block ${isSelected ? "text-[#C5A880]" : "text-stone-500"}`}>
@@ -112,6 +118,7 @@ export function KnowYourTradition() {
                       }`}
                     />
                   </button>
+
 
                   {/* Mobile-Only Expanded Visual Proof (Attached directly to active card on mobile) */}
                   {isSelected && (
