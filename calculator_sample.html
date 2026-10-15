@@ -1,0 +1,312 @@
+ auto;--pdmb-top: ;--pdmb-right: ;--pdmb-bottom: ;--pdmb-left: ;"><div class="t4s-container"><div class="t4s-code__html t4s-rte" hdt-reveal="slide-in"><div id="jwf-power-calculator-v3">
+  <div class="jwfcalc">
+    <div class="jwfcalc__shell">
+
+      <section class="jwfcalc__hero">
+        <div class="jwfcalc__kicker">✦ JustWowFactory Crystal Guidance</div>
+        <h1>Find Your <span>Personal Power</span> Crystal</h1>
+        <p>
+          A refined birth-pattern crystal guide for bracelet, mala, raw crystal placement,
+          direction support, and personalised WhatsApp guidance.
+        </p>
+      </section>
+
+      <section id="jwf-input-section" class="jwfcalc__layout">
+        <div class="jwf-card jwf-form-card">
+          <div class="jwf-label">Your Details</div>
+          <h2>Build Your Crystal Report</h2>
+          <p class="jwf-muted">
+            Enter your birth details and intention to receive your crystal jewellery and raw crystal guidance.
+          </p>
+
+          <div class="jwf-form">
+            <div class="jwf-dob-grid">
+              <div>
+                <label>Day</label>
+                <input id="jwf-day" type="number" min="1" max="31" placeholder="DD">
+              </div>
+              <div>
+                <label>Month</label>
+                <input id="jwf-month" type="number" min="1" max="12" placeholder="MM">
+              </div>
+              <div>
+                <label>Year</label>
+                <input id="jwf-year" type="number" min="1900" max="2099" placeholder="YYYY">
+              </div>
+            </div>
+
+            <div class="jwf-two-grid">
+              <div>
+                <label>Gender</label>
+                <select id="jwf-gender">
+                  <option value="">Prefer not to say</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Mobile Number</label>
+                <input id="jwf-mobile" type="tel" placeholder="Optional">
+              </div>
+            </div>
+
+            <div>
+              <label>Profession</label>
+              <select id="jwf-profession">
+                <option value="">Select profession</option>
+
+                <optgroup label="Business, Commerce &amp; Strategy">
+                  <option>Entrepreneur / Business Owner</option>
+                  <option>Finance / Banking / Investment</option>
+                  <option>Consulting / Analyst / Strategy</option>
+                  <option>Legal / Compliance / Audit</option>
+                  <option>IT / Software / Engineering / Data</option>
+                  <option>Trading / Procurement / Supply Chain</option>
+                </optgroup>
+
+                <optgroup label="Creative, Education &amp; Communication">
+                  <option>Artist / Designer / Writer / Media</option>
+                  <option>Marketing / Brand / Content / Social Media</option>
+                  <option>Teacher / Educator / Trainer / Coach</option>
+                  <option>HR / Community / People-facing roles</option>
+                </optgroup>
+
+                <optgroup label="Public, Sales &amp; Visibility Roles">
+                  <option>Sales / Business Development</option>
+                  <option>Performer / Speaker / Influencer</option>
+                  <option>Leadership / Politics / Public Relations</option>
+                  <option>Hospitality / Events / Front Office</option>
+                </optgroup>
+
+                <optgroup label="Healing, Care &amp; Research">
+                  <option>Doctor / Therapist / Healer / Researcher</option>
+                  <option>Psychology / Counselling / Wellness</option>
+                  <option>Spiritual Guide / Astrologer</option>
+                  <option>NGO / Social Impact / Care Work</option>
+                </optgroup>
+
+                <optgroup label="Grounded, Operational &amp; Support Roles">
+                  <option>Real Estate / Operations / Administration</option>
+                  <option>Manufacturing / Construction / Logistics</option>
+                  <option>Agriculture / Food / Wellness Operations</option>
+                  <option>Homemaker</option>
+                  <option>Student</option>
+                  <option>Other / Mixed / Not Listed</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div>
+              <label>Primary Goal</label>
+              <select id="jwf-goal">
+                <option value="">Select primary goal</option>
+                <option value="career">Career, Money &amp; Growth</option>
+                <option value="confidence">Confidence &amp; Personal Power</option>
+                <option value="focus">Focus, Clarity &amp; Decisions</option>
+                <option value="protection">Protection, Stability &amp; Grounding</option>
+                <option value="love">Love, Harmony &amp; Self-Worth</option>
+                <option value="calm">Calm, Peace &amp; Emotional Balance</option>
+                <option value="spiritual">Spiritual Growth &amp; Inner Guidance</option>
+                <option value="expression">Communication &amp; Expression</option>
+              </select>
+            </div>
+
+            <button id="jwf-generate" type="button">Reveal My Crystal Report</button>
+            <button id="jwf-reset" type="button">Reset</button>
+
+            <div id="jwf-error" class="jwf-error"></div>
+          </div>
+        </div>
+
+        <div class="jwf-intro">
+          <h2>Purposeful guidance, not random crystal stacking</h2>
+
+          <div class="jwf-intro-grid">
+            <div class="jwf-dark-card">
+              <span>Step 1</span>
+              <h3>Birth Pattern</h3>
+              <p>Your date of birth reveals which personal power areas feel strong, light, missing, or overactive.</p>
+            </div>
+
+            <div class="jwf-dark-card">
+              <span>Step 2</span>
+              <h3>Current Goal</h3>
+              <p>Your selected intention refines how the result is explained, without disturbing the core balance logic.</p>
+            </div>
+
+            <div class="jwf-dark-card">
+              <span>Step 3</span>
+              <h3>Crystal Pairing</h3>
+              <p>One crystal becomes the main support, while the second is added only when it improves the pairing.</p>
+            </div>
+
+            <div class="jwf-dark-card">
+              <span>Step 4</span>
+              <h3>Wear + Place</h3>
+              <p>You receive jewellery guidance along with raw crystal placement for desk, room, or direction-based use.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="jwf-results" class="jwf-results">
+        <div class="jwf-card jwf-main-report">
+          <div class="jwf-label">Your Crystal Guidance Report</div>
+          <h2>Core Summary</h2>
+          <p id="jwf-summary" class="jwf-main-text"></p>
+
+          <div class="jwf-summary-grid">
+            <div class="jwf-mini">
+              <span>Life Path</span>
+              <strong id="jwf-life-path"></strong>
+            </div>
+            <div class="jwf-mini">
+              <span>KUA</span>
+              <strong id="jwf-kua"></strong>
+            </div>
+            <div class="jwf-mini">
+              <span>Primary Element</span>
+              <strong id="jwf-focus"></strong>
+            </div>
+            <div class="jwf-mini">
+              <span>Best Direction</span>
+              <strong id="jwf-direction"></strong>
+            </div>
+          </div>
+
+          <button id="jwf-wa-top" type="button" class="jwf-wa">Send My Report on WhatsApp</button>
+        </div>
+
+        <div class="jwf-stack">
+
+          <div class="jwf-grid-two">
+            <div class="jwf-card">
+              <div class="jwf-label">Lo Shu Grid</div>
+              <h2>Your number pattern</h2>
+              <p class="jwf-main-text">
+                Each number is connected with an element and a personal power area.
+              </p>
+              <div id="jwf-loshu" class="jwf-loshu"></div>
+              <div id="jwf-missing" class="jwf-chip-row"></div>
+              <div class="jwf-refine-note" id="jwf-refine-note"></div>
+            </div>
+
+            <div class="jwf-card">
+              <div class="jwf-label">Element Balance</div>
+              <h2>Your elemental reading</h2>
+              <p id="jwf-balance-text" class="jwf-main-text"></p>
+              <div id="jwf-bars" class="jwf-bars"></div>
+              <div id="jwf-status-chips" class="jwf-chip-row"></div>
+            </div>
+          </div>
+
+          <div class="jwf-card jwf-element-guide">
+            <div class="jwf-label">Understanding the Five Elements</div>
+            <h2>What each element influences</h2>
+            <p class="jwf-main-text">
+              The five elements describe different areas of personal functioning. A Missing or Weak element is not a flaw;
+              it simply highlights an area that may need more conscious support. A Strong / Overactive element may be useful,
+              but too much of it can create imbalance.
+            </p>
+
+            <div class="jwf-status-legend" aria-label="Element status guide">
+              <span><b>Missing</b> Very little natural emphasis in this pattern.</span>
+              <span><b>Weak</b> Present, but may need reinforcement.</span>
+              <span><b>Balanced</b> Adequately represented; no major correction needed.</span>
+              <span><b>Strong / Overactive</b> Dominant; useful in moderation.</span>
+            </div>
+
+            <div class="jwf-element-guide-grid">
+              <article class="jwf-element-guide-item" style="--element-color:#2E7D48">
+                <span>Wood · Growth</span>
+                <h3>Growth, planning &amp; adaptability</h3>
+                <p><strong>Supports:</strong> momentum, creativity, direction, flexibility and the ability to build toward new goals.</p>
+                <p><strong>If Missing / Weak:</strong> you may feel stuck, inconsistent, uncertain about direction, hesitant to start, or slow to adapt.</p>
+                <p><strong>If Strong / Overactive:</strong> it may show as rigidity, frustration, over-planning or pushing growth too hard.</p>
+              </article>
+
+              <article class="jwf-element-guide-item" style="--element-color:#C4483A">
+                <span>Fire · Drive</span>
+                <h3>Confidence, action &amp; visibility</h3>
+                <p><strong>Supports:</strong> motivation, courage, self-expression, leadership, enthusiasm and taking decisive action.</p>
+                <p><strong>If Missing / Weak:</strong> you may experience low drive, reduced confidence, hesitation, low visibility or difficulty expressing yourself.</p>
+                <p><strong>If Strong / Overactive:</strong> it may show as impatience, impulsive decisions, burnout or restless action.</p>
+              </article>
+
+              <article class="jwf-element-guide-item" style="--element-color:#B28635">
+                <span>Earth · Stability</span>
+                <h3>Grounding, consistency &amp; follow-through</h3>
+                <p><strong>Supports:</strong> practical judgement, routine, money discipline, reliability and steady completion of plans.</p>
+                <p><strong>If Missing / Weak:</strong> you may feel ungrounded, scattered, inconsistent with routines, uncertain with money decisions or weak in follow-through.</p>
+                <p><strong>If Strong / Overactive:</strong> it may show as heaviness, stagnation, resistance to change or becoming overly attached to familiar routines.</p>
+              </article>
+
+              <article class="jwf-element-guide-item" style="--element-color:#6E6A83">
+                <span>Metal · Structure</span>
+                <h3>Focus, boundaries &amp; execution</h3>
+                <p><strong>Supports:</strong> organisation, discipline, prioritisation, clear boundaries, precision and finishing what you start.</p>
+                <p><strong>If Missing / Weak:</strong> you may struggle with boundaries, priorities, organisation, decisiveness or maintaining a clear structure.</p>
+                <p><strong>If Strong / Overactive:</strong> it may show as perfectionism, rigid control, harsh self-criticism or emotional distance.</p>
+              </article>
+
+              <article class="jwf-element-guide-item" style="--element-color:#1D65A6">
+                <span>Water · Flow</span>
+                <h3>Adaptability, reflection &amp; intuition</h3>
+                <p><strong>Supports:</strong> calm reflection, emotional flexibility, intuition, adaptability and the ability to move through uncertainty.</p>
+                <p><strong>If Missing / Weak:</strong> you may find change harder, feel emotionally tense, over-control outcomes, or have less space for reflection and intuition.</p>
+                <p><strong>If Strong / Overactive:</strong> it may show as overthinking, withdrawal, fear loops or becoming absorbed in internal thoughts.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="jwf-grid-two">
+            <div class="jwf-card">
+              <div class="jwf-label">Element Insights</div>
+              <h2>What your balance may mean</h2>
+              <p class="jwf-main-text">
+                Your result below connects each element with its practical role and explains what its current level may look like in day-to-day life.
+              </p>
+              <div id="jwf-element-stories" class="jwf-element-stories"></div>
+            </div>
+
+            <div class="jwf-card">
+              <div class="jwf-label">Profession and Timing</div>
+              <h2>Supportive lifestyle guidance</h2>
+              <p id="jwf-prof-summary" class="jwf-main-text"></p>
+              <ul id="jwf-prof-list" class="jwf-list"></ul>
+              <div id="jwf-timing-chips" class="jwf-chip-row"></div>
+            </div>
+          </div>
+
+          <div class="jwf-card">
+            <div class="jwf-label">Direction Guidance</div>
+            <h2 id="jwf-kua-title"></h2>
+            <div class="jwf-kua-grid">
+              <div>
+                <strong>Wealth</strong><span id="jwf-kua-w"></span>
+              </div>
+              <div>
+                <strong>Health</strong><span id="jwf-kua-h"></span>
+              </div>
+              <div>
+                <strong>Relationships</strong><span id="jwf-kua-r"></span>
+              </div>
+              <div>
+                <strong>Stability</strong><span id="jwf-kua-s"></span>
+              </div>
+              <div class="jwf-avoid">
+                <strong>Use mindfully</strong><span id="jwf-kua-a"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jwf-card">
+            <div class="jwf-label">Life Path Guidance</div>
+            <h2 id="jwf-lp-title"></h2>
+            <p id="jwf-lp-subtitle" class="jwf-main-text"></p>
+            <ul id="jwf-lp-list" class="jwf-list"></ul>
+          </div>
+
+          <div class="jwf-card">
+            <div class="jwf-label">Cr

@@ -217,11 +217,11 @@ export function FeaturedProducts() {
       </div>
 
       {/* FULL-SCREEN-WIDTH Stage with Scroll Buttons placed at extreme ends */}
-      <div className="relative w-full h-[420px] sm:h-[500px] md:h-[560px] lg:h-[610px] flex items-center justify-center overflow-visible my-auto">
+      <div className="relative w-full h-[360px] sm:h-[420px] md:h-[470px] lg:h-[510px] flex items-center justify-center overflow-visible my-auto">
         {/* Left Arrow Button (At the extreme outer left end) */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 sm:left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#1A1815] hover:bg-[#122E46] text-[#FAF8F5] flex items-center justify-center shadow-2xl border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
+          className="absolute left-2 sm:left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-[#1A1815] hover:bg-[#122E46] text-[#FAF8F5] flex items-center justify-center shadow-2xl border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
           aria-label="Previous category"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -230,13 +230,13 @@ export function FeaturedProducts() {
         {/* Right Arrow Button (At the extreme outer right end) */}
         <button
           onClick={nextSlide}
-          className="absolute right-2 sm:right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#1A1815] hover:bg-[#122E46] text-[#FAF8F5] flex items-center justify-center shadow-2xl border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
+          className="absolute right-2 sm:right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-[#1A1815] hover:bg-[#122E46] text-[#FAF8F5] flex items-center justify-center shadow-2xl border border-white/20 transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
           aria-label="Next category"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {/* Cards Wrapper - Flat Straight Rectangles (No 3D perspective slant) */}
+        {/* Cards Wrapper */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -246,14 +246,12 @@ export function FeaturedProducts() {
             const diff = getNormalizedDiff(idx, renderProgress);
             const absDiff = Math.abs(diff);
 
-            // Clean constant horizontal spacing without expansion or lifting
-            const translateX = `calc(-50% + ${diff * 74}%)`;
+            // Clean constant horizontal spacing with a distinct gap between cards
+            const translateX = `calc(-50% + ${diff * 106}%)`;
 
-            // Scale configuration:
-            // Middle card (absDiff = 0): scaleX = 1.2, scaleY = 0.8
-            // Previous & next side cards (absDiff = 1): scaleX = 1.14, scaleY = 0.6
-            const scaleX = 1.2 - Math.min(absDiff, 1.0) * 0.06;
-            const scaleY = Math.max(0.48, 0.8 - Math.min(absDiff, 1.3) * 0.20);
+            // Proportional uniform scale without stretching:
+            // Center card: 1.0, side cards: ~0.85
+            const scale = Math.max(0.72, 1.0 - Math.min(absDiff, 1.2) * 0.15);
 
             // 100% full opacity for visible cards
             let opacity = 1;
@@ -265,22 +263,22 @@ export function FeaturedProducts() {
 
             const isCentered = absDiff < 0.35;
             const boxShadow = isCentered
-              ? "0 30px 65px -15px rgba(0,0,0,0.55), 0 12px 28px -10px rgba(0,0,0,0.3)"
-              : "0 15px 35px -10px rgba(0,0,0,0.35)";
+              ? "0 25px 50px -12px rgba(0,0,0,0.45), 0 10px 20px -8px rgba(0,0,0,0.25)"
+              : "0 10px 25px -8px rgba(0,0,0,0.3)";
 
             return (
               <div
                 key={cat.id}
                 onClick={() => handleCardClick(idx, cat)}
                 style={{
-                  transform: `translate3d(${translateX}, -50%, 0) scale(${scaleX}, ${scaleY})`,
+                  transform: `translate3d(${translateX}, -50%, 0) scale(${scale})`,
                   zIndex,
                   opacity,
                   boxShadow,
                   willChange: "transform, opacity",
                   pointerEvents: absDiff < 1.35 ? "auto" : "none",
                 }}
-                className="absolute top-1/2 left-1/2 w-[82vw] sm:w-[460px] md:w-[520px] lg:w-[560px] aspect-[9/10] rounded-[12px] overflow-hidden shadow-2xl cursor-pointer group/card bg-[#111111]"
+                className="absolute top-1/2 left-1/2 w-[78vw] sm:w-[360px] md:w-[420px] lg:w-[465px] aspect-[4/3] rounded-[14px] overflow-hidden shadow-xl cursor-pointer group/card bg-[#111111]"
               >
                 {/* Full-bleed Image - Covers card edge-to-edge */}
                 <Image
@@ -289,16 +287,16 @@ export function FeaturedProducts() {
                   fill
                   priority={isCentered}
                   className="object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
-                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 520px, 560px"
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 380px, 420px"
                 />
 
-                {/* Bottom Content Area */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-7 flex flex-col items-center text-center z-10">
-                  <h3 className="font-serif text-lg sm:text-2xl md:text-3xl lg:text-4xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] mb-1 transition-transform duration-300">
+                {/* Bottom Content Area with gradient overlay for crystal clear contrast */}
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 flex flex-col items-center text-center z-10 bg-gradient-to-t from-black/85 via-black/45 to-transparent pt-8 sm:pt-10">
+                  <h3 className="font-serif text-base sm:text-xl md:text-2xl lg:text-3xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] mb-1 transition-transform duration-300">
                     {cat.name}
                   </h3>
 
-                  <p className="text-[11px] sm:text-xs md:text-sm text-[#DFCAAB] font-light tracking-wide mb-2 sm:mb-2.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-1">
+                  <p className="text-[10px] sm:text-xs md:text-sm text-[#DFCAAB] font-light tracking-wide mb-2 sm:mb-2.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-1">
                     {cat.subtitle}
                   </p>
 
@@ -313,10 +311,10 @@ export function FeaturedProducts() {
                     <Link
                       href={cat.href}
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-semibold tracking-widest uppercase transition-all duration-300 shadow-2xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
+                      className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-widest uppercase transition-all duration-300 shadow-xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
                     >
                       <span>Explore Collection</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Link>
                   </div>
                 </div>

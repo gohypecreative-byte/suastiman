@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components/common/Logo";
 import { useCart } from "@/context/CartContext";
 import {
@@ -14,13 +15,20 @@ import {
   ChevronDown,
   User,
   Truck,
-  CreditCard,
-  Percent,
   ShieldCheck,
   Leaf,
+  Gem,
 } from "lucide-react";
 
+type NavLink = {
+  name: string;
+  href: string;
+  badge?: string;
+  children?: { name: string; href: string; desc?: string }[];
+};
+
 export function Navbar() {
+  const pathname = usePathname();
   const { openCart, totalCount, wishlistCount, isHydrated } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -70,33 +78,46 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [mobileMenuOpen, searchOpen]);
 
-  type NavLink = {
-    name: string;
-    href: string;
-    badge?: string;
-    children?: { name: string; href: string; desc: string }[];
-  };
+  // Close menus on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setSearchOpen(false);
+  }, [pathname]);
 
   const navLinks: NavLink[] = [
     {
       name: "Shop",
       href: "/products",
       children: [
-        { name: "All Collections", href: "/products", desc: "Browse full collection" },
-        { name: "Spiritual Bracelets", href: "/products?category=bracelets", desc: "Energy & chakra wristwear" },
-        { name: "108 Japa Malas", href: "/products?category=malas", desc: "Traditional prayer & meditation" },
-        { name: "Zodiac Jewellery", href: "/tools/energy-finder", desc: "Astrological chart & birthstones" },
-        { name: "Sacred Botanicals", href: "/products?category=rudraksha", desc: "Wild Rudraksha & Vrindavan Tulsi" },
-        { name: "Healing Gemstones", href: "/products?category=gemstones", desc: "Earth-mined crystal energy" },
+        { name: "All Collections", href: "/products" },
+        { name: "Spiritual Bracelets", href: "/products?category=bracelets" },
+        { name: "108 Japa Malas", href: "/products?category=malas" },
+        { name: "Zodiac Jewellery", href: "/tools/energy-finder" },
+        { name: "Sacred Botanicals", href: "/products?category=rudraksha" },
+        { name: "Healing Gemstones", href: "/products?category=gemstones" },
       ],
     },
     {
       name: "Sacred Materials",
       href: "/#material-journeys",
       children: [
-        { name: "Rudraksha Seeds", href: "/#material-journeys-rudraksha", desc: "Wild Himalayan Elaeocarpus" },
-        { name: "Tulsi Sacred Wood", href: "/#material-journeys-tulsi", desc: "Naturally seasoned Vrindavan wood" },
-        { name: "Earth Gemstones", href: "/#material-journeys-gemstones", desc: "Raw unheated natural minerals" },
+        { name: "Rudraksha Seeds", href: "/#material-journeys-rudraksha" },
+        { name: "Tulsi Sacred Wood", href: "/#material-journeys-tulsi" },
+        { name: "Earth Gemstones", href: "/#material-journeys-gemstones" },
+      ],
+    },
+    {
+      name: "Find Your Crystal",
+      href: "/pages/profession-crystal-mapping-calculator",
+      children: [
+        {
+          name: "Build Your Crystal Report",
+          href: "/pages/profession-crystal-mapping-calculator",
+        },
+        {
+          name: "Zodiac Astrological Finder",
+          href: "/tools/energy-finder",
+        },
       ],
     },
     { name: "Know Your Tradition", href: "/#know-your-tradition" },
@@ -105,13 +126,12 @@ export function Navbar() {
     { name: "Blog", href: "/blog" },
   ];
 
-
   return (
     <>
       {/* Layout Spacer to match navbar height and prevent any layout jump */}
       <div className="w-full h-[96px] sm:h-[116px] pointer-events-none" aria-hidden="true" />
 
-      {/* Floating Smart Header Wrapper (fixed to browser viewport) */}
+      {/* Floating Smart Header Wrapper */}
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
           isVisible ? "translate-y-0" : "-translate-y-full"
@@ -123,7 +143,7 @@ export function Navbar() {
             {[...Array(4)].map((_, groupIdx) => (
               <div
                 key={groupIdx}
-                className="flex items-center gap-8 md:gap-14 mx-4 md:mx-7 text-[10px] sm:text-[11px] font-medium tracking-[0.14em] uppercase"
+                className="flex items-center gap-8 md:gap-12 mx-4 md:mx-6 text-[10px] sm:text-[11px] font-medium tracking-[0.14em] uppercase"
               >
                 <div className="flex items-center gap-2">
                   <Leaf className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
@@ -140,216 +160,244 @@ export function Navbar() {
                   <span>COMPLIMENTARY SHIPPING OVER ₹1999</span>
                 </div>
                 <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
+                <Link
+                  href="/pages/profession-crystal-mapping-calculator"
+                  className="flex items-center gap-1.5 text-[#FFE7B6] hover:text-white transition-colors"
+                >
+                  <Gem className="w-3.5 h-3.5 text-[#FFE7B6]" />
+                  <span>FREE NUMEROLOGY CRYSTAL CALCULATOR &amp; MOBILE ANALYSIS</span>
+                </Link>
+                <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Main Sticky Navigation */}
+        {/* Main Header Bar */}
         <header
-          className={`w-full bg-[#F9F8F5] border-b border-[#E2DEC9] transition-shadow duration-300 ${
-            isScrolled ? "shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]" : ""
+          className={`w-full bg-[#FFFFFF]/98 backdrop-blur-md border-b border-[#EBE7DE] transition-all duration-300 ${
+            isScrolled ? "shadow-[0_4px_25px_-5px_rgba(0,0,0,0.08)] bg-white" : ""
           }`}
         >
-        <div className="w-full px-4 sm:px-8 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#122E46] hover:text-[#C5A880] transition-colors -ml-2"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-
-          {/* Logo */}
-          <div className="flex items-center">
-            <Logo />
-          </div>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-3">
-            {navLinks.map((link) => (
-              <div key={link.name} className="relative group">
-                {link.badge && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm">
-                    {link.badge}
-                  </span>
-                )}
-
-                {link.children ? (
-                  <div className="flex items-center gap-1.5 cursor-pointer px-3 py-1.5 rounded-[4px] border border-transparent hover:border-[#122E46]/30 group-hover:border-[#122E46]/30 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] group-hover:text-[#C5A880] transition-all duration-200">
-                    <span>{link.name}</span>
-                    <ChevronDown className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:rotate-180 text-[#122E46] group-hover:text-[#C5A880]" />
-
-                    {/* Dropdown Menu */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top translate-y-2 group-hover:translate-y-0 overflow-hidden">
-                      <div className="py-2.5">
-                        {link.children.map((child) => (
-                          <a
-                            key={child.name}
-                            href={child.href}
-                            className="block px-4 py-2.5 hover:bg-[#F9F8F5] transition-colors text-stone-700 hover:text-[#122E46]"
-                          >
-                            <div className="flex flex-col">
-                              <span className="font-sans uppercase text-[11.5px] font-semibold tracking-[0.12em] text-[#122E46]">{child.name}</span>
-                              {child.desc && <span className="text-[11px] text-stone-400 font-light normal-case tracking-normal mt-0.5">{child.desc}</span>}
-                            </div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className="px-3 py-1.5 rounded-[4px] border border-transparent hover:border-[#122E46]/30 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] transition-all duration-200 block"
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Right Action Icons */}
-          <div className="flex items-center space-x-3 sm:space-x-5 text-[#122E46]">
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="hover:text-[#C5A880] transition-colors p-1"
-              title="Search"
-            >
-              <Search className="w-5 h-5 stroke-[1.6]" />
-            </button>
-            
-            <Link
-              href="/account"
-              className="hover:text-[#C5A880] transition-colors p-1"
-              title="My Account & Sanctuary"
-            >
-              <User className="w-5 h-5 stroke-[1.6]" />
-            </Link>
-            
-            <Link
-              href="/wishlist"
-              className="relative hover:text-[#C5A880] transition-colors p-1"
-              title="Sacred Wishlist"
-            >
-              <Heart className="w-5 h-5 stroke-[1.6]" />
-              {isHydrated && wishlistCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
-            </Link>
-
-            <button
-              onClick={openCart}
-              className="relative hover:text-[#C5A880] transition-colors p-1"
-              title="Bag"
-            >
-              <ShoppingBag className="w-5 h-5 stroke-[1.6]" />
-              {isHydrated && totalCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {totalCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Expandable Search Drawer */}
-        {searchOpen && (
-          <div className="border-t border-[#E2DEC9] bg-[#ECEADE] px-3 sm:px-4 py-3 sm:py-4 animate-in slide-in-from-top duration-200">
-            <div className="max-w-3xl mx-auto flex items-center gap-3 bg-white px-3 sm:px-4 py-2 rounded-xl border border-[#C5A880]/50 shadow-inner">
-              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-stone-400 shrink-0" />
-              <input
-                type="text"
-                placeholder="Search sacred materials, origin, or tradition..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent border-none text-xs sm:text-sm text-[#111111] focus:outline-none placeholder:text-stone-400"
-                autoFocus
-              />
+          <div className="w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-10 h-16 sm:h-[72px] flex items-center justify-between">
+            {/* Left: Mobile Menu Toggle Button */}
+            <div className="flex items-center gap-2 lg:hidden">
               <button
-                onClick={() => setSearchOpen(false)}
-                className="text-stone-400 hover:text-stone-700 p-1 shrink-0"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 -ml-2 text-[#122E46] hover:text-[#C5A880] transition-colors focus:outline-none"
+                aria-label="Toggle menu"
               >
-                <X className="w-4 h-4" />
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
-          </div>
-        )}
 
-        {/* Mobile Slide-down Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-[#E2DEC9] bg-[#F9F8F5] px-5 sm:px-6 py-5 sm:py-6 space-y-4 shadow-xl max-h-[80vh] overflow-y-auto">
-            {navLinks.map((link) => (
-              <div key={link.name} className="border-b border-[#E2DEC9]/40">
-                {link.children ? (
-                  <div className="py-2.5">
-                    <span className="block text-[13px] font-sans uppercase tracking-[0.14em] font-semibold text-[#122E46] mb-2">{link.name}</span>
-                    <div className="pl-4 space-y-2 border-l-2 border-[#122E46]/30">
-                      {link.children.map((child) => (
-                        <a
-                          key={child.name}
-                          href={child.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block text-xs uppercase tracking-[0.12em] py-1 text-stone-600 hover:text-[#122E46]"
-                        >
-                          {child.name}
-                        </a>
-                      ))}
+            {/* Brand Logo */}
+            <div className="flex items-center shrink-0">
+              <Logo />
+            </div>
+
+            {/* Desktop Center Navigation Links */}
+            <nav className="hidden lg:flex items-center space-x-1 xl:space-x-3">
+              {navLinks.map((link) => (
+                <div key={link.name} className="relative group">
+                  {link.badge && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm">
+                      {link.badge}
+                    </span>
+                  )}
+
+                  {link.children ? (
+                    <div className="flex items-center gap-1.5 cursor-pointer px-2.5 py-1.5 text-[13px] font-sans font-medium uppercase tracking-[0.14em] text-[#122E46] hover:text-[#C5A880] group-hover:text-[#C5A880] transition-colors">
+                      <span>{link.name}</span>
+                      <ChevronDown className="w-3.5 h-3.5 stroke-[2] transition-transform duration-200 group-hover:rotate-180 text-[#122E46] group-hover:text-[#C5A880]" />
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top translate-y-2 group-hover:translate-y-0 overflow-hidden z-50">
+                        <div className="py-2.5">
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.name}
+                              href={child.href}
+                              className="block px-4 py-2.5 hover:bg-[#F9F8F5] transition-colors text-stone-700 hover:text-[#122E46]"
+                            >
+                              <div className="flex flex-col">
+                                <span className="font-sans uppercase text-[11.5px] font-semibold tracking-[0.12em] text-[#122E46]">
+                                  {child.name}
+                                </span>
+                                {child.desc && (
+                                  <span className="text-[11px] text-stone-400 font-light normal-case tracking-normal mt-0.5">
+                                    {child.desc}
+                                  </span>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-[13px] font-sans uppercase tracking-[0.14em] font-semibold text-[#122E46] hover:text-[#C5A880] py-2 relative"
-                  >
-                    {link.name}
-                    {link.badge && (
-                      <span className="ml-2 bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm">
-                        {link.badge}
-                      </span>
-                    )}
-                  </Link>
-                )}
-              </div>
-            ))}
-            <div className="pt-3 border-t border-[#E2DEC9]/60 flex flex-col gap-2">
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={`px-2.5 py-1.5 text-[13px] font-sans font-medium uppercase tracking-[0.14em] transition-colors duration-200 block ${
+                        pathname === link.href ? "text-[#C5A880] font-semibold" : "text-[#122E46] hover:text-[#C5A880]"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* Right Action Icons */}
+            <div className="flex items-center space-x-3 sm:space-x-5 text-[#122E46]">
+              {/* Search */}
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="hover:text-[#C5A880] transition-colors p-1 focus:outline-none"
+                title="Search"
+                aria-label="Search"
+              >
+                <Search className="w-5 h-5 stroke-[1.6]" />
+              </button>
+
+              {/* User Account */}
               <Link
                 href="/account"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2.5 text-[13px] font-medium text-[#122E46] hover:text-[#C5A880] py-1"
+                className="hover:text-[#C5A880] transition-colors p-1"
+                title="My Account &amp; Sanctuary"
+                aria-label="Account"
               >
-                <User className="w-4 h-4 text-[#122E46]" />
-                <span>My Account &amp; Sanctuary</span>
+                <User className="w-5 h-5 stroke-[1.6]" />
               </Link>
+
+              {/* Wishlist */}
               <Link
                 href="/wishlist"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between text-[13px] font-medium text-[#122E46] hover:text-[#C5A880] py-1"
+                className="relative hover:text-[#C5A880] transition-colors p-1"
+                title="Sacred Wishlist"
+                aria-label="Wishlist"
               >
-                <div className="flex items-center gap-2.5">
-                  <Heart className="w-4 h-4 text-[#122E46]" />
-                  <span>Sacred Wishlist</span>
-                </div>
+                <Heart className="w-5 h-5 stroke-[1.6]" />
                 {isHydrated && wishlistCount > 0 && (
-                  <span className="bg-[#122E46] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                     {wishlistCount}
                   </span>
                 )}
               </Link>
-            </div>
-            <div className="pt-1">
-              <p className="text-xs text-stone-500 font-serif italic mb-2">
-                &ldquo;Wear what aligns with your soul.&rdquo;
-              </p>
+
+              {/* Shopping Bag / Cart */}
+              <button
+                onClick={openCart}
+                className="relative hover:text-[#C5A880] transition-colors p-1 focus:outline-none cursor-pointer"
+                title="Shopping Bag"
+                aria-label="Bag"
+              >
+                <ShoppingBag className="w-5 h-5 stroke-[1.6]" />
+                {isHydrated && totalCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
+                    {totalCount}
+                  </span>
+                )}
+              </button>
             </div>
           </div>
-        )}
-      </header>
+
+          {/* Expandable Search Drawer */}
+          {searchOpen && (
+            <div className="border-t border-[#E2DEC9] bg-[#ECEADE] px-3 sm:px-4 py-3 sm:py-4 animate-in slide-in-from-top duration-200">
+              <div className="max-w-3xl mx-auto flex items-center gap-3 bg-white px-3 sm:px-4 py-2 rounded-xl border border-[#C5A880]/50 shadow-inner">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-stone-400 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Search sacred materials, origin, or tradition..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-transparent border-none text-xs sm:text-sm text-[#111111] focus:outline-none placeholder:text-stone-400"
+                  autoFocus
+                />
+                <button
+                  onClick={() => setSearchOpen(false)}
+                  className="text-stone-400 hover:text-stone-700 p-1 shrink-0"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Mobile Slide-down Menu */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden border-t border-[#E2DEC9] bg-[#F9F8F5] px-5 sm:px-6 py-5 sm:py-6 space-y-4 shadow-xl max-h-[80vh] overflow-y-auto animate-in slide-in-from-top duration-200">
+              {navLinks.map((link) => (
+                <div key={link.name} className="border-b border-[#E2DEC9]/40">
+                  {link.children ? (
+                    <div className="py-2.5">
+                      <span className="block text-[13px] font-sans uppercase tracking-[0.14em] font-semibold text-[#122E46] mb-2">
+                        {link.name}
+                      </span>
+                      <div className="pl-4 space-y-2 border-l-2 border-[#122E46]/30">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block text-xs uppercase tracking-[0.12em] py-1 text-stone-600 hover:text-[#122E46]"
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-[13px] font-sans uppercase tracking-[0.14em] font-semibold text-[#122E46] hover:text-[#C5A880] py-2 relative"
+                    >
+                      {link.name}
+                      {link.badge && (
+                        <span className="ml-2 bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm">
+                          {link.badge}
+                        </span>
+                      )}
+                    </Link>
+                  )}
+                </div>
+              ))}
+              <div className="pt-3 border-t border-[#E2DEC9]/60 flex flex-col gap-2">
+                <Link
+                  href="/account"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 text-[13px] font-medium text-[#122E46] hover:text-[#C5A880] py-1"
+                >
+                  <User className="w-4 h-4 text-[#122E46]" />
+                  <span>My Account &amp; Sanctuary</span>
+                </Link>
+                <Link
+                  href="/wishlist"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between text-[13px] font-medium text-[#122E46] hover:text-[#C5A880] py-1"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Heart className="w-4 h-4 text-[#122E46]" />
+                    <span>Sacred Wishlist</span>
+                  </div>
+                  {isHydrated && wishlistCount > 0 && (
+                    <span className="bg-[#122E46] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
+              <div className="pt-1 text-center">
+                <p className="text-xs text-stone-400 font-serif italic mb-2">
+                  &ldquo;Wear what aligns with your soul.&rdquo;
+                </p>
+              </div>
+            </div>
+          )}
+        </header>
       </div>
     </>
   );

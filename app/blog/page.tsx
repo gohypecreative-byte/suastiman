@@ -208,6 +208,7 @@ export default function BlogPage() {
                   alt={featuredArticle.title}
                   fill
                   priority
+                  sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover object-center hover:scale-105 transition-transform duration-700"
                 />
                 <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-mono text-[#DFCAAB] uppercase tracking-widest border border-white/10">
@@ -410,6 +411,7 @@ export default function BlogPage() {
                     src={readingArticle.image}
                     alt={readingArticle.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 768px"
                     className="object-cover"
                   />
                 </div>
