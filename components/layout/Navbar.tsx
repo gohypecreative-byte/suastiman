@@ -29,13 +29,18 @@ type NavLink = {
 
 export function Navbar() {
   const pathname = usePathname();
-  const { openCart, totalCount, wishlistCount, isHydrated } = useCart();
+  const { openCart, totalCount, wishlistCount } = useCart();
+  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -279,7 +284,7 @@ export function Navbar() {
                 aria-label="Wishlist"
               >
                 <Heart className="w-5 h-5 stroke-[1.6]" />
-                {isHydrated && wishlistCount > 0 && (
+                {mounted && wishlistCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                     {wishlistCount}
                   </span>
@@ -294,7 +299,7 @@ export function Navbar() {
                 aria-label="Bag"
               >
                 <ShoppingBag className="w-5 h-5 stroke-[1.6]" />
-                {isHydrated && totalCount > 0 && (
+                {mounted && totalCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-[#122E46] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                     {totalCount}
                   </span>
@@ -383,7 +388,7 @@ export function Navbar() {
                     <Heart className="w-4 h-4 text-[#122E46]" />
                     <span>Sacred Wishlist</span>
                   </div>
-                  {isHydrated && wishlistCount > 0 && (
+                  {mounted && wishlistCount > 0 && (
                     <span className="bg-[#122E46] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                       {wishlistCount}
                     </span>

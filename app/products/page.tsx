@@ -172,6 +172,7 @@ interface ProductCardProps {
   onToggleWishlist: () => void;
   onAddToCart: (e: React.MouseEvent) => void;
   isAdded: boolean;
+  priority?: boolean;
 }
 
 function ProductCardItem({
@@ -180,6 +181,7 @@ function ProductCardItem({
   onToggleWishlist,
   onAddToCart,
   isAdded,
+  priority = false,
 }: ProductCardProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const images = prod.images && prod.images.length > 0 ? prod.images : [prod.image];
@@ -205,6 +207,8 @@ function ProductCardItem({
             src={images[currentIdx]}
             alt={prod.name}
             fill
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
             className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
@@ -456,7 +460,7 @@ function ProductsCatalog() {
 
         {/* Products Grid - Minimal Luxury Reference Design */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-3.5">
-          {filteredProducts.map((prod) => (
+          {filteredProducts.map((prod, idx) => (
             <ProductCardItem
               key={prod.id}
               prod={prod}
@@ -464,6 +468,7 @@ function ProductsCatalog() {
               onToggleWishlist={() => handleToggleWishlist(prod)}
               onAddToCart={(e) => handleAddToCart(e, prod)}
               isAdded={addedId === prod.id}
+              priority={idx < 4}
             />
           ))}
         </div>
