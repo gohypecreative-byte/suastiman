@@ -51,7 +51,7 @@ const tactileMaterials: TactileMaterial[] = [
   },
   {
     id: "lapis",
-    name: "Raw Earth Lapis & Pyrite",
+    name: "Raw Earth Lapis and Pyrite",
     subtitle: "Unheated Metamorphic Rock",
     image: "/images/origin/raw_gemstone_craft.jpg",
     feel: "Substantial cold mineral heft, dense, crisp edges",
@@ -62,7 +62,7 @@ const tactileMaterials: TactileMaterial[] = [
       { label: "SURFACE FEEL", val: "Vitreous Cool Mineral" },
       { label: "MINERALOGY", val: "Lazurite + Pyrite + Calcite" },
       { label: "LAPIDARY", val: "Jaipur Hand Faceting" },
-      { label: "TREATMENT", val: "100% Unheated & Undyed" },
+      { label: "TREATMENT", val: "100% Unheated and Undyed" },
     ],
   },
 ];
@@ -165,7 +165,7 @@ export function TactileShowcase() {
           <div className="lg:col-span-5 space-y-6">
             <div>
               <span className="text-[11px] font-mono text-[#C5A880] tracking-widest uppercase block mb-1">
-                TOUCH &amp; MATERIAL SENSORY NOTES
+                TOUCH AND MATERIAL SENSORY NOTES
               </span>
               <h3 className="font-serif text-3xl text-white font-normal leading-tight">
                 {active.feel}

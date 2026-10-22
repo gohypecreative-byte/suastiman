@@ -93,7 +93,7 @@ const NINE_STAGES: NaturalStage[] = [
     step: "08",
     badge: "STAGE 08 • HAND CLEANSING",
     tagline: "HONORED BY HUMAN HANDS",
-    title: "River water, patience & care.",
+    title: "River water, patience and care.",
     caption: "Generational artisans in mountain riverbeds gently peel away the fruit pulp with spring water, revealing pristine grooves without acid or chemicals.",
     image: "/images/origin/hero_journey_wash.jpg",
     elevation: "1,400m Spring Bed",
@@ -102,12 +102,12 @@ const NINE_STAGES: NaturalStage[] = [
   {
     step: "09",
     badge: "STAGE 09 • SVASTIMĀN ARCHIVE",
-    tagline: "SACRED FORM & LAB PROVENANCE",
+    tagline: "SACRED FORM AND LAB PROVENANCE",
     title: "From origin to your hands.",
     caption: "Preserving raw integrity, verifying every mukhi with lab standards, and honoring the sacred object with traditional context, not fear.",
     image: "/images/origin/stage9_svastiman.jpg",
     elevation: "Sanctified Form",
-    provenance: "Lab-Tested & Verified",
+    provenance: "Lab-Tested and Verified",
   },
 ];
 
@@ -125,7 +125,7 @@ export function HeroBanner() {
   const current = NINE_STAGES[activeIndex];
 
   return (
-    <section className="relative w-full h-[calc(100dvh-96px)] sm:h-[calc(100vh-116px)] min-h-[520px] sm:min-h-[660px] bg-[#122E46] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
+    <section id="hero" className="relative w-full h-[calc(100dvh-96px)] sm:h-[calc(100vh-116px)] min-h-[520px] sm:min-h-[660px] bg-[#122E46] text-[#ECEADE] overflow-hidden flex flex-col justify-between border-b border-[#C5A880]/20 select-none">
       {/* Background Photography with Smooth Crossfade & High Natural Clarity (Light & Bright) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {NINE_STAGES.map((stage, idx) => (

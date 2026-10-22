@@ -89,7 +89,7 @@ const originSteps: OriginStep[] = [
   {
     step: "08",
     name: "HUMAN HAND CLEANING",
-    subhead: "River Washing & Patient Sorting",
+    subhead: "River Washing and Patient Sorting",
     desc: "No acid, no artificial dyes. Generational artisan hands wash the seeds in running water, brushing away pulp to reveal raw grooves.",
     image: "/images/origin/hero_journey_wash.jpg",
     alt: "Artisan Hands Cleaning Seeds",
@@ -99,7 +99,7 @@ const originSteps: OriginStep[] = [
   {
     step: "09",
     name: "SVASTIMĀN",
-    subhead: "Sacred Form & Knowledge",
+    subhead: "Sacred Form and Knowledge",
     desc: "Preserving the source, verifying the authenticity, and handing over the sacred object with traditional context, not fear.",
     image: "/images/origin/stage9_svastiman.jpg",
     alt: "Svastiman Heritage Mala",

@@ -73,10 +73,29 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
+    // Robust smooth scroll to target hash on load or on hashchange
+    const scrollToHash = () => {
+      if (typeof window !== "undefined" && window.location.hash) {
+        const id = window.location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        }
+      }
+    };
+
+    if (typeof window !== "undefined" && window.location.hash) {
+      setTimeout(scrollToHash, 200);
+      setTimeout(scrollToHash, 600);
+    }
+    window.addEventListener("hashchange", scrollToHash);
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener("resize", updateHeight);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", scrollToHash);
     };
   }, []);
 

@@ -32,7 +32,7 @@ const bestSellers: Product[] = [
   },
   {
     id: "bs3",
-    name: "Classic Pyrite Bracelet | Wealth & Prosperity",
+    name: "Classic Pyrite Bracelet | Wealth and Prosperity",
     price: 2299,
     image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=600&q=80",
     badge: "Our Pick",

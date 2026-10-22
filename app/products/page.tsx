@@ -30,7 +30,7 @@ const CATALOG_PRODUCTS: CatalogProduct[] = [
     id: "prod-rudraksha-108",
     name: "Himalayan Rudraksha 108 Japa Mala",
     category: "rudraksha",
-    material: "Wild Nepal Elaeocarpus & Unbleached Cotton",
+    material: "Wild Nepal Elaeocarpus and Unbleached Cotton",
     origin: "Taplejung, East Nepal (2,200m)",
     price: 2899,
     originalPrice: 3499,
@@ -96,10 +96,10 @@ const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
   {
     id: "prod-multi-mala",
-    name: "Multi-Gemstone & Tulsi Alignment Mala",
+    name: "Multi-Gemstone and Tulsi Alignment Mala",
     category: "gemstones",
-    material: "Tiger Eye, Hematite, Emerald Quartz & Tulsi",
-    origin: "Jaipur Lapidary & Vrindavan",
+    material: "Tiger Eye, Hematite, Emerald Quartz and Tulsi",
+    origin: "Jaipur Lapidary and Vrindavan",
     price: 2499,
     originalPrice: 2999,
     image: "/images/origin/brand_macro_detail.jpg",
@@ -405,7 +405,7 @@ function ProductsCatalog() {
         };
       case "gemstones":
         return {
-          title: "Earth Gemstones & Minerals",
+          title: "Earth Gemstones and Minerals",
           subtitle: "Untreated, unheated crystals cut and shaped with Jaipur water-lapidary mastery.",
         };
       default:

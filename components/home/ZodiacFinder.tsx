@@ -27,8 +27,8 @@ const zodiacs: ZodiacData[] = [
     element: "Fire",
     planet: "Mars",
     dates: "Mar 21 - Apr 19",
-    recommendedStone: "Red Jasper & Carnelian",
-    productName: "Aries Pranic Fire & Vitality Bracelet",
+    recommendedStone: "Red Jasper and Carnelian",
+    productName: "Aries Pranic Fire and Vitality Bracelet",
     price: 1899,
     originalPrice: 2499,
     image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80",
@@ -41,8 +41,8 @@ const zodiacs: ZodiacData[] = [
     element: "Earth",
     planet: "Venus",
     dates: "Apr 20 - May 20",
-    recommendedStone: "Emerald & Green Jade",
-    productName: "Taurus Abundance & Heart Serenity Mala",
+    recommendedStone: "Emerald and Green Jade",
+    productName: "Taurus Abundance and Heart Serenity Mala",
     price: 2199,
     originalPrice: 2899,
     image: "https://images.unsplash.com/photo-1611591475102-4f107c164a27?auto=format&fit=crop&w=600&q=80",
@@ -55,7 +55,7 @@ const zodiacs: ZodiacData[] = [
     element: "Air",
     planet: "Mercury",
     dates: "May 21 - Jun 20",
-    recommendedStone: "Blue Lace Agate & Aquamarine",
+    recommendedStone: "Blue Lace Agate and Aquamarine",
     productName: "Gemini Throat Chakra Clarity Bracelet",
     price: 1799,
     originalPrice: 2399,
@@ -69,7 +69,7 @@ const zodiacs: ZodiacData[] = [
     element: "Water",
     planet: "Moon",
     dates: "Jun 21 - Jul 22",
-    recommendedStone: "Rainbow Moonstone & Selenite",
+    recommendedStone: "Rainbow Moonstone and Selenite",
     productName: "Cancer Lunar Aura Protection Talisman",
     price: 1999,
     originalPrice: 2699,
@@ -83,8 +83,8 @@ const zodiacs: ZodiacData[] = [
     element: "Fire",
     planet: "Sun",
     dates: "Jul 23 - Aug 22",
-    recommendedStone: "Golden Tiger Eye & Sunstone",
-    productName: "Leo Sovereign Radiance & Solar Bracelet",
+    recommendedStone: "Golden Tiger Eye and Sunstone",
+    productName: "Leo Sovereign Radiance and Solar Bracelet",
     price: 1999,
     originalPrice: 2599,
     image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?auto=format&fit=crop&w=600&q=80",
@@ -97,8 +97,8 @@ const zodiacs: ZodiacData[] = [
     element: "Earth",
     planet: "Mercury",
     dates: "Aug 23 - Sep 22",
-    recommendedStone: "Amazonite & Moss Agate",
-    productName: "Virgo Sacred Order & Calm Mala",
+    recommendedStone: "Amazonite and Moss Agate",
+    productName: "Virgo Sacred Order and Calm Mala",
     price: 1899,
     originalPrice: 2499,
     image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
@@ -111,8 +111,8 @@ const zodiacs: ZodiacData[] = [
     element: "Air",
     planet: "Venus",
     dates: "Sep 23 - Oct 22",
-    recommendedStone: "Rose Quartz & Lepidolite",
-    productName: "Libra Divine Harmony & Grace Bracelet",
+    recommendedStone: "Rose Quartz and Lepidolite",
+    productName: "Libra Divine Harmony and Grace Bracelet",
     price: 1899,
     originalPrice: 2499,
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80",
@@ -123,10 +123,10 @@ const zodiacs: ZodiacData[] = [
     sign: "Scorpio",
     symbol: "♏",
     element: "Water",
-    planet: "Mars & Pluto",
+    planet: "Mars and Pluto",
     dates: "Oct 23 - Nov 21",
-    recommendedStone: "Black Obsidian & Garnet",
-    productName: "Scorpio Alchemy & Auric Shield Bracelet",
+    recommendedStone: "Black Obsidian and Garnet",
+    productName: "Scorpio Alchemy and Auric Shield Bracelet",
     price: 2099,
     originalPrice: 2799,
     image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80",
@@ -139,8 +139,8 @@ const zodiacs: ZodiacData[] = [
     element: "Fire",
     planet: "Jupiter",
     dates: "Nov 22 - Dec 21",
-    recommendedStone: "Lapis Lazuli & Sodalite",
-    productName: "Sagittarius Cosmic Truth & Expansion Mala",
+    recommendedStone: "Lapis Lazuli and Sodalite",
+    productName: "Sagittarius Cosmic Truth and Expansion Mala",
     price: 2299,
     originalPrice: 2999,
     image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?auto=format&fit=crop&w=600&q=80",
@@ -153,7 +153,7 @@ const zodiacs: ZodiacData[] = [
     element: "Earth",
     planet: "Saturn",
     dates: "Dec 22 - Jan 19",
-    recommendedStone: "Black Tourmaline & Onyx",
+    recommendedStone: "Black Tourmaline and Onyx",
     productName: "Capricorn Saturnian Mastery Bracelet",
     price: 1999,
     originalPrice: 2699,
@@ -165,9 +165,9 @@ const zodiacs: ZodiacData[] = [
     sign: "Aquarius",
     symbol: "♒",
     element: "Air",
-    planet: "Saturn & Uranus",
+    planet: "Saturn and Uranus",
     dates: "Jan 20 - Feb 18",
-    recommendedStone: "Amethyst & Labradorite",
+    recommendedStone: "Amethyst and Labradorite",
     productName: "Aquarius Visionary Intuition Bracelet",
     price: 1899,
     originalPrice: 2499,
@@ -179,9 +179,9 @@ const zodiacs: ZodiacData[] = [
     sign: "Pisces",
     symbol: "♓",
     element: "Water",
-    planet: "Jupiter & Neptune",
+    planet: "Jupiter and Neptune",
     dates: "Feb 19 - Mar 20",
-    recommendedStone: "Aquamarine & Fluorite",
+    recommendedStone: "Aquamarine and Fluorite",
     productName: "Pisces Mystical Ocean Serenity Mala",
     price: 2199,
     originalPrice: 2899,
@@ -291,7 +291,7 @@ export function ZodiacFinder() {
               {/* Benefits list */}
               <div className="space-y-2 pt-2 border-t border-[#ECEADE]/10">
                 <p className="text-xs uppercase tracking-wider text-[#C5A880] font-semibold">
-                  Spiritual &amp; Energetic Benefits:
+                  Spiritual and Energetic Benefits:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {selectedSign.benefits.map((b, i) => (
@@ -315,7 +315,7 @@ export function ZodiacFinder() {
                     </span>
                   </div>
                   <span className="text-[11px] text-[#C5A880]">
-                    Includes Authenticity Certificate &amp; Energization Ritual
+                    Includes Authenticity Certificate and Energization Ritual
                   </span>
                 </div>
 

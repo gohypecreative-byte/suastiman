@@ -33,7 +33,7 @@ const TULSI_STAGES: TulsiStage[] = [
     image: "/images/origin/stage2_river.jpg",
     desc: "Nurtured in fertile, mineral-rich riverbed alluvium with pure well water and organic compost, free from synthetic pesticides.",
     specs: [
-      { label: "Geography", value: "Braj Soil & Yamuna Floodplain" },
+      { label: "Geography", value: "Braj Soil and Yamuna Floodplain" },
       { label: "Soil Quality", value: "Organic Alluvial Loam" },
       { label: "Cultivation", value: "Zero Chemical Fertilizer" },
     ],
@@ -57,7 +57,7 @@ const TULSI_STAGES: TulsiStage[] = [
     image: "/images/origin/brand_intro_forest.jpg",
     desc: "Fragrant purple-green serrated leaves carrying therapeutic botanical essences, harvested only with traditional respect.",
     specs: [
-      { label: "Active Compounds", value: "Natural Eugenol & Rosmarinic" },
+      { label: "Active Compounds", value: "Natural Eugenol and Rosmarinic" },
       { label: "Tradition", value: "Morning Prayer Offering" },
       { label: "Color Tone", value: "Deep Krishna Green" },
     ],
@@ -89,7 +89,7 @@ const TULSI_STAGES: TulsiStage[] = [
   {
     step: "07",
     name: "Mala",
-    tagline: "108 Japa & Daily Meditation",
+    tagline: "108 Japa and Daily Meditation",
     image: "/images/origin/stage9_svastiman.jpg",
     desc: "Turned on manual micro-lathes by generational craftsmen in Vrindavan and strung on unbleached thread for sacred japa meditation.",
     specs: [

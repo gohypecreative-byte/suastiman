@@ -16,7 +16,7 @@ const sansFont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Svastimān | House of Sacred Indian Materials & Traditional Knowledge",
+  title: "Svastimān | House of Sacred Indian Materials and Traditional Knowledge",
   description:
     "Svastimān is a house of authentic Indian sacred materials, unheated earth gemstones, wild Himalayan Rudraksha, and Vrindavan Tulsi wood. Rooted in source, honored by hand.",
   keywords: [

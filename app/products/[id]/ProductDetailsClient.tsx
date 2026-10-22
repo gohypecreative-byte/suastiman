@@ -10,10 +10,10 @@ import { useCart } from "@/context/CartContext";
 const mockProducts = [
   {
     id: "p1",
-    name: "108-Seed Himalayan 5-Mukhi Rudraksha & Raw Lapis Mala",
+    name: "108-Seed Himalayan 5-Mukhi Rudraksha and Raw Lapis Mala",
     category: "malas",
-    crystal: "Natural Elaeocarpus ganitrus & Badakhshan Lapis Lazuli",
-    intention: "Contemplative Focus & Dhyana Practice",
+    crystal: "Natural Elaeocarpus ganitrus and Badakhshan Lapis Lazuli",
+    intention: "Contemplative Focus and Dhyana Practice",
     price: 2899,
     originalPrice: 3499,
     rating: 4.9,
@@ -34,7 +34,7 @@ const mockProducts = [
     name: "Aged Krishna Tulsi Wood 108 Japa Meditation Mala",
     category: "malas",
     crystal: "Naturally Cured Ocimum sanctum Heartwood",
-    intention: "Mantra Repetition & Nervous System Calming",
+    intention: "Mantra Repetition and Nervous System Calming",
     price: 1899,
     originalPrice: 2299,
     rating: 4.9,
@@ -52,10 +52,10 @@ const mockProducts = [
   },
   {
     id: "p3",
-    name: "Raw Earth Lapis Lazuli & Brass Accent Bracelet",
+    name: "Raw Earth Lapis Lazuli and Brass Accent Bracelet",
     category: "bracelets",
     crystal: "Natural Untreated Metamorphic Lazurite",
-    intention: "Mental Equanimity & Grounded Awareness",
+    intention: "Mental Equanimity and Grounded Awareness",
     price: 1999,
     originalPrice: 2499,
     rating: 4.8,
@@ -286,7 +286,7 @@ export function ProductDetailsClient({ id }: { id: string }) {
                 onClick={() => toggleAccordion("care")}
                 className="w-full py-5 flex items-center justify-between text-left focus:outline-none"
               >
-                <span className="font-serif text-lg font-medium text-[#132F47]">Ritual & Care Guide</span>
+                <span className="font-serif text-lg font-medium text-[#132F47]">Ritual and Care Guide</span>
                 <ChevronDown className={`w-5 h-5 text-stone-400 transition-transform duration-300 ${activeAccordion === "care" ? "rotate-180" : ""}`} />
               </button>
               <div className={`overflow-hidden transition-all duration-300 ${activeAccordion === "care" ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"}`}>
@@ -302,7 +302,7 @@ export function ProductDetailsClient({ id }: { id: string }) {
                 onClick={() => toggleAccordion("shipping")}
                 className="w-full py-5 flex items-center justify-between text-left focus:outline-none"
               >
-                <span className="font-serif text-lg font-medium text-[#132F47]">Shipping & Returns</span>
+                <span className="font-serif text-lg font-medium text-[#132F47]">Shipping and Returns</span>
                 <ChevronDown className={`w-5 h-5 text-stone-400 transition-transform duration-300 ${activeAccordion === "shipping" ? "rotate-180" : ""}`} />
               </button>
               <div className={`overflow-hidden transition-all duration-300 ${activeAccordion === "shipping" ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"}`}>

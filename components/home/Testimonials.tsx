@@ -15,7 +15,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     name: "Dr. Radhika Joshi",
-    role: "Classical Indologist & Researcher",
+    role: "Classical Indologist and Researcher",
     location: "Pune",
     material: "108-Seed 5-Mukhi Nepali Rudraksha Mala",
     comment:
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Arvind Nair",
-    role: "Architect & Meditation Practitioner",
+    role: "Architect and Meditation Practitioner",
     location: "Kochi",
     material: "Aged Vrindavan Krishna Tulsi Mala",
     comment:
@@ -33,9 +33,9 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Meera Sen",
-    role: "Conservationist & Mineralogist",
+    role: "Conservationist and Mineralogist",
     location: "Dehradun",
-    material: "Raw Lapis Lazuli & Brass Bracelet",
+    material: "Raw Lapis Lazuli and Brass Bracelet",
     comment:
       "The untreated Lapis Lazuli with genuine golden pyrite inclusions is rare to find in an industry flooded with dyed blue glass. SVASTIMAN's insistence on raw geological integrity and Jaipur artisan craft is remarkable.",
     verifiedOrigin: "Jaipur Water-Lapidary Craft",
@@ -50,10 +50,10 @@ export function Testimonials() {
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 text-[#9E7D4E] text-xs font-semibold uppercase tracking-[0.2em]">
             <Compass className="w-3.5 h-3.5" />
-            <span>Reflections &amp; Provenance</span>
+            <span>Reflections and Provenance</span>
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#0C161D] font-normal">
-            Voices of Tradition &amp; Material Integrity
+            Voices of Tradition and Material Integrity
           </h2>
           <p className="text-stone-600 text-sm font-light">
             Read perspectives from scholars, practitioners, and custodians of Indian heritage.

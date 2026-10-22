@@ -60,7 +60,7 @@ const ARTICLES: Article[] = [
     id: "vrindavan-tulsi-heartwood-curing",
     title: "From Temple Grove to Consecrated Mala: The Natural Curing of Vrindavan Tulsi",
     category: "tulsi",
-    categoryLabel: "Tulsi & Vrindavan",
+    categoryLabel: "Tulsi and Vrindavan",
     subtitle: "Why green branches must never be cut and how holy basil wood naturally petrifies",
     readTime: "5 min read",
     date: "September 24, 2026",
@@ -78,15 +78,15 @@ const ARTICLES: Article[] = [
   },
   {
     id: "cosmic-mathematics-108",
-    title: "The Cosmic Geometry of 108: Astronomy, Heart Nadis & The Science of Japa",
+    title: "The Cosmic Geometry of 108: Astronomy, Heart Nadis and The Science of Japa",
     category: "rituals",
-    categoryLabel: "Vedic Rituals & Japa",
+    categoryLabel: "Vedic Rituals and Japa",
     subtitle: "Why Vedic malas are counted in exact multiples of 108 beads",
     readTime: "7 min read",
     date: "September 15, 2026",
     author: "Vedic Astronomical Society",
     image: "/images/origin/stage9_svastiman.jpg",
-    reference: "Surya Siddhanta & Hatha Yoga Pradipika",
+    reference: "Surya Siddhanta and Hatha Yoga Pradipika",
     excerpt:
       "The solar distance from Earth equals approximately 108 times the Sun's diameter. In human subtle physiology, 108 energetic nadis converge at the heart chakra during rhythmic tactile japa.",
     fullContent: [
@@ -120,13 +120,13 @@ const ARTICLES: Article[] = [
     id: "glacier-water-consecration",
     title: "The Taplejung River Cleansing: The Nine-Fold Purification of Sacred Malas",
     category: "rituals",
-    categoryLabel: "Vedic Rituals & Japa",
+    categoryLabel: "Vedic Rituals and Japa",
     subtitle: "Why pure spring water and cold-pressed oils supersede chemical polishes",
     readTime: "5 min read",
     date: "August 10, 2026",
     author: "Taplejung Highland Artisan Collective",
     image: "/images/origin/rudraksha_hand_clean.jpg",
-    reference: "Vedic Samhitas & Traditional Shaucha Vidhi",
+    reference: "Vedic Samhitas and Traditional Shaucha Vidhi",
     excerpt:
       "Craftsmen in Taplejung never wash sacred seeds with modern synthetic detergents. Discover the traditional riverbed wash using wild brushwood and Himalayan spring water.",
     fullContent: [
@@ -167,9 +167,9 @@ export default function BlogPage() {
                 {[
                   { id: "all", label: "All Chronicles" },
                   { id: "rudraksha", label: "Rudraksha Science" },
-                  { id: "tulsi", label: "Tulsi & Vrindavan" },
+                  { id: "tulsi", label: "Tulsi and Vrindavan" },
                   { id: "gemstones", label: "Gemstone Lapidary" },
-                  { id: "rituals", label: "Vedic Rituals & Japa" },
+                  { id: "rituals", label: "Vedic Rituals and Japa" },
                 ].map((cat) => (
                   <button
                     key={cat.id}
@@ -342,7 +342,7 @@ export default function BlogPage() {
             <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
             <div className="relative z-10 max-w-2xl mx-auto text-center space-y-4">
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#C5A880]">
-                MONTHLY BOTANICAL &amp; VEDIC DISPATCH
+                MONTHLY BOTANICAL AND VEDIC DISPATCH
               </span>
               <h2 className="font-serif text-2xl sm:text-4xl font-normal leading-snug">
                 Receive the Chronicles of <br />

@@ -73,35 +73,35 @@ const ELEMENT_INFO: Record<
   }
 > = {
   Wood: {
-    purpose: "Growth & Creativity",
+    purpose: "Growth and Creativity",
     color: "#2E7D48",
     crystals: {
       primary: "Green Aventurine",
-      secondary: "Malachite & Jade",
+      secondary: "Malachite and Jade",
       desc: "Invites organic expansion, opportunity, breakthrough momentum, and emotional heart alignment.",
       altDesc: "Adds grounded wisdom and shields against stagnation or hesitation in your next chapter.",
     },
     rudraksha: {
-      name: "4 & 6 Mukhi Sacred Rudraksha",
+      name: "4 and 6 Mukhi Sacred Rudraksha",
       desc: "Awakens intellect, articulate communication, and sustained creative drive.",
     },
-    direction: "East & South-East",
+    direction: "East and South-East",
     day: "Wednesday",
     mantra: "Om Braam Breem Braum Sah Budhaya Namah",
     placement: "Place on the East corner of your study or workspace to activate continuous growth.",
     icon: Trees,
   },
   Fire: {
-    purpose: "Confidence & Visibility",
+    purpose: "Confidence and Visibility",
     color: "#C4483A",
     crystals: {
-      primary: "Carnelian & Sunstone",
+      primary: "Carnelian and Sunstone",
       secondary: "Red Jasper",
       desc: "Ignites personal radiance, courage, decisive action, and magnetic public presence.",
       altDesc: "Grounds physical vitality, preventing burnout while sustaining internal motivation.",
     },
     rudraksha: {
-      name: "3 & 12 Mukhi Rudraksha",
+      name: "3 and 12 Mukhi Rudraksha",
       desc: "Dissolves self-doubt, activates solar energy, and commands respect in leadership.",
     },
     direction: "South",
@@ -111,29 +111,29 @@ const ELEMENT_INFO: Record<
     icon: Flame,
   },
   Earth: {
-    purpose: "Stability & Wealth Retention",
+    purpose: "Stability and Wealth Retention",
     color: "#B28236",
     crystals: {
-      primary: "Citrine & Natural Pyrite",
+      primary: "Citrine and Natural Pyrite",
       secondary: "Golden Tiger Eye",
       desc: "Anchors material prosperity, prevents financial leakage, and reinforces emotional resilience.",
       altDesc: "Sharpens willpower, builds unshakeable confidence, and brings disciplined focus.",
     },
     rudraksha: {
-      name: "7 & 8 Mukhi Rudraksha",
-      desc: "Governed by Goddess Mahalaxmi & Lord Ganesha; removes obstacles in career & investments.",
+      name: "7 and 8 Mukhi Rudraksha",
+      desc: "Governed by Goddess Mahalaxmi and Lord Ganesha; removes obstacles in career and investments.",
     },
-    direction: "Center, North-East & South-West",
+    direction: "Center, North-East and South-West",
     day: "Thursday",
     mantra: "Om Graam Greem Groum Sah Gurave Namah",
     placement: "Place near the South-West master direction or wealth locker for grounding and retention.",
     icon: Mountain,
   },
   Metal: {
-    purpose: "Mental Clarity & Precision",
+    purpose: "Mental Clarity and Precision",
     color: "#7E8287",
     crystals: {
-      primary: "Natural Pyrite & Clear Quartz",
+      primary: "Natural Pyrite and Clear Quartz",
       secondary: "Hematite",
       desc: "Filters out mental clutter, amplifies intuitive logic, and shields your personal aura.",
       altDesc: "Absorbs toxic negativity, calms overactive overthinking, and grounds emotional storms.",
@@ -142,23 +142,23 @@ const ELEMENT_INFO: Record<
       name: "7 Mukhi Himalayan Rudraksha",
       desc: "Fortifies inner peace, structural clarity, and protective energy boundary.",
     },
-    direction: "West & North-West",
+    direction: "West and North-West",
     day: "Friday / Saturday",
     mantra: "Om Shram Shreem Shroum Sah Chandraya Namah",
     placement: "Keep on the West or North-West zone to enhance structural precision and support from mentors.",
     icon: Disc3,
   },
   Water: {
-    purpose: "Intuition & Career Flow",
+    purpose: "Intuition and Career Flow",
     color: "#2C5E8A",
     crystals: {
-      primary: "Amethyst & Blue Lace Agate",
-      secondary: "Lapis Lazuli & Black Obsidian",
+      primary: "Amethyst and Blue Lace Agate",
+      secondary: "Lapis Lazuli and Black Obsidian",
       desc: "Fosters peaceful serenity, throat chakra expression, intuition, and effortless career transitions.",
       altDesc: "Repels psychic drain, absorbs negative intent, and provides an impenetrable psychic shield.",
     },
     rudraksha: {
-      name: "1 Mukhi & 5 Mukhi Vrindavan Botanicals",
+      name: "1 Mukhi and 5 Mukhi Vrindavan Botanicals",
       desc: "Connects you to pure universal awareness, deep calm meditation, and absolute truth.",
     },
     direction: "North",
@@ -194,7 +194,7 @@ const FAQS = [
 
 const PROFESSION_CATEGORIES = [
   {
-    category: "Business, Commerce & Strategy",
+    category: "Business, Commerce and Strategy",
     options: [
       "Entrepreneur / Business Owner",
       "Finance / Banking / Investment",
@@ -205,7 +205,7 @@ const PROFESSION_CATEGORIES = [
     ],
   },
   {
-    category: "Creative, Education & Communication",
+    category: "Creative, Education and Communication",
     options: [
       "Artist / Designer / Writer / Media",
       "Marketing / Brand / Content / Social Media",
@@ -214,7 +214,7 @@ const PROFESSION_CATEGORIES = [
     ],
   },
   {
-    category: "Public, Sales & Visibility Roles",
+    category: "Public, Sales and Visibility Roles",
     options: [
       "Sales / Business Development",
       "Performer / Speaker / Influencer",
@@ -223,7 +223,7 @@ const PROFESSION_CATEGORIES = [
     ],
   },
   {
-    category: "Healing, Care & Research",
+    category: "Healing, Care and Research",
     options: [
       "Doctor / Therapist / Healer / Researcher",
       "Psychology / Counselling / Wellness",
@@ -232,7 +232,7 @@ const PROFESSION_CATEGORIES = [
     ],
   },
   {
-    category: "Grounded, Operational & Support Roles",
+    category: "Grounded, Operational and Support Roles",
     options: [
       "Real Estate / Operations / Administration",
       "Manufacturing / Construction / Logistics",
@@ -245,14 +245,14 @@ const PROFESSION_CATEGORIES = [
 ];
 
 const GOAL_OPTIONS = [
-  { value: "career", label: "Career, Money & Growth" },
-  { value: "confidence", label: "Confidence & Personal Power" },
-  { value: "focus", label: "Focus, Clarity & Decisions" },
-  { value: "protection", label: "Protection, Stability & Grounding" },
-  { value: "love", label: "Love, Harmony & Self-Worth" },
-  { value: "calm", label: "Calm, Peace & Emotional Balance" },
-  { value: "spiritual", label: "Spiritual Growth & Inner Guidance" },
-  { value: "expression", label: "Communication & Expression" },
+  { value: "career", label: "Career, Money and Growth" },
+  { value: "confidence", label: "Confidence and Personal Power" },
+  { value: "focus", label: "Focus, Clarity and Decisions" },
+  { value: "protection", label: "Protection, Stability and Grounding" },
+  { value: "love", label: "Love, Harmony and Self-Worth" },
+  { value: "calm", label: "Calm, Peace and Emotional Balance" },
+  { value: "spiritual", label: "Spiritual Growth and Inner Guidance" },
+  { value: "expression", label: "Communication and Expression" },
 ];
 
 export function CrystalCalculator() {
@@ -1040,7 +1040,7 @@ export function CrystalCalculator() {
                   YOUR SACRED RECOMMENDATION
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-serif text-[#122E46] font-medium mt-1">
-                  Primary Power Crystal &amp; Botanical Companion
+                  Primary Power Crystal and Botanical Companion
                 </h2>
               </div>
 
@@ -1093,7 +1093,7 @@ export function CrystalCalculator() {
               {/* Ritual & Placement Box */}
               <div className="bg-[#FAF8F5] border border-[#E2DEC9] p-5 rounded-xl space-y-3 text-xs sm:text-sm">
                 <h4 className="font-serif text-[#122E46] text-base font-medium">
-                  Wearing &amp; Spatial Placement Guidance
+                  Wearing and Spatial Placement Guidance
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-light text-stone-700">
                   <div>
@@ -1104,7 +1104,7 @@ export function CrystalCalculator() {
                   </div>
                   <div>
                     <strong className="text-[#8C6D3B] font-medium block mb-1">
-                      Best Day &amp; Sacred Mantra:
+                      Best Day and Sacred Mantra:
                     </strong>
                     Day: {results.wearGuidance.day} &bull; Mantra: &ldquo;{results.wearGuidance.mantra}&rdquo;
                   </div>

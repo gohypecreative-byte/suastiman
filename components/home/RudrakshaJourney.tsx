@@ -71,13 +71,13 @@ const RUDRAKSHA_STAGES: RudrakshaStage[] = [
     specs: [
       { label: "Conditioning", value: "Natural Sandalwood Oil" },
       { label: "Coating", value: "Zero Plastic Lacquer" },
-      { label: "Tactile Grip", value: "Warm & Firm Hand Feel" },
+      { label: "Tactile Grip", value: "Warm and Firm Hand Feel" },
     ],
   },
   {
     step: "06",
     name: "Mala",
-    tagline: "108 Sacred Beads & Guru Knot",
+    tagline: "108 Sacred Beads and Guru Knot",
     image: "/images/origin/stage9_svastiman.jpg",
     tactileDesc: "Strung on unbleached raw cotton cord with traditional knots between each bead, blessed with Vedic provenance without fear selling.",
     specs: [
@@ -160,7 +160,7 @@ export function RudrakshaJourney() {
               <div className="space-y-3.5">
                 <div className="inline-flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-[#7A6242]">
                   <Fingerprint className="w-3.5 h-3.5" />
-                  <span>Tactile &amp; Botanical Profile</span>
+                  <span>Tactile and Botanical Profile</span>
                 </div>
 
                 <h4 className="font-serif text-2xl sm:text-3xl text-[#1A1815] font-normal leading-snug">

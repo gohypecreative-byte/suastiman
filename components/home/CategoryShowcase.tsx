@@ -18,7 +18,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "cat-bracelets",
     name: "Spiritual Bracelets",
-    count: "Energy Alignment & Mindful Wear",
+    count: "Energy Alignment and Mindful Wear",
     image: "/images/origin/brand_macro_detail.jpg",
     hoverImage: "/images/products/prod4.webp",
     href: "#featured-products",
@@ -36,7 +36,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "cat-zodiac",
     name: "Zodiac Jewellery",
-    count: "Astrological & Birthstone Energy",
+    count: "Astrological and Birthstone Energy",
     image: "/images/origin/zodiac_pendant_centered.jpg",
     hoverImage: "/images/womens_new_arrival_final.jpg",
     href: "#zodiac-finder",
@@ -63,7 +63,7 @@ const CATEGORIES: CategoryItem[] = [
   {
     id: "cat-gemstones",
     name: "Healing Gemstones",
-    count: "Untreated Earth Minerals & Crystals",
+    count: "Untreated Earth Minerals and Crystals",
     image: "/images/origin/raw_gemstone_craft.jpg",
     hoverImage: "/images/products/prod3.webp",
     href: "#gemstone-journey",
@@ -98,7 +98,7 @@ export function CategoryShowcase() {
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
             Wear Your Energy. <br className="hidden sm:inline" />
             <span className="italic text-[#7A6242] font-light">
-              Crafted for mindfulness &amp; energy alignment.
+              Crafted for mindfulness and energy alignment.
             </span>
           </h2>
         </div>

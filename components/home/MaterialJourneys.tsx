@@ -43,7 +43,7 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
       {
         stageNumber: "01",
         stageName: "NATURE",
-        headline: "Wild Cloud Forest & Fruit",
+        headline: "Wild Cloud Forest and Fruit",
         image: "/images/origin/hero_journey_fruit.jpg",
         badge: "Untouched High Altitude",
         caption: "Ripens as an electric-blue botanical fruit in the dense Himalayan canopy before human hands ever touch it.",
@@ -82,7 +82,7 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     id: "tulsi",
     name: "Sacred Tulsi Wood",
     botanical: "Ocimum sanctum L.",
-    origin: "Vrindavan & Sacred Braj Groves",
+    origin: "Vrindavan and Sacred Braj Groves",
     summary: "Aromatic holy basil aged naturally into serene tactile beads.",
     heading: (
       <>
@@ -97,7 +97,7 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
         stageName: "NATURE",
         headline: "Vrindavan Temple Groves",
         image: "/images/origin/tulsi_heritage_plant.jpg",
-        badge: "Sacred Soil & Sunlight",
+        badge: "Sacred Soil and Sunlight",
         caption: "Revered sacred herb cultivated in historic temple courtyards under organic traditional care.",
         specs: ["Temple Courtyard Grown", "Pure Morning Prana", "Sacred Braj Soil"],
       },
@@ -122,7 +122,7 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
       {
         stageNumber: "04",
         stageName: "FINISHED PIECE",
-        headline: "108 Japa & Daily Mala",
+        headline: "108 Japa and Daily Mala",
         image: "/images/origin/stage9_svastiman.jpg",
         badge: "Mindful Sacred Touch",
         caption: "Lightweight, calming, and naturally fragrant for daily meditation, japa chanting, and mindful presence.",
@@ -134,7 +134,7 @@ const MATERIAL_STORIES: Record<string, MaterialStory> = {
     id: "gemstones",
     name: "Earth Gemstones",
     botanical: "Natural Mineral Geology",
-    origin: "Himalayan Strata & Jaipur Lapidary",
+    origin: "Himalayan Strata and Jaipur Lapidary",
     summary: "Untreated raw minerals cut without glass or synthetic fillers.",
     heading: (
       <>

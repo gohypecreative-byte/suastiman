@@ -23,6 +23,22 @@ export function Footer() {
     }
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      const hash = href.replace("/#", "");
+      if (typeof window !== "undefined" && window.location.pathname === "/") {
+        e.preventDefault();
+        const el = document.getElementById(hash);
+        if (el) {
+          const yOffset = -80;
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }
+    }
+  };
+
   return (
     <footer className="w-full bg-[#F7F5F0] text-[#122E46] border-t border-[#E0D8CB] overflow-hidden select-none relative">
       {/* Subtle brand texture */}
@@ -84,80 +100,120 @@ export function Footer() {
       <div className="w-full px-5 sm:px-10 md:px-14 lg:px-16 xl:px-20 2xl:px-24 pb-20 lg:pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-10 xl:gap-14 2xl:gap-20 pt-8 sm:pt-10 border-t border-[#E0D8CB]/80">
           
-          {/* Col 1: Customer Service / Sacred Materials */}
+          {/* Col 1: Sacred Materials */}
           <div className="space-y-4">
             <h4 className="font-serif text-sm font-semibold tracking-wider text-[#122E46] uppercase">
               Sacred Materials
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-[13px] text-stone-700 font-normal">
               <li>
-                <a href="#category-showcase" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                <Link
+                  href="/products?category=rudraksha"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
                   Himalayan Rudraksha
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#category-showcase" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                <Link
+                  href="/products?category=tulsi"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
                   Vrindavan Tulsi Wood
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#category-showcase" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                <Link
+                  href="/products?category=gemstones"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
                   Untreated Gemstones
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#featured-products" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
+                <Link
+                  href="/products?category=malas"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
                   108 Japa Malas
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#featured-products" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Sacred Kanthas &amp; Bracelets
-                </a>
+                <Link
+                  href="/products?category=bracelets"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Spiritual Bracelets
+                </Link>
               </li>
               <li>
-                <a href="#featured-products" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Pure Sandalwood Oil
-                </a>
+                <Link
+                  href="/products"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block font-medium text-[#122E46]"
+                >
+                  All Sacred Collections &rarr;
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 2: Tradition & Science */}
+          {/* Col 2: Tradition and Science */}
           <div className="space-y-4">
             <h4 className="font-serif text-sm font-semibold tracking-wider text-[#122E46] uppercase">
-              Tradition &amp; Science
+              Tradition and Science
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-[13px] text-stone-700 font-normal">
               <li>
-                <a href="#know-your-tradition" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  The Nine Stages
-                </a>
+                <Link
+                  href="/#hero"
+                  onClick={(e) => handleNavClick(e, "/#hero")}
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  The Nine Stages of Origin
+                </Link>
               </li>
               <li>
-                <a href="#know-your-tradition" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Vedic Botanical Anatomy
-                </a>
+                <Link
+                  href="/#know-your-tradition"
+                  onClick={(e) => handleNavClick(e, "/#know-your-tradition")}
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Vedic Botanical Wisdom
+                </Link>
               </li>
               <li>
-                <a href="#trust-provenance" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Digital X-Ray Lab
-                </a>
+                <Link
+                  href="/#trust-provenance"
+                  onClick={(e) => handleNavClick(e, "/#trust-provenance")}
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Laboratory X-Ray and Testing
+                </Link>
               </li>
               <li>
-                <a href="#trust-provenance" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Mineral Lab Analysis
-                </a>
+                <Link
+                  href="/#craftsmanship"
+                  onClick={(e) => handleNavClick(e, "/#craftsmanship")}
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Master Artisan Craftsmanship
+                </Link>
               </li>
               <li>
-                <a href="#material-journeys" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Brahmagranthi Knots
-                </a>
+                <Link
+                  href="/blog"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Sacred Knowledge Chronicles
+                </Link>
               </li>
               <li>
-                <a href="#trust-provenance" className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block">
-                  Authenticity Charter
-                </a>
+                <Link
+                  href="/pages/profession-crystal-mapping-calculator"
+                  className="hover:text-[#8C6D46] hover:translate-x-1.5 transition-all duration-300 inline-block"
+                >
+                  Find Your Crystal Report
+                </Link>
               </li>
             </ul>
           </div>
@@ -212,10 +268,10 @@ export function Footer() {
 
             <div>
               <h4 className="font-serif text-sm font-semibold tracking-wider text-[#122E46] uppercase">
-                Office &amp; Sacred Origin
+                Office and Sacred Origin
               </h4>
               <p className="pt-1.5 text-xs sm:text-[13px] text-stone-600 font-light leading-relaxed">
-                Himalayan Cloud Belts &amp; Vrindavan Groves, India
+                Himalayan Cloud Belts and Vrindavan Groves, India
               </p>
               <a
                 href="mailto:concierge@svastiman.com"
@@ -274,7 +330,7 @@ export function Footer() {
                   />
                   <span>
                     I agree to receive monographs from Svastimān. Read our{" "}
-                    <a href="#trust-provenance" className="underline hover:text-[#8C6D46] transition-colors">Privacy Policy</a>.
+                    <Link href="/privacy-policy" className="underline hover:text-[#8C6D46] transition-colors">Privacy Policy</Link>.
                   </span>
                 </label>
               </form>
@@ -289,21 +345,21 @@ export function Footer() {
           </p>
 
           <div className="order-1 md:order-3 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs">
-            <a href="#trust-provenance" className="hover:text-[#8C6D46] transition-colors">
+            <Link href="/authenticity-charter" className="hover:text-[#8C6D46] transition-colors">
               Authenticity Charter
-            </a>
+            </Link>
             <span className="text-stone-300">&bull;</span>
-            <a href="#trust-provenance" className="hover:text-[#8C6D46] transition-colors">
-              Lab Provenance
-            </a>
+            <Link href="/shipping-policy" className="hover:text-[#8C6D46] transition-colors">
+              Shipping Policy
+            </Link>
             <span className="text-stone-300">&bull;</span>
-            <a href="#" className="hover:text-[#8C6D46] transition-colors">
+            <Link href="/privacy-policy" className="hover:text-[#8C6D46] transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <span className="text-stone-300">&bull;</span>
-            <a href="#" className="hover:text-[#8C6D46] transition-colors">
+            <Link href="/terms-of-reverence" className="hover:text-[#8C6D46] transition-colors">
               Terms of Reverence
-            </a>
+            </Link>
           </div>
         </div>
       </div>

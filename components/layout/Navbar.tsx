@@ -152,7 +152,7 @@ export function Navbar() {
                 <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#C5A880] stroke-[1.8]" />
-                  <span>CERTIFIED SACRED BOTANICALS &amp; GEMS</span>
+                  <span>CERTIFIED SACRED BOTANICALS AND GEMS</span>
                 </div>
                 <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
                 <div className="flex items-center gap-2">
@@ -165,7 +165,7 @@ export function Navbar() {
                   className="flex items-center gap-1.5 text-[#FFE7B6] hover:text-white transition-colors"
                 >
                   <Gem className="w-3.5 h-3.5 text-[#FFE7B6]" />
-                  <span>FREE NUMEROLOGY CRYSTAL CALCULATOR &amp; MOBILE ANALYSIS</span>
+                  <span>FREE NUMEROLOGY CRYSTAL CALCULATOR AND MOBILE ANALYSIS</span>
                 </Link>
                 <span className="text-[#C5A880]/40 text-[10px]">&bull;</span>
               </div>
@@ -265,7 +265,7 @@ export function Navbar() {
               <Link
                 href="/account"
                 className="hover:text-[#C5A880] transition-colors p-1"
-                title="My Account &amp; Sanctuary"
+                title="My Account and Sanctuary"
                 aria-label="Account"
               >
                 <User className="w-5 h-5 stroke-[1.6]" />
@@ -372,7 +372,7 @@ export function Navbar() {
                   className="flex items-center gap-2.5 text-[13px] font-medium text-[#122E46] hover:text-[#C5A880] py-1"
                 >
                   <User className="w-4 h-4 text-[#122E46]" />
-                  <span>My Account &amp; Sanctuary</span>
+                  <span>My Account and Sanctuary</span>
                 </Link>
                 <Link
                   href="/wishlist"

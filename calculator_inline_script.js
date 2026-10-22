@@ -217,14 +217,14 @@
   };
 
   const goals = {
-    career: "Career, Money & Growth",
-    confidence: "Confidence & Personal Power",
-    focus: "Focus, Clarity & Decisions",
-    protection: "Protection, Stability & Grounding",
-    love: "Love, Harmony & Self-Worth",
-    calm: "Calm, Peace & Emotional Balance",
-    spiritual: "Spiritual Growth & Inner Guidance",
-    expression: "Communication & Expression"
+    career: "Career, Money and Growth",
+    confidence: "Confidence and Personal Power",
+    focus: "Focus, Clarity and Decisions",
+    protection: "Protection, Stability and Grounding",
+    love: "Love, Harmony and Self-Worth",
+    calm: "Calm, Peace and Emotional Balance",
+    spiritual: "Spiritual Growth and Inner Guidance",
+    expression: "Communication and Expression"
   };
 
   const goalTone = {
@@ -265,11 +265,11 @@
   };
 
   const professionNotes = {
-    "Business, Commerce & Strategy": "Your field benefits from discipline, clear judgement, structured execution, and grounded money decisions.",
-    "Creative, Education & Communication": "Your field benefits from expressive clarity, steady creative flow, and emotional confidence.",
-    "Public, Sales & Visibility Roles": "Your field benefits from visibility, persuasive energy, stamina, and balanced personal presence.",
-    "Healing, Care & Research": "Your field benefits from empathy, emotional protection, deeper intuition, and healthy boundaries.",
-    "Grounded, Operational & Support Roles": "Your field benefits from practical steadiness, routine, responsibility, and reliable execution.",
+    "Business, Commerce and Strategy": "Your field benefits from discipline, clear judgement, structured execution, and grounded money decisions.",
+    "Creative, Education and Communication": "Your field benefits from expressive clarity, steady creative flow, and emotional confidence.",
+    "Public, Sales and Visibility Roles": "Your field benefits from visibility, persuasive energy, stamina, and balanced personal presence.",
+    "Healing, Care and Research": "Your field benefits from empathy, emotional protection, deeper intuition, and healthy boundaries.",
+    "Grounded, Operational and Support Roles": "Your field benefits from practical steadiness, routine, responsibility, and reliable execution.",
     "General": "Your recommendation is shaped around your current lifestyle rhythm and personal balance needs."
   };
 
@@ -847,7 +847,7 @@
     }
 
     $("jwf-wear-primary").textContent = "Bracelet of " + primaryStone;
-    $("jwf-wear-secondary").textContent = "Mala of " + primaryStone + " & " + supportStone;
+    $("jwf-wear-secondary").textContent = "Mala of " + primaryStone + " and " + supportStone;
     $("jwf-wear-day").textContent = targetData.ritual.day;
     $("jwf-wear-hand").textContent = targetData.ritual.hand;
     $("jwf-wear-mantra").textContent = targetData.ritual.mantra;

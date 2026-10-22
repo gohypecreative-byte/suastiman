@@ -22,7 +22,7 @@ const GEMSTONE_STAGES: GemstoneStage[] = [
     desc: "Crystallized naturally deep within the Himalayan and Rajasthan subterranean strata under extreme geological heat and pressure.",
     specs: [
       { label: "Formation", value: "Natural Metamorphic Veins" },
-      { label: "Origin", value: "Himalayan & Jaipur Strata" },
+      { label: "Origin", value: "Himalayan and Jaipur Strata" },
       { label: "Geology", value: "Untreated Mineral Matrix" },
     ],
   },
@@ -34,8 +34,8 @@ const GEMSTONE_STAGES: GemstoneStage[] = [
     desc: "Raw, unheated rough rocks extracted without dynamite, displaying natural mineral inclusions and pyrite flecks without glass filling.",
     specs: [
       { label: "Treatment", value: "Zero Heat / Non-Irradiated" },
-      { label: "Authenticity", value: "Real Inclusions & Feathers" },
-      { label: "Texture", value: "Raw Crust & Heavy Cold Heft" },
+      { label: "Authenticity", value: "Real Inclusions and Feathers" },
+      { label: "Texture", value: "Raw Crust and Heavy Cold Heft" },
     ],
   },
   {
@@ -53,11 +53,11 @@ const GEMSTONE_STAGES: GemstoneStage[] = [
   {
     step: "04",
     name: "Polishing",
-    tagline: "Cloth & Wood-Dust Finishing",
+    tagline: "Cloth and Wood-Dust Finishing",
     image: "/images/origin/brand_artisan_wash.jpg",
     desc: "Tumbled in natural walnut shells and buffed on cotton cloth wheels without toxic chemical resins, synthetic glazes, or dye coatings.",
     specs: [
-      { label: "Buffing Medium", value: "Natural Walnut & Linen" },
+      { label: "Buffing Medium", value: "Natural Walnut and Linen" },
       { label: "Resins", value: "Zero Synthetic Epoxies" },
       { label: "Surface Luster", value: "Natural Crystalline Glow" },
     ],
@@ -77,7 +77,7 @@ const GEMSTONE_STAGES: GemstoneStage[] = [
   {
     step: "06",
     name: "Bracelet",
-    tagline: "Pure Tactile Resonance & Wear",
+    tagline: "Pure Tactile Resonance and Wear",
     image: "/images/origin/stage9_svastiman.jpg",
     desc: "Individually hand-threaded with high-tensile resilient cord for mindful daily wear, paired with certified authenticity documentation.",
     specs: [
@@ -174,7 +174,7 @@ export function GemstoneJourney() {
               <div className="space-y-3.5">
                 <div className="inline-flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-[#C5A880]">
                   <Gem className="w-3.5 h-3.5" />
-                  <span>Geological &amp; Lapidary Profile</span>
+                  <span>Geological and Lapidary Profile</span>
                 </div>
 
                 <h4 className="font-serif text-2xl sm:text-3xl text-white font-normal leading-snug">

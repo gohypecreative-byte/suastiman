@@ -30,7 +30,7 @@ const TRUST_PILLARS: TrustPillar[] = [
   },
   {
     title: "Digital Radiography Testing",
-    category: "TESTING & CERTIFICATION",
+    category: "TESTING AND CERTIFICATION",
     image: "/images/origin/trust_xray_bright.jpg",
     badge: "100% X-Ray Verified",
     specs: ["Non-Destructive Testing", "Authentic Mukhi Chambers", "Individual Lab Reports"],
@@ -64,7 +64,7 @@ export function TrustProvenance() {
         <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1815] leading-[1.12] tracking-tight">
             Trust Should Be Visible. <br />
-            <span className="italic text-[#7A6242] font-light">Laboratory-tested &amp; verified.</span>
+            <span className="italic text-[#7A6242] font-light">Laboratory-tested and verified.</span>
           </h2>
         </div>
 

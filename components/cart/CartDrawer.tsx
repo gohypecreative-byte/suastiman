@@ -124,7 +124,7 @@ export function CartDrawer() {
             </span>
           </div>
           <p className="text-[11px] text-stone-400 mb-4">
-            Taxes &amp; shipping calculated at checkout.
+            Taxes and shipping calculated at checkout.
           </p>
 
           <button

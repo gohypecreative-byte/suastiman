@@ -32,7 +32,7 @@ const TRADITION_KNOWLEDGE: TraditionCard[] = [
     title: "The Living Sanctity of Vrindavan Tulsi Wood",
     subtitle: "Why Holy Basil wood carries lasting therapeutic coolness",
     image: "/images/origin/know_tulsi_wood.jpg",
-    reference: "Padma Purana & Charaka Samhita",
+    reference: "Padma Purana and Charaka Samhita",
     desc: "Aged Tulsi heartwood is dense in natural phenolic eugenol compounds. Friction against skin warmth gently releases micro-aromatic herbal volatiles that calm sensory restlessness.",
     keyInsight: "Naturally fallen mature branches harvested without harming living green plants.",
   },
@@ -42,7 +42,7 @@ const TRADITION_KNOWLEDGE: TraditionCard[] = [
     title: "The Cosmic Mathematics of the 108 Count",
     subtitle: "Why Vedic malas are structured in exact 108 beads",
     image: "/images/origin/stage9_svastiman.jpg",
-    reference: "Surya Siddhanta & Vedic Astronomy",
+    reference: "Surya Siddhanta and Vedic Astronomy",
     desc: "The solar distance is exactly 108 times the Sun's diameter. In subtle human physiology, 108 energetic nadis converge at the heart center (Anahata) during rhythmic japa breathwork.",
     keyInsight: "108 is astronomical geometry linking universal distance with individual breath.",
   },
@@ -72,7 +72,7 @@ export function KnowYourTradition() {
         {/* Header */}
         <div className="max-w-3xl mb-5 sm:mb-6 lg:mb-8 space-y-2 sm:space-y-3">
           <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
-            Vedic Wisdom &amp; Botanical Science, <br className="hidden sm:inline" />
+            Vedic Wisdom and Botanical Science, <br className="hidden sm:inline" />
             <span className="italic text-[#7A6242] font-light">grounded in scriptural truth.</span>
           </h2>
         </div>

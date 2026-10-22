@@ -22,7 +22,7 @@ const RIBBON_ITEMS = [
   },
   {
     icon: Gem,
-    text: "INDIVIDUAL LAB TESTED & CERTIFIED PROVENANCE",
+    text: "INDIVIDUAL LAB TESTED AND CERTIFIED PROVENANCE",
   },
 ];
 
