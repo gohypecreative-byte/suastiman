@@ -134,8 +134,8 @@ export default function LoginPage() {
 
         {/* 2-Column Split Screen Matching Reference Image */}
         <main className="flex-1 w-full bg-white border-t border-[#E2DEC9] flex flex-col">
-          <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
-            
+          <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-12  min-h-[calc(100vh-80px)]">
+
             {/* Left Column: Authentic Svastimān Flagship Sacred Photography */}
             <div className="lg:col-span-6 relative w-full h-[360px] sm:h-[460px] lg:h-full min-h-[360px] bg-[#0A1B2A] overflow-hidden">
               <Image
@@ -191,11 +191,10 @@ export default function LoginPage() {
                       setErrorMsg("");
                       setStep("form");
                     }}
-                    className={`pb-2.5 pr-4 font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
-                      loginMethod === "phone"
+                    className={`pb-2.5 pr-4 font-semibold tracking-wider uppercase transition-colors cursor-pointer ${loginMethod === "phone"
                         ? "text-[#122E46] border-b-2 border-[#122E46] -mb-[1px]"
                         : "text-[#5C6773] hover:text-[#122E46]"
-                    }`}
+                      }`}
                   >
                     Phone Number (OTP)
                   </button>
@@ -206,11 +205,10 @@ export default function LoginPage() {
                       setErrorMsg("");
                       setStep("form");
                     }}
-                    className={`pb-2.5 px-4 font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
-                      loginMethod === "email"
+                    className={`pb-2.5 px-4 font-semibold tracking-wider uppercase transition-colors cursor-pointer ${loginMethod === "email"
                         ? "text-[#122E46] border-b-2 border-[#122E46] -mb-[1px]"
                         : "text-[#5C6773] hover:text-[#122E46]"
-                    }`}
+                      }`}
                   >
                     Email and Password
                   </button>
@@ -356,8 +354,8 @@ export default function LoginPage() {
                         {isLoading
                           ? "PROCESSING..."
                           : loginMethod === "phone"
-                          ? "SEND OTP"
-                          : "LOGIN"}
+                            ? "SEND OTP"
+                            : "LOGIN"}
                       </button>
                     </div>
 

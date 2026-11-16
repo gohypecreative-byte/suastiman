@@ -6,13 +6,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { HeroBanner } from "@/components/home/HeroBanner";
 import { BrandIntro } from "@/components/home/BrandIntro";
 import { CategoryShowcase } from "@/components/home/CategoryShowcase";
+import { BestSellers } from "@/components/home/BestSellers";
 import { MaterialJourneys } from "@/components/home/MaterialJourneys";
-
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { Craftsmanship } from "@/components/home/Craftsmanship";
 import { KnowYourTradition } from "@/components/home/KnowYourTradition";
-import { TraditionTrustRibbon } from "@/components/home/TraditionTrustRibbon";
 import { TrustProvenance } from "@/components/home/TrustProvenance";
+import { Testimonials } from "@/components/home/Testimonials";
+import { TraditionTrustRibbon } from "@/components/home/TraditionTrustRibbon";
 import { FinalBrandCTA } from "@/components/home/FinalBrandCTA";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
@@ -73,7 +74,7 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    // Robust smooth scroll to target hash on load or on hashchange
+    // Smooth scroll to target hash on load or on hashchange
     const scrollToHash = () => {
       if (typeof window !== "undefined" && window.location.hash) {
         const id = window.location.hash.replace("#", "");
@@ -102,60 +103,52 @@ export default function Home() {
   return (
     <CartProvider>
       <div className="relative min-h-screen bg-[#F7F5F0] text-[#0C161D]">
-        {/* Main Content Wrapper (Slides UP with rounded bottom corners on desktop to reveal footer underneath) */}
-        <div 
-          style={{ marginBottom: isDesktop && footerHeight ? `${footerHeight}px` : undefined }}
-          className="relative z-10 bg-[#F7F5F0] rounded-b-[24px] lg:rounded-b-[56px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-clip"
-        >
-          {/* Navigation Bar */}
+        {/* Main Content Wrapper */}
+        <div className="relative z-10 bg-[#F7F5F0] overflow-clip">
+          {/* 1. Navigation Bar (Reference Layout with Svastiman Brand Tokens) */}
           <Navbar />
 
-          {/* Main Content Sections Structured Exactly as Defined */}
+          {/* Main Content Sections: Structured following Hira Fragrances' section layout */}
           <main className="flex-1 space-y-0">
-            {/* 1. HERO — “Before It Was a Mala” */}
+            {/* 2. Hero Section: Dynamic Image Carousel & Floating Quick-Add Product Card */}
             <HeroBanner />
 
-            {/* 11. CATEGORIES — Minimal Category Showcase (Rudraksha, Tulsi, Gemstones, Malas, Bracelets) */}
+            {/* 3. Brand Statement / Rich Text Narrative (matching Hira section_rich_text) */}
+            <BrandIntro />
+
+            {/* 4. Curated Category Showcase (matching Hira section_tab_collections / People's Choice) */}
             <CategoryShowcase />
 
-            {/* 3. MATERIAL JOURNEY — Nature -> Raw Material -> Human Craft -> Finished Form */}
+            {/* 5. Bestsellers Product Slider with Instant Add-to-Cart (matching Hira Bestsellers) */}
+            <BestSellers />
+
+            {/* 6. Material Origin Journeys (Interactive Botanical & Gemstone exploration) */}
             <MaterialJourneys />
 
-            {/* 7. PRODUCT SHOWCASE — Premium Macro Tactile Products */}
+            {/* 7. Tactile Featured Products */}
             <FeaturedProducts />
 
-            {/* 8. CRAFTSMANSHIP — “Made by Human Hands” */}
-            <Craftsmanship />
-
-            {/* 9. KNOW YOUR TRADITION — Knowledge Archive */}
-            <KnowYourTradition />
-
-            {/* Horizontal Separation Ribbon — Tradition & Authenticity Marquee */}
-            <TraditionTrustRibbon />
-
-            {/* 10. AUTHENTICITY & TRUST — Testing, Origin, Craft & Care */}
+            {/* 8. Trust & Provenance Pillars (matching Hira Why Choose Us / 4 Pillars) */}
             <TrustProvenance />
 
-            {/* 12. FINAL BRAND CTA — From Nature. Through Human Hands. Rooted in Tradition. */}
+            {/* 9. Voices of Svastiman / Customer Testimonials (matching Hira Voices of Hira) */}
+            <Testimonials />
+
+            {/* 10. Craftsmanship & Vedic Tradition Archive */}
+            <Craftsmanship />
+            <KnowYourTradition />
+
+            {/* 11. Tradition & Authenticity Ribbon (matching Hira scrolling banner) */}
+            <TraditionTrustRibbon />
+
+            {/* 12. Final Brand CTA & Newsletter */}
             <FinalBrandCTA />
           </main>
         </div>
 
-        {/* Footer: Normal in-flow on Mobile (<1024px) so it fully scrolls; Parallax Reveal on Desktop (>=1024px) */}
-        <div 
-          ref={footerContainerRef}
-          className="relative z-10 w-full lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:z-0 lg:pointer-events-auto"
-        >
-          <div 
-            ref={footerInnerRef}
-            style={{
-              transform: isDesktop ? "translate3d(0, 30%, 0)" : "none",
-              willChange: isDesktop ? "transform" : "auto",
-            }}
-            className="w-full"
-          >
-            <Footer />
-          </div>
+        {/* Footer (Full in-flow visibility for both distinct sections) */}
+        <div className="relative z-10 w-full">
+          <Footer />
         </div>
 
         {/* Global Cart Slideout Drawer */}

@@ -212,7 +212,10 @@ export function MaterialJourneys() {
   const story = MATERIAL_STORIES[activeTab];
 
   return (
-    <section id="material-journeys" className="py-10 sm:py-16 lg:py-20 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-y border-[#C5A880]/20">
+    <section
+      id="material-journeys"
+      className="relative -mt-8 sm:-mt-10 z-20 rounded-t-[40px] sm:rounded-t-[48px] pt-16 pb-12 sm:pt-20 sm:pb-16 lg:py-20 bg-[#122E46] text-[#ECEADE] overflow-hidden border-t border-[#C5A880]/30 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border-b border-[#C5A880]/20"
+    >
       <div id="material-journeys-rudraksha" className="absolute -top-32" />
       <div id="material-journeys-tulsi" className="absolute -top-32" />
       <div id="material-journeys-gemstones" className="absolute -top-32" />

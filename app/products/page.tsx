@@ -1,173 +1,35 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { CartProvider, useCart } from "@/context/CartContext";
-import { ShoppingBag, Check, ArrowLeft, ArrowRight, Filter, Heart, Plus, Bookmark } from "lucide-react";
-
-export interface CatalogProduct {
-  id: string;
-  name: string;
-  category: "rudraksha" | "tulsi" | "gemstones";
-  material: string;
-  origin: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  images: string[];
-  badge: string;
-  specs: string[];
-}
-
-const CATALOG_PRODUCTS: CatalogProduct[] = [
-  {
-    id: "prod-rudraksha-108",
-    name: "Himalayan Rudraksha 108 Japa Mala",
-    category: "rudraksha",
-    material: "Wild Nepal Elaeocarpus and Unbleached Cotton",
-    origin: "Taplejung, East Nepal (2,200m)",
-    price: 2899,
-    originalPrice: 3499,
-    image: "/images/products/prod1.webp",
-    images: [
-      "/images/products/prod1.webp",
-      "/images/origin/rudraksha_macro_seed.jpg",
-      "/images/origin/stage9_svastiman.jpg",
-    ],
-    badge: "100% Wild Sourced",
-    specs: ["Lab X-Ray Tested", "Traditional Brahmagranthi Knots", "Sandalwood Oil Cured"],
-  },
-  {
-    id: "prod-tulsi-japa",
-    name: "Vrindavan Krishna Tulsi 108 Mala",
-    category: "tulsi",
-    material: "Naturally Cured Holy Basil Heartwood",
-    origin: "Vrindavan Temple Groves, UP",
-    price: 1899,
-    originalPrice: 2299,
-    image: "/images/products/prod2.webp",
-    images: [
-      "/images/products/prod2.webp",
-      "/images/origin/know_tulsi_wood.jpg",
-      "/images/origin/tulsi_heritage_plant.jpg",
-    ],
-    badge: "Temple Soil Harvest",
-    specs: ["Hand-Turned Micro Lathe", "Raw Beeswax Buffed", "Natural Eugenol Scent"],
-  },
-  {
-    id: "prod-lapis-bracelet",
-    name: "Raw Earth Lapis Lazuli Bracelet",
-    category: "gemstones",
-    material: "Untreated Metamorphic Lapis with Pyrite",
-    origin: "Jaipur Water Lapidary Craft",
-    price: 1999,
-    originalPrice: 2499,
-    image: "/images/products/prod3.webp",
-    images: [
-      "/images/products/prod3.webp",
-      "/images/origin/raw_gemstone_craft.jpg",
-      "/images/origin/trust_gem_bright.jpg",
-    ],
-    badge: "Zero Chemical Dye",
-    specs: ["Certified Mineralogy", "Natural Pyrite Veins", "High-Tensile Resilient Cord"],
-  },
-  {
-    id: "prod-rudraksha-wrist",
-    name: "Tactile Himalayan Wrist Rudraksha",
-    category: "rudraksha",
-    material: "Selected 5-Mukhi Symmetrical Seeds",
-    origin: "Bhojpur Highlands, Nepal",
-    price: 1299,
-    originalPrice: 1599,
-    image: "/images/products/prod4.webp",
-    images: [
-      "/images/products/prod4.webp",
-      "/images/origin/hero_journey_seed.jpg",
-      "/images/origin/rudraksha_hand_clean.jpg",
-    ],
-    badge: "Selected Locules",
-    specs: ["Water Density Cleared", "Natural Vegetal Wax", "Stretch Resistant Core"],
-  },
-  {
-    id: "prod-multi-mala",
-    name: "Multi-Gemstone and Tulsi Alignment Mala",
-    category: "gemstones",
-    material: "Tiger Eye, Hematite, Emerald Quartz and Tulsi",
-    origin: "Jaipur Lapidary and Vrindavan",
-    price: 2499,
-    originalPrice: 2999,
-    image: "/images/origin/brand_macro_detail.jpg",
-    images: [
-      "/images/origin/brand_macro_detail.jpg",
-      "/images/products/prod3.webp",
-      "/images/origin/raw_gemstone_craft.jpg",
-    ],
-    badge: "Seven Chakra Matrix",
-    specs: ["Natural Untreated Stones", "Hand Knotted", "Silver Guru Bead"],
-  },
-  {
-    id: "prod-tulsi-kanthi",
-    name: "Vrindavan Tulsi Double-Strand Kanthi",
-    category: "tulsi",
-    material: "Aged Fallen Vrindavan Holy Basil",
-    origin: "Radha Kund Vicinity, Vrindavan",
-    price: 999,
-    originalPrice: 1299,
-    image: "/images/origin/know_tulsi_wood.jpg",
-    images: [
-      "/images/origin/know_tulsi_wood.jpg",
-      "/images/origin/tulsi_heritage_plant.jpg",
-      "/images/products/prod2.webp",
-    ],
-    badge: "Traditional Kanthi",
-    specs: ["Temple Sanctified", "Pure Cotton Cord", "Skin-Safe Herbal Oil"],
-  },
-  {
-    id: "prod-rudraksha-silver",
-    name: "Single Mukhi Himalayan Seed Pendant",
-    category: "rudraksha",
-    material: "Rare Natural Half-Moon 1-Mukhi Rudraksha",
-    origin: "Rameshwaram / Nepal Foothills",
-    price: 4499,
-    originalPrice: 5299,
-    image: "/images/origin/rudraksha_macro_seed.jpg",
-    images: [
-      "/images/origin/rudraksha_macro_seed.jpg",
-      "/images/origin/zodiac_pendant_centered.jpg",
-      "/images/products/prod1.webp",
-    ],
-    badge: "Certified Rare Locule",
-    specs: ["Complete X-Ray Certification", "925 Hallmarked Silver Cap", "Custom Silk Cord"],
-  },
-  {
-    id: "prod-tiger-eye-bracelet",
-    name: "Raw Tiger Eye Energy Bracelet",
-    category: "gemstones",
-    material: "Chatoyant Natural Tiger Eye Specimen",
-    origin: "Rajasthan Natural Mines",
-    price: 1499,
-    originalPrice: 1899,
-    image: "/images/origin/raw_gemstone_craft.jpg",
-    images: [
-      "/images/origin/raw_gemstone_craft.jpg",
-      "/images/products/zodiac_bracelets_collection.jpg",
-      "/images/origin/trust_gem_bright.jpg",
-    ],
-    badge: "100% Earth Mined",
-    specs: ["Natural Optical Banding", "Polished with River Quartz", "Elastic Heavy Duty"],
-  },
-];
-
-type CategoryFilter = "all" | "bracelets" | "malas" | "rudraksha" | "tulsi" | "gemstones";
+import {
+  ShoppingBag,
+  Check,
+  ArrowRight,
+  Filter,
+  Bookmark,
+  Plus,
+  Sparkles,
+  Layers,
+  MapPin,
+} from "lucide-react";
+import {
+  Product,
+  ProductCategory,
+  PRODUCT_CATEGORIES,
+  PRODUCTS,
+} from "@/lib/products";
+import { TulsiCategoryView } from "@/components/products/TulsiCategoryView";
 
 interface ProductCardProps {
-  prod: CatalogProduct;
+  prod: Product;
   isSaved: boolean;
   onToggleWishlist: () => void;
   onAddToCart: (e: React.MouseEvent) => void;
@@ -200,9 +62,9 @@ function ProductCardItem({
 
   return (
     <div className="group flex flex-col select-none">
-      {/* Rounded Image Container (Compact height, edge-to-edge perfect fit) */}
-      <div className="relative aspect-square w-full rounded-[8px] overflow-hidden bg-[#FAF8F5] border border-[#E8E2D5]/70 group-hover:border-[#C5A880]/70 transition-all duration-300">
-        <Link href={`/products/${prod.id}`} className="absolute inset-0 block">
+      {/* Rounded Image Container */}
+      <div className="relative aspect-square w-full rounded-[10px] overflow-hidden bg-[#FAF8F5] border border-[#E8E2D5]/80 group-hover:border-[#C5A880]/80 transition-all duration-300 shadow-xs">
+        <Link href={prod.href} className="absolute inset-0 block">
           <Image
             src={images[currentIdx]}
             alt={prod.name}
@@ -214,21 +76,33 @@ function ProductCardItem({
           />
         </Link>
 
-        {/* Previous Image Button (Translucent opaque frosted style matching reference image) */}
+        {/* Top Badges: Product Code & Provenance Badge */}
+        <div className="absolute top-2.5 left-2.5 z-10 flex flex-wrap items-center gap-1.5 pointer-events-none">
+          <span className="bg-[#1A1815] text-[#FAF8F5] text-[9.5px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded shadow-sm">
+            {prod.code.toUpperCase()}
+          </span>
+          {prod.badge && (
+            <span className="bg-[#C5A880] text-[#122E46] text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shadow-xs hidden sm:inline-block">
+              {prod.badge}
+            </span>
+          )}
+        </div>
+
+        {/* Previous Image Button */}
         {images.length > 1 && (
           <button
             onClick={handlePrev}
-            className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/45 backdrop-blur-md text-[#111111] border border-white/20 shadow-xs flex items-center justify-center cursor-pointer transition-all duration-300 ease-out active:scale-95 max-sm:opacity-95 max-sm:translate-x-0 sm:opacity-0 sm:-translate-x-[calc(100%+20px)] sm:pointer-events-none sm:group-hover:opacity-100 sm:group-hover:translate-x-0 sm:group-hover:pointer-events-auto"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/60 backdrop-blur-md text-[#111111] border border-white/20 shadow-xs flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 max-sm:opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
             aria-label="Previous image"
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.6"
+              strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-4 h-4 sm:w-5 sm:h-5"
+              className="w-4 h-4"
             >
               <line x1="19" y1="12" x2="5" y2="12" />
               <polyline points="10 7 5 12 10 17" />
@@ -236,21 +110,21 @@ function ProductCardItem({
           </button>
         )}
 
-        {/* Next Image Button (Translucent opaque frosted style matching reference image) */}
+        {/* Next Image Button */}
         {images.length > 1 && (
           <button
             onClick={handleNext}
-            className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/45 backdrop-blur-md text-[#111111] border border-white/20 shadow-xs flex items-center justify-center cursor-pointer transition-all duration-300 ease-out active:scale-95 max-sm:opacity-95 max-sm:translate-x-0 sm:opacity-0 sm:translate-x-[calc(100%+20px)] sm:pointer-events-none sm:group-hover:opacity-100 sm:group-hover:translate-x-0 sm:group-hover:pointer-events-auto"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/60 backdrop-blur-md text-[#111111] border border-white/20 shadow-xs flex items-center justify-center cursor-pointer transition-all duration-200 active:scale-95 max-sm:opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
             aria-label="Next image"
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="1.6"
+              strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="w-4 h-4 sm:w-5 sm:h-5"
+              className="w-4 h-4"
             >
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="14 7 19 12 14 17" />
@@ -258,9 +132,9 @@ function ProductCardItem({
           </button>
         )}
 
-        {/* Pagination Dots (Matching reference card) */}
+        {/* Pagination Dots */}
         {images.length > 1 && (
-          <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pointer-events-none">
             {images.map((_, idx) => (
               <span
                 key={idx}
@@ -274,18 +148,18 @@ function ProductCardItem({
           </div>
         )}
 
-        {/* Bookmark Button in top-right corner (No round background, direct clean icon with drop shadow) */}
+        {/* Bookmark Button */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             onToggleWishlist();
           }}
-          className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-20 cursor-pointer p-1 transition-transform duration-200 hover:scale-115 active:scale-90"
+          className="absolute top-2.5 right-2.5 z-20 cursor-pointer p-1 transition-transform duration-200 hover:scale-110 active:scale-90"
           aria-label={isSaved ? "Remove from Wishlist" : "Save to Wishlist"}
         >
           <Bookmark
-            className={`w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-all duration-300 ${
+            className={`w-5 h-5 sm:w-5.5 sm:h-5.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] transition-all duration-300 ${
               isSaved
                 ? "fill-[#1A1815] text-[#1A1815] stroke-white stroke-1"
                 : "text-stone-700/80 hover:text-stone-900 fill-stone-700/25 stroke-[1.8]"
@@ -294,16 +168,19 @@ function ProductCardItem({
         </button>
       </div>
 
-      {/* Below-Image Product Info (Name & Price shifted right, + button shifted left) */}
-      <div className="mt-2 sm:mt-2.5 flex items-start justify-between gap-1.5 px-0.5">
-        <div className="min-w-0 flex-1 pl-2.5 sm:pl-3.5">
-          <Link href={`/products/${prod.id}`}>
+      {/* Below-Image Product Info */}
+      <div className="mt-2.5 flex items-start justify-between gap-2 px-1">
+        <div className="min-w-0 flex-1">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#7A6242] font-semibold block">
+            {prod.categoryName} • {prod.code.toUpperCase()}
+          </span>
+          <Link href={prod.href} className="block mt-0.5">
             <h3 className="font-sans text-xs sm:text-sm font-medium text-[#1A1815] group-hover:text-[#7A6242] transition-colors line-clamp-1 leading-snug">
               {prod.name}
             </h3>
           </Link>
-          <div className="mt-0.5 sm:mt-1 flex items-baseline gap-1.5">
-            <span className="text-xs sm:text-sm font-semibold text-[#1A1815]">
+          <div className="mt-1 flex items-baseline gap-2">
+            <span className="text-xs sm:text-sm font-bold text-[#1A1815]">
               ₹{prod.price.toLocaleString("en-IN")}
             </span>
             {prod.originalPrice && (
@@ -314,16 +191,16 @@ function ProductCardItem({
           </div>
         </div>
 
-        {/* Plus Action Button (Shifted left from the right edge) */}
+        {/* Plus Action Button */}
         <button
           onClick={onAddToCart}
-          className="p-1.5 text-stone-800 hover:text-black hover:scale-110 active:scale-90 transition-transform cursor-pointer shrink-0 mr-2.5 sm:mr-3.5"
+          className="p-1.5 mt-1 rounded-full bg-[#1A1815]/5 hover:bg-[#1A1815] text-[#1A1815] hover:text-white transition-all cursor-pointer shrink-0 active:scale-90"
           aria-label="Add to cart"
         >
           {isAdded ? (
-            <Check className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 stroke-[2.5]" />
+            <Check className="w-4 h-4 text-emerald-600 stroke-[2.5]" />
           ) : (
-            <Plus className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
+            <Plus className="w-4 h-4 stroke-[2]" />
           )}
         </button>
       </div>
@@ -332,29 +209,38 @@ function ProductCardItem({
 }
 
 function ProductsCatalog() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get("category");
-  
-  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const categoryParam = searchParams.get("category");
+
+  const [activeCategory, setActiveCategory] = useState<string>("all");
   const [addedId, setAddedId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const { addToCart, toggleWishlist, isInWishlist } = useCart();
 
   useEffect(() => {
-    if (initialCategory && ["bracelets", "malas", "rudraksha", "tulsi", "gemstones"].includes(initialCategory)) {
-      setActiveCategory(initialCategory as CategoryFilter);
+    if (categoryParam) {
+      const match = PRODUCT_CATEGORIES.find(
+        (c) => c.id === categoryParam.toLowerCase()
+      );
+      if (match) {
+        setActiveCategory(match.id);
+        return;
+      }
     }
-  }, [initialCategory]);
+    setActiveCategory("all");
+  }, [categoryParam]);
 
-  const filteredProducts = activeCategory === "all"
-    ? CATALOG_PRODUCTS
-    : activeCategory === "bracelets"
-    ? CATALOG_PRODUCTS.filter((p) => p.name.toLowerCase().includes("bracelet") || p.name.toLowerCase().includes("wrist"))
-    : activeCategory === "malas"
-    ? CATALOG_PRODUCTS.filter((p) => p.name.toLowerCase().includes("mala") || p.name.toLowerCase().includes("kanthi"))
-    : CATALOG_PRODUCTS.filter((p) => p.category === activeCategory);
+  const handleCategorySelect = (catId: string) => {
+    setActiveCategory(catId);
+    if (catId === "all") {
+      router.push("/products", { scroll: false });
+    } else {
+      router.push(`/products?category=${catId}`, { scroll: false });
+    }
+  };
 
-  const handleAddToCart = (e: React.MouseEvent, prod: CatalogProduct) => {
+  const handleAddToCart = (e: React.MouseEvent, prod: Product) => {
     e.stopPropagation();
     addToCart({
       id: prod.id,
@@ -367,7 +253,7 @@ function ProductsCatalog() {
     setTimeout(() => setAddedId(null), 1800);
   };
 
-  const handleToggleWishlist = (prod: CatalogProduct) => {
+  const handleToggleWishlist = (prod: Product) => {
     const currentlySaved = isInWishlist(prod.id);
     toggleWishlist({
       id: prod.id,
@@ -380,98 +266,221 @@ function ProductsCatalog() {
       specs: prod.specs,
     });
     setToastMessage(
-      currentlySaved ? `"${prod.name}" removed from Wishlist` : `"${prod.name}" saved to Wishlist`
+      currentlySaved
+        ? `"${prod.name}" removed from Wishlist`
+        : `"${prod.name}" saved to Wishlist`
     );
     setTimeout(() => setToastMessage(null), 2500);
   };
 
-  const getCategoryTitle = () => {
-    switch (activeCategory) {
-      case "bracelets":
-        return {
-          title: "Spiritual Bracelets",
-          subtitle: "Tactile wristwear designed for chakra balance, vitality, and continuous mindfulness.",
-        };
-      case "malas":
-        return {
-          title: "Sacred 108 Japa Malas",
-          subtitle: "Hand-knotted 108 contemplation beads structured with traditional Brahmagranthi ties.",
-        };
-      case "rudraksha":
-        return {
-          title: "Sacred Rudraksha Collection",
-          subtitle: "Wild Himalayan seeds lab-tested with verified botanical provenance.",
-        };
-      case "tulsi":
-        return {
-          title: "Vrindavan Tulsi Wood Collection",
-          subtitle: "Naturally cured fallen holy basil wood hand-carved in sacred temple groves.",
-        };
-      case "gemstones":
-        return {
-          title: "Earth Gemstones and Minerals",
-          subtitle: "Untreated, unheated crystals cut and shaped with Jaipur water-lapidary mastery.",
-        };
-      default:
-        return {
-          title: "All Sacred Collections",
-          subtitle: "Tactile spiritual objects crafted from authentic botanical and geological origins.",
-        };
-    }
-  };
+  // Group products by primary category for "all" view
+  const categoryGroups = useMemo(() => {
+    const groups: {
+      meta: (typeof PRODUCT_CATEGORIES)[0];
+      products: Product[];
+    }[] = [];
 
-  const headerInfo = getCategoryTitle();
+    PRODUCT_CATEGORIES.forEach((cat) => {
+      let prods: Product[] = [];
+      if (cat.id === "malas") {
+        prods = PRODUCTS.filter((p) => p.secondaryCategories?.includes("malas"));
+      } else {
+        prods = PRODUCTS.filter((p) => p.category === cat.id);
+      }
+
+      if (prods.length > 0) {
+        groups.push({
+          meta: cat,
+          products: prods,
+        });
+      }
+    });
+
+    return groups;
+  }, []);
+
+  // Filtered products for single category view
+  const singleCategoryProducts = useMemo(() => {
+    if (activeCategory === "all") return PRODUCTS;
+    if (activeCategory === "malas") {
+      return PRODUCTS.filter((p) => p.secondaryCategories?.includes("malas"));
+    }
+    return PRODUCTS.filter((p) => p.category === activeCategory);
+  }, [activeCategory]);
+
+  const activeCategoryMeta = useMemo(() => {
+    return PRODUCT_CATEGORIES.find((c) => c.id === activeCategory);
+  }, [activeCategory]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F9F8F5] text-[#111111]">
       <Navbar />
 
-      <main className="flex-1 pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 w-full">
+      <main className="flex-1 pt-6 sm:pt-8 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
         {/* Page Header */}
-        <div className="border-b border-[#E8E2D5] pb-6 mb-8">
-          <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] tracking-tight mb-4">
-            {headerInfo.title}
-          </h1>
+        <div className="border-b border-[#E8E2D5] pb-6 mb-8 sm:mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#7A6242] font-semibold block mb-1">
+                Svastimān Provenance Archive
+              </span>
+              <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] tracking-tight">
+                {activeCategory === "all"
+                  ? "Sacred Botanical & Mineral Collections"
+                  : activeCategoryMeta?.name}
+              </h1>
+            </div>
 
-          {/* Category Filter Pills */}
+            <p className="text-xs sm:text-sm text-stone-600 max-w-md font-sans">
+              {activeCategory === "all"
+                ? "Each piece carries verified natural origin, unvarnished tactile integrity, and dedicated product archival codes."
+                : activeCategoryMeta?.tagline}
+            </p>
+          </div>
+
+          {/* Category Filter Pills (Modern luxury navigation) */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-            {[
-              { id: "all", label: "All Collections" },
-              { id: "bracelets", label: "Spiritual Bracelets" },
-              { id: "malas", label: "108 Japa Malas" },
-              { id: "rudraksha", label: "Sacred Rudraksha" },
-              { id: "tulsi", label: "Vrindavan Tulsi" },
-              { id: "gemstones", label: "Earth Gemstones" },
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id as any)}
-                className={`px-5 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                  activeCategory === cat.id
-                    ? "bg-[#1A1815] text-[#FAF8F5] shadow-md border border-[#1A1815]"
-                    : "bg-[#EFECE6]/80 text-stone-700 hover:text-black hover:bg-white border border-[#E0D8CB]"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            <button
+              onClick={() => handleCategorySelect("all")}
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap ${
+                activeCategory === "all"
+                  ? "bg-[#1A1815] text-[#FAF8F5] shadow-sm border border-[#1A1815]"
+                  : "bg-white/80 hover:bg-white text-stone-700 hover:text-black border border-[#E0D8CB]"
+              }`}
+            >
+              All Categories ({PRODUCTS.length})
+            </button>
+
+            {PRODUCT_CATEGORIES.map((cat) => {
+              const count =
+                cat.id === "malas"
+                  ? PRODUCTS.filter((p) => p.secondaryCategories?.includes("malas")).length
+                  : PRODUCTS.filter((p) => p.category === cat.id).length;
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => handleCategorySelect(cat.id)}
+                  className={`px-4 sm:px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                    activeCategory === cat.id
+                      ? "bg-[#1A1815] text-[#FAF8F5] shadow-sm border border-[#1A1815]"
+                      : "bg-white/80 hover:bg-white text-stone-700 hover:text-black border border-[#E0D8CB]"
+                  }`}
+                >
+                  <span>{cat.shortName}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                      activeCategory === cat.id
+                        ? "bg-white/20 text-white"
+                        : "bg-stone-100 text-stone-500"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Products Grid - Minimal Luxury Reference Design */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-3.5">
-          {filteredProducts.map((prod, idx) => (
-            <ProductCardItem
-              key={prod.id}
-              prod={prod}
-              isSaved={isInWishlist(prod.id)}
-              onToggleWishlist={() => handleToggleWishlist(prod)}
-              onAddToCart={(e) => handleAddToCart(e, prod)}
-              isAdded={addedId === prod.id}
-              priority={idx < 4}
-            />
-          ))}
-        </div>
+        {/* View Mode 1: Organized Category Sections (when "All" is active) */}
+        {activeCategory === "all" ? (
+          <div className="space-y-16 sm:space-y-20">
+            {categoryGroups.map((group) => (
+              <section key={group.meta.id} className="space-y-5">
+                {/* Category Section Header */}
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-[#E8E2D5]">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A6242] font-semibold">
+                        CATEGORY • {group.meta.id.toUpperCase()}
+                      </span>
+                      <span className="text-[10px] bg-[#EAE5D9] text-[#1A1815] font-mono px-2 py-0.5 rounded-full font-semibold">
+                        {group.products.length} {group.products.length === 1 ? "Artifact" : "Artifacts"}
+                      </span>
+                    </div>
+                    <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A1815] mt-1">
+                      {group.meta.name}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-stone-600 mt-0.5 font-sans">
+                      {group.meta.tagline}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => handleCategorySelect(group.meta.id)}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#7A6242] hover:text-[#1A1815] uppercase tracking-wider transition-colors self-start sm:self-auto cursor-pointer"
+                  >
+                    <span>View All {group.meta.shortName}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Category Product Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+                  {group.products.map((prod) => (
+                    <ProductCardItem
+                      key={prod.id}
+                      prod={prod}
+                      isSaved={isInWishlist(prod.id)}
+                      onToggleWishlist={() => handleToggleWishlist(prod)}
+                      onAddToCart={(e) => handleAddToCart(e, prod)}
+                      isAdded={addedId === prod.id}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        ) : activeCategory === "tulsi" ? (
+          /* View Mode 2: Dedicated Client Tulsi Collection Experience (T01 - T32) */
+          <TulsiCategoryView
+            products={singleCategoryProducts}
+            isInWishlist={isInWishlist}
+            onToggleWishlist={handleToggleWishlist}
+            onAddToCart={handleAddToCart}
+            addedId={addedId}
+          />
+        ) : (
+          /* View Mode 3: Focused Single Category View for Other Categories */
+          <div className="space-y-8">
+            {/* Curated Editorial Info Banner for Active Category */}
+            {activeCategoryMeta && (
+              <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#E8E2D5] shadow-xs space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A6242] font-semibold">
+                    {activeCategoryMeta.badge}
+                  </span>
+                  <span className="text-stone-300">•</span>
+                  <span className="text-xs text-stone-500 font-mono">
+                    {singleCategoryProducts.length} Dedicated Items
+                  </span>
+                </div>
+                <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#1A1815]">
+                  {activeCategoryMeta.name}
+                </h2>
+                <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-3xl font-sans">
+                  {activeCategoryMeta.description}
+                </p>
+              </div>
+            )}
+
+            {/* Product Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+              {singleCategoryProducts.map((prod, idx) => (
+                <ProductCardItem
+                  key={prod.id}
+                  prod={prod}
+                  isSaved={isInWishlist(prod.id)}
+                  onToggleWishlist={() => handleToggleWishlist(prod)}
+                  onAddToCart={(e) => handleAddToCart(e, prod)}
+                  isAdded={addedId === prod.id}
+                  priority={idx < 4}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Floating Wishlist Toast Notification */}
@@ -479,7 +488,10 @@ function ProductsCatalog() {
         <div className="fixed bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#1A1815] text-[#FAF8F5] text-xs font-medium shadow-2xl border border-[#3E3832] transition-all duration-300">
           <Bookmark className="w-4 h-4 fill-[#C5A880] text-[#C5A880]" />
           <span>{toastMessage}</span>
-          <Link href="/wishlist" className="ml-1 underline font-semibold text-[#C5A880] hover:text-white">
+          <Link
+            href="/wishlist"
+            className="ml-1 underline font-semibold text-[#C5A880] hover:text-white"
+          >
             View
           </Link>
         </div>
@@ -495,7 +507,13 @@ function ProductsCatalog() {
 export default function ProductsPage() {
   return (
     <CartProvider>
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading collections...</div>}>
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-[#F9F8F5] text-stone-600 font-serif">
+            Loading Sacred Collections...
+          </div>
+        }
+      >
         <ProductsCatalog />
       </Suspense>
     </CartProvider>

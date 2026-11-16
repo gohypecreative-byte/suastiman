@@ -117,7 +117,10 @@ export function Craftsmanship() {
   };
 
   return (
-    <section id="craftsmanship" className="py-20 sm:py-28 bg-[#122E46] text-[#ECEADE] relative overflow-hidden border-b border-[#C5A880]/20">
+    <section
+      id="craftsmanship"
+      className="relative -mt-8 sm:-mt-10 z-20 rounded-t-[40px] sm:rounded-t-[48px] pt-16 pb-20 sm:pt-20 sm:pb-28 bg-[#122E46] text-[#ECEADE] overflow-hidden border-t border-[#C5A880]/30 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] border-b border-[#C5A880]/20"
+    >
       {/* Background Subtle Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
 

@@ -42,7 +42,10 @@ const BRAND_PILLARS: PillarCard[] = [
 
 export function BrandIntro() {
   return (
-    <section id="brand-intro" className="py-12 sm:py-16 bg-[#FBF9F5] text-[#0C161D] relative overflow-hidden border-b border-[#E8E2D5]">
+    <section
+      id="brand-intro"
+      className="relative -mt-6 sm:-mt-8 z-20 rounded-t-[40px] sm:rounded-t-[48px] pt-14 pb-12 sm:pt-16 sm:pb-16 bg-[#FBF9F5] text-[#0C161D] overflow-hidden border-t border-[#E8E2D5]/60 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] border-b border-[#E8E2D5]"
+    >
       {/* Background Subtle Luxury Grain Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
