@@ -1,175 +1,381 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { BookOpen, Compass, ShieldCheck, ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Check } from "lucide-react";
 
-interface TraditionCard {
+interface SupportingPoint {
+  title: string;
+  desc: string;
+}
+
+interface SlideData {
   id: string;
   category: string;
   title: string;
-  subtitle: string;
+  description: string;
+  supportingPoints: SupportingPoint[];
   image: string;
-  reference: string;
-  desc: string;
-  keyInsight: string;
 }
 
-const TRADITION_KNOWLEDGE: TraditionCard[] = [
+const SLIDES: SlideData[] = [
   {
-    id: "rudraksha-science",
-    category: "BOTANICAL TRADITION",
+    id: "rudraksha-endocarp",
+    category: "Botanical Tradition",
     title: "Why Rudraksha is an Endocarp, Not Wood",
-    subtitle: "The bio-electric resonance of Elaeocarpus ganitrus",
+    description:
+      "Rudraksha (Elaeocarpus ganitrus) is not simply a piece of wood. It is the dried inner fruit layer known as the endocarp, which protects the seed within.",
+    supportingPoints: [
+      {
+        title: "Botanical Identity",
+        desc: "Understand the natural structure of Rudraksha.",
+      },
+      {
+        title: "Natural Formation",
+        desc: "Explore the fruit and seed structure.",
+      },
+      {
+        title: "Sacred Significance",
+        desc: "Discover its traditional importance in Vedic culture.",
+      },
+    ],
     image: "/images/origin/know_rudraksha_anatomy.jpg",
-    reference: "Shiva Purana (Vidyeshvara Samhita)",
-    desc: "Formed with internal cellular locules, natural Rudraksha seeds exhibit stabilizing dielectric capacitance when worn against pulse points. Never softening with age, it naturally petrifies.",
-    keyInsight: "Zero chemical varnish: pure sandalwood oil allows natural seed pores to breathe.",
   },
   {
-    id: "tulsi-heritage",
-    category: "SACRED HERBAL HERITAGE",
+    id: "tulsi-sanctity",
+    category: "Sacred Herbal Heritage",
     title: "The Living Sanctity of Vrindavan Tulsi Wood",
-    subtitle: "Why Holy Basil wood carries lasting therapeutic coolness",
+    description:
+      "Tulsi holds a special place in Vedic tradition. Its sacred association, botanical identity and traditional use make it an important part of India's spiritual heritage.",
+    supportingPoints: [
+      {
+        title: "Sacred Heritage",
+        desc: "Tulsi's significance in Vedic traditions.",
+      },
+      {
+        title: "Botanical Identity",
+        desc: "Understanding the Tulsi plant.",
+      },
+      {
+        title: "Traditional Wisdom",
+        desc: "Its historical and cultural importance.",
+      },
+    ],
     image: "/images/origin/know_tulsi_wood.jpg",
-    reference: "Padma Purana and Charaka Samhita",
-    desc: "Aged Tulsi heartwood is dense in natural phenolic eugenol compounds. Friction against skin warmth gently releases micro-aromatic herbal volatiles that calm sensory restlessness.",
-    keyInsight: "Naturally fallen mature branches harvested without harming living green plants.",
   },
   {
-    id: "108-ratio",
-    category: "ASTRONOMICAL SACRED RATIO",
+    id: "108-mathematics",
+    category: "Astronomical Sacred Ratio",
     title: "The Cosmic Mathematics of the 108 Count",
-    subtitle: "Why Vedic malas are structured in exact 108 beads",
+    description:
+      "The number 108 holds deep significance in Indian spiritual traditions. From prayer beads to traditional practices, it represents a meaningful connection between mathematics, symbolism and spirituality.",
+    supportingPoints: [
+      {
+        title: "Sacred Mathematics",
+        desc: "Explore the significance of 108.",
+      },
+      {
+        title: "Mala Tradition",
+        desc: "Understand the 108-bead counting system.",
+      },
+      {
+        title: "Cosmic Symbolism",
+        desc: "Its place in traditional Indian philosophy.",
+      },
+    ],
     image: "/images/origin/stage9_svastiman.jpg",
-    reference: "Surya Siddhanta and Vedic Astronomy",
-    desc: "The solar distance is exactly 108 times the Sun's diameter. In subtle human physiology, 108 energetic nadis converge at the heart center (Anahata) during rhythmic japa breathwork.",
-    keyInsight: "108 is astronomical geometry linking universal distance with individual breath.",
   },
   {
-    id: "earth-crystals",
-    category: "GEMOLOGICAL INTEGRITY",
+    id: "gemological-integrity",
+    category: "Gemological Integrity",
     title: "Natural Inclusions: Earth's Geological Fingerprint",
-    subtitle: "Distinguishing untreated minerals from dyed commercial glass",
+    description:
+      "Natural gemstones and sacred beads can carry unique internal patterns and inclusions formed through natural processes. These characteristics help reveal their individual geological history.",
+    supportingPoints: [
+      {
+        title: "Natural Formation",
+        desc: "Understand how natural inclusions develop.",
+      },
+      {
+        title: "Geological Identity",
+        desc: "Explore internal patterns and structures.",
+      },
+      {
+        title: "Authenticity",
+        desc: "Appreciate the uniqueness of natural materials.",
+      },
+    ],
     image: "/images/origin/brand_macro_detail.jpg",
-    reference: "Ratnapariksha by Buddhabhatta",
-    desc: "Real earth stones contain microscopic pyrite veins and crystal growth planes formed over millennia under tectonic compression. Real stones are instantly cold to skin contact.",
-    keyInsight: "Real minerals never look like flat colored plastic; internal inclusions prove authenticity.",
   },
 ];
 
 export function KnowYourTradition() {
-  const [activeId, setActiveId] = useState(TRADITION_KNOWLEDGE[0].id);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
 
-  const active = TRADITION_KNOWLEDGE.find((item) => item.id === activeId) || TRADITION_KNOWLEDGE[0];
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    let lastTransitionTime = 0;
+    let touchStartY = 0;
+
+    // Passive Window Scroll Tracking (for scrollbar dragging and smooth travel)
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalScrollable = rect.height - windowHeight;
+
+      if (totalScrollable <= 0) return;
+
+      const currentScroll = -rect.top;
+      const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
+
+      let nextIndex = 0;
+      if (progress >= 0.75) {
+        nextIndex = 3;
+      } else if (progress >= 0.50) {
+        nextIndex = 2;
+      } else if (progress >= 0.25) {
+        nextIndex = 1;
+      } else {
+        nextIndex = 0;
+      }
+
+      if (nextIndex !== activeIndexRef.current) {
+        setActiveIndex(nextIndex);
+        activeIndexRef.current = nextIndex;
+      }
+    };
+
+    // Wheel Stepper: One clean slide step per scroll gesture
+    const handleWheel = (e: WheelEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Only handle when sticky pinned in viewport
+      const isPinned = rect.top <= 10 && rect.bottom >= windowHeight + 10;
+      if (!isPinned) return;
+
+      if (Math.abs(e.deltaY) < 22) return;
+
+      const now = Date.now();
+      if (now - lastTransitionTime < 650) {
+        e.preventDefault();
+        return;
+      }
+
+      const totalScrollable = rect.height - windowHeight;
+
+      if (e.deltaY > 0) {
+        // Scrolling Down
+        if (activeIndexRef.current < SLIDES.length - 1) {
+          e.preventDefault();
+          lastTransitionTime = now;
+          const targetIndex = activeIndexRef.current + 1;
+          setActiveIndex(targetIndex);
+          activeIndexRef.current = targetIndex;
+
+          const targetY =
+            window.scrollY +
+            rect.top +
+            (totalScrollable * targetIndex) / (SLIDES.length - 1);
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }
+      } else {
+        // Scrolling Up
+        if (activeIndexRef.current > 0) {
+          e.preventDefault();
+          lastTransitionTime = now;
+          const targetIndex = activeIndexRef.current - 1;
+          setActiveIndex(targetIndex);
+          activeIndexRef.current = targetIndex;
+
+          const targetY =
+            window.scrollY +
+            rect.top +
+            (totalScrollable * targetIndex) / (SLIDES.length - 1);
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }
+      }
+    };
+
+    // Mobile Touch Gesture Support
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isPinned = rect.top <= 10 && rect.bottom >= windowHeight + 10;
+      if (!isPinned) return;
+
+      const touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+
+      if (Math.abs(deltaY) < 35) return;
+
+      const now = Date.now();
+      if (now - lastTransitionTime < 600) return;
+
+      const totalScrollable = rect.height - windowHeight;
+
+      if (deltaY > 0 && activeIndexRef.current < SLIDES.length - 1) {
+        lastTransitionTime = now;
+        const targetIndex = activeIndexRef.current + 1;
+        setActiveIndex(targetIndex);
+        activeIndexRef.current = targetIndex;
+
+        const targetY =
+          window.scrollY +
+          rect.top +
+          (totalScrollable * targetIndex) / (SLIDES.length - 1);
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      } else if (deltaY < 0 && activeIndexRef.current > 0) {
+        lastTransitionTime = now;
+        const targetIndex = activeIndexRef.current - 1;
+        setActiveIndex(targetIndex);
+        activeIndexRef.current = targetIndex;
+
+        const targetY =
+          window.scrollY +
+          rect.top +
+          (totalScrollable * targetIndex) / (SLIDES.length - 1);
+        window.scrollTo({ top: targetY, behavior: "smooth" });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
 
   return (
-    <section id="know-your-tradition" className="pt-8 sm:pt-10 lg:pt-12 pb-24 sm:pb-32 lg:pb-36 min-h-[calc(100vh-70px)] flex flex-col justify-center bg-[#F6F4EE] text-[#0C161D] relative overflow-hidden">
-      {/* Subtle Texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
+    <section
+      ref={containerRef}
+      id="know-your-tradition"
+      className="relative h-[320vh] sm:h-[350vh] lg:h-[380vh] bg-[#F6F4EE] text-[#0C161D]"
+    >
+      {/* Sticky Pinned Container */}
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center overflow-hidden z-10">
+        {/* Subtle Background Texture */}
+        <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
-      <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
-        {/* Header */}
-        <div className="max-w-3xl mb-5 sm:mb-6 lg:mb-8 space-y-2 sm:space-y-3">
-          <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
-            Vedic Wisdom and Botanical Science, <br className="hidden sm:inline" />
-            <span className="italic text-[#7A6242] font-light">grounded in scriptural truth.</span>
-          </h2>
-        </div>
-
-        {/* 4 Knowledge Modules: Interactive Accordion on Mobile, Side-by-Side on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-stretch">
-          {/* Left Column: Topics Selector (Accordion on Mobile, List on Desktop) */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-3 sm:gap-3.5 lg:gap-4">
-            {TRADITION_KNOWLEDGE.map((item) => {
-              const isSelected = item.id === activeId;
-              return (
-                <div
-                  key={item.id}
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isSelected
-                      ? "bg-[#122E46] text-[#ECEADE] border-[#122E46] shadow-xl shadow-[#122E46]/20"
-                      : "bg-white text-stone-800 border-[#E0D9CA] hover:border-stone-400 hover:shadow-md"
-                  }`}
-                >
-                  <button
-                    onClick={() => {
-                      if (typeof window !== "undefined" && window.innerWidth >= 1024) {
-                        setActiveId(item.id);
-                      } else {
-                        setActiveId((prev) => (prev === item.id ? "" : item.id));
-                      }
-                    }}
-                    className="w-full p-4 sm:p-5 lg:p-6 text-left flex items-start justify-between gap-3 sm:gap-4 cursor-pointer"
-                  >
-                    <div className="space-y-1 sm:space-y-1.5">
-                      <span className={`text-[9px] sm:text-[10px] font-mono tracking-widest uppercase block ${isSelected ? "text-[#C5A880]" : "text-stone-500"}`}>
-                        {item.category}
-                      </span>
-                      <h3 className="font-serif text-sm sm:text-base lg:text-lg font-normal leading-snug">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <ChevronRight
-                      className={`w-4 h-4 shrink-0 mt-1 transition-transform duration-300 ${
-                        isSelected
-                          ? "text-[#C5A880] rotate-90 lg:rotate-0 lg:translate-x-1"
-                          : "text-stone-400"
-                      }`}
-                    />
-                  </button>
-
-
-                  {/* Mobile-Only Expanded Visual Proof (Attached directly to active card on mobile) */}
-                  {isSelected && (
-                    <div className="lg:hidden px-4 pb-4 pt-1 space-y-3 border-t border-white/10">
-                      <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-[#EAE5D9] border border-[#E0D9CA] shadow-md">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          className="object-cover brightness-[1.10] contrast-[1.0] transition-all duration-500"
-                          sizes="(max-width: 1024px) 100vw, 55vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
-                        <div className="absolute bottom-3 left-3 right-3 text-white pointer-events-none">
-                          <p className="text-xs sm:text-sm font-serif italic text-stone-100 leading-snug drop-shadow-md">
-                            &ldquo;{item.subtitle}&rdquo;
-                          </p>
-                        </div>
-                      </div>
-
-                      <p className="text-xs text-[#ECEADE]/85 leading-relaxed font-sans">
-                        {item.desc}
-                      </p>
-
-                      <div className="flex items-start gap-2 pt-1 text-[11px] font-mono text-[#DFCAAB] border-t border-white/10">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A880] shrink-0 mt-0.5" />
-                        <span>{item.keyInsight}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10 py-4 sm:py-6 lg:py-8 flex flex-col justify-center h-full max-h-[850px]">
+          {/* Main Heading – Fixed & Exactly Unchanged */}
+          <div className="mb-5 sm:mb-6 lg:mb-8 max-w-3xl">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-normal text-[#1A1815] leading-[1.18] tracking-tight">
+              Vedic Wisdom and Botanical Science, <br className="hidden sm:inline" />
+              <span className="italic text-[#7A6242] font-light">
+                grounded in scriptural truth.
+              </span>
+            </h2>
           </div>
 
-          {/* Desktop-Only Right Column: Expanded height & cinematic presence */}
-          <div className="hidden lg:block lg:col-span-7 bg-[#EAE5D9] rounded-3xl overflow-hidden border border-[#E0D9CA] shadow-xl relative min-h-[500px] lg:min-h-[530px]">
-            <Image
-              src={active.image}
-              alt={active.title}
-              fill
-              className="object-cover brightness-[1.12] contrast-[0.98] transition-all duration-500"
-              sizes="(max-width: 1024px) 100vw, 55vw"
-            />
-            {/* Soft, light gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />
+          {/* Clean Pinned Two-Column Layout (Matching Image 2 Sizing & Proportions) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* LEFT COLUMN: Compact, Proportionate Image with Horizontal Side-Slide Motion */}
+            <div className="lg:col-span-5 w-full flex justify-center lg:justify-start">
+              <div className="relative w-full max-w-[380px] sm:max-w-[400px] lg:max-w-[420px] aspect-[4/3] rounded-2xl overflow-hidden bg-[#EAE5D9] border border-stone-200/90 shadow-lg shadow-stone-900/5">
+                {SLIDES.map((slide, idx) => {
+                  const isActive = idx === activeIndex;
+                  const isPast = idx < activeIndex;
+                  return (
+                    <div
+                      key={slide.id}
+                      className={`absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                        isActive
+                          ? "opacity-100 translate-x-0 z-10 scale-100"
+                          : isPast
+                          ? "opacity-0 -translate-x-12 pointer-events-none z-0 scale-[0.98]"
+                          : "opacity-0 translate-x-12 pointer-events-none z-0 scale-[0.98]"
+                      }`}
+                    >
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        fill
+                        priority={idx === 0}
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 420px"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-            <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
-              <p className="text-base sm:text-xl font-serif italic text-[#FAF8F5] leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                &ldquo;{active.subtitle}&rdquo;
-              </p>
+            {/* RIGHT COLUMN: Compact Refined Content (Matching Image 2) */}
+            <div className="lg:col-span-7 w-full">
+              <div className="grid grid-cols-1 grid-rows-1 w-full min-h-[260px] sm:min-h-[280px] lg:min-h-[320px] items-center">
+                {SLIDES.map((slide, idx) => {
+                  const isActive = idx === activeIndex;
+                  const isPast = idx < activeIndex;
+                  return (
+                    <div
+                      key={slide.id}
+                      className={`col-start-1 row-start-1 w-full flex flex-col justify-center transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                        isActive
+                          ? "opacity-100 translate-y-0 pointer-events-auto z-10"
+                          : isPast
+                          ? "opacity-0 -translate-y-6 pointer-events-none z-0"
+                          : "opacity-0 translate-y-6 pointer-events-none z-0"
+                      }`}
+                    >
+                      {/* Subtle Category */}
+                      <p className="font-serif italic text-xs sm:text-sm text-stone-400 font-light mb-1 sm:mb-1.5">
+                        {slide.category}
+                      </p>
+
+                      {/* Title: Compact & Refined, Matching Image 2 */}
+                      <h3 className="font-serif text-xl sm:text-2xl lg:text-[26px] font-normal text-[#1A1815] leading-[1.25] tracking-tight mb-2 sm:mb-2.5">
+                        {slide.title}
+                      </h3>
+
+                      {/* Description: Clean, Moderate Font */}
+                      <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-sans mb-3.5 sm:mb-4 max-w-lg">
+                        {slide.description}
+                      </p>
+
+                      {/* Supporting Points: Compact with Small Green Checkmarks */}
+                      <div className="space-y-2 sm:space-y-2.5">
+                        {slide.supportingPoints.map((point, pIdx) => (
+                          <div key={pIdx} className="flex items-start gap-2.5">
+                            <div className="w-4 h-4 rounded-full bg-[#EBF5ED] text-[#2E7D32] border border-[#2E7D32]/25 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                              <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                            </div>
+                            <div className="text-xs sm:text-[13px] leading-relaxed">
+                              <strong className="font-semibold text-[#1A1815]">
+                                {point.title}:{" "}
+                              </strong>
+                              <span className="text-stone-600 font-normal">
+                                {point.desc}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

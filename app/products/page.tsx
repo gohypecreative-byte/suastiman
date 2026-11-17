@@ -321,12 +321,9 @@ function ProductsCatalog() {
         <div className="border-b border-[#E8E2D5] pb-6 mb-8 sm:mb-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#7A6242] font-semibold block mb-1">
-                Svastimān Provenance Archive
-              </span>
               <h1 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] tracking-tight">
                 {activeCategory === "all"
-                  ? "Sacred Botanical & Mineral Collections"
+                  ? "Sacred Botanical and Mineral Collections"
                   : activeCategoryMeta?.name}
               </h1>
             </div>
@@ -391,15 +388,7 @@ function ProductsCatalog() {
                 {/* Category Section Header */}
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-3 border-b border-[#E8E2D5]">
                   <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A6242] font-semibold">
-                        CATEGORY • {group.meta.id.toUpperCase()}
-                      </span>
-                      <span className="text-[10px] bg-[#EAE5D9] text-[#1A1815] font-mono px-2 py-0.5 rounded-full font-semibold">
-                        {group.products.length} {group.products.length === 1 ? "Artifact" : "Artifacts"}
-                      </span>
-                    </div>
-                    <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A1815] mt-1">
+                    <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A1815]">
                       {group.meta.name}
                     </h2>
                     <p className="text-xs sm:text-sm text-stone-600 mt-0.5 font-sans">
