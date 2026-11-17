@@ -48,7 +48,7 @@ const CATEGORIES: CategoryShowcaseItem[] = [
     id: "cat-botanicals",
     name: "Sacred Botanicals",
     category: "botanicals",
-    subtitle: "Wild Himalayan Rudraksha and Vrindavan Tulsi",
+    subtitle: "Himalayan Rudraksha and Vrindavan Tulsi",
     image: "/images/origin/hero_journey_fruit.jpg",
     itemCount: "14 Authentic Seeds and Wood",
     href: "/products?category=rudraksha",

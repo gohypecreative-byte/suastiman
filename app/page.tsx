@@ -104,7 +104,7 @@ export default function Home() {
     <CartProvider>
       <div className="relative min-h-screen bg-[#F7F5F0] text-[#0C161D]">
         {/* Main Content Wrapper */}
-        <div className="relative z-10 bg-[#F7F5F0] overflow-clip">
+        <div className="relative z-10 bg-[#F7F5F0] overflow-x-clip">
           {/* 1. Navigation Bar (Reference Layout with Svastiman Brand Tokens) */}
           <Navbar />
 

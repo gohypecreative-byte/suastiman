@@ -50,7 +50,7 @@ export interface Product {
 export const PRODUCT_CATEGORIES: ProductCategoryMeta[] = [
   {
     id: "tulsi",
-    name: "Sacred Vrindavan Tulsi",
+    name: "Vrindavan Tulsi",
     shortName: "Tulsi",
     tagline: "Revered as Vrinda Devi • 100% Natural Tulsi Wood • Vrindavan, Braj",
     description: "Revered as Vrinda Devi, Tulsi Ji holds a special place in Vaishnava tradition and is deeply cherished by devotees of Lord Krishna. Wearing a Tulsi Mala is a symbol of devotion, purity, humility and surrender. More than a sacred ornament, it serves as a gentle reminder to stay connected with Krishna and walk the path of Bhakti in everyday life.",
@@ -58,7 +58,7 @@ export const PRODUCT_CATEGORIES: ProductCategoryMeta[] = [
   },
   {
     id: "rudraksha",
-    name: "Wild Himalayan Rudraksha",
+    name: "Himalayan Rudraksha",
     shortName: "Rudraksha",
     tagline: "Untouched 2,200m Cloud Belts • Digital Radiography Tested",
     description: "Authentic high-altitude wild botanical seeds harvested from eastern Nepal. Never lacquered or chemically treated, river-washed and hand-knotted by generational artisans.",
@@ -116,9 +116,9 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 399,
     "originalPrice": 549,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_01.jpg",
     "images": [
-      "/images/products/prod2.webp",
+      "/images/products/tulsi/tulsi_01.jpg",
       "/images/origin/know_tulsi_wood.jpg",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
@@ -174,9 +174,9 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 449,
     "originalPrice": 599,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_02.jpg",
     "images": [
-      "/images/products/prod2.webp",
+      "/images/products/tulsi/tulsi_02.jpg",
       "/images/origin/know_tulsi_wood.jpg",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
@@ -230,10 +230,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 399,
     "originalPrice": 549,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_03.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_03.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -286,10 +286,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 449,
     "originalPrice": 599,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_04.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_04.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -342,10 +342,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 499,
     "originalPrice": 649,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_05.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_05.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -398,10 +398,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 399,
     "originalPrice": 549,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_06.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_06.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -454,10 +454,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 449,
     "originalPrice": 599,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_07.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_07.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -510,10 +510,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 429,
     "originalPrice": 579,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_08.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_08.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -566,10 +566,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 349,
     "originalPrice": 499,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_09.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_09.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -622,10 +622,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 389,
     "originalPrice": 539,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_10.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_10.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -678,10 +678,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 429,
     "originalPrice": 579,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_11.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_11.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -734,10 +734,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 349,
     "originalPrice": 499,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_12.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_12.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -790,10 +790,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 389,
     "originalPrice": 539,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_13.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_13.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -846,10 +846,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 429,
     "originalPrice": 579,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_14.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_14.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -902,10 +902,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 349,
     "originalPrice": 499,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_15.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_15.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -958,10 +958,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 389,
     "originalPrice": 539,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_16.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_16.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1014,10 +1014,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 429,
     "originalPrice": 579,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_17.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_17.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1070,10 +1070,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 349,
     "originalPrice": 499,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_18.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_18.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1126,10 +1126,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 389,
     "originalPrice": 539,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_19.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_19.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1184,11 +1184,11 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 799,
     "originalPrice": 949,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_20.jpg",
     "images": [
-      "/images/products/prod2.webp",
-      "/images/origin/brand_intro_craft.jpg",
-      "/images/origin/stage9_svastiman.jpg"
+      "/images/products/tulsi/tulsi_20.jpg",
+      "/images/origin/know_tulsi_wood.jpg",
+      "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
     "specs": [
@@ -1242,11 +1242,11 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 899,
     "originalPrice": 1049,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_21.jpg",
     "images": [
-      "/images/products/prod2.webp",
-      "/images/origin/brand_intro_craft.jpg",
-      "/images/origin/stage9_svastiman.jpg"
+      "/images/products/tulsi/tulsi_21.jpg",
+      "/images/origin/know_tulsi_wood.jpg",
+      "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
     "specs": [
@@ -1300,11 +1300,11 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 999,
     "originalPrice": 1149,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_22.jpg",
     "images": [
-      "/images/products/prod2.webp",
-      "/images/origin/brand_intro_craft.jpg",
-      "/images/origin/stage9_svastiman.jpg"
+      "/images/products/tulsi/tulsi_22.jpg",
+      "/images/origin/know_tulsi_wood.jpg",
+      "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
     "specs": [
@@ -1358,11 +1358,11 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Krishna",
     "price": 1099,
     "originalPrice": 1249,
-    "image": "/images/products/prod2.webp",
+    "image": "/images/products/tulsi/tulsi_23.jpg",
     "images": [
-      "/images/products/prod2.webp",
-      "/images/origin/brand_intro_craft.jpg",
-      "/images/origin/stage9_svastiman.jpg"
+      "/images/products/tulsi/tulsi_23.jpg",
+      "/images/origin/know_tulsi_wood.jpg",
+      "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
     "specs": [
@@ -1414,10 +1414,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 549,
     "originalPrice": 699,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_24.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_24.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1470,10 +1470,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 599,
     "originalPrice": 749,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_25.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_25.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1526,10 +1526,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 649,
     "originalPrice": 799,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_26.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_26.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1582,10 +1582,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 549,
     "originalPrice": 699,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_27.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_27.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1638,10 +1638,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 599,
     "originalPrice": 749,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_28.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_28.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1694,10 +1694,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 649,
     "originalPrice": 799,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_29.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_29.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1750,10 +1750,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna",
     "price": 549,
     "originalPrice": 699,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_30.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_30.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",
@@ -1806,10 +1806,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna, Guru",
     "price": 849,
     "originalPrice": 999,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_31.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_31.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Authenticity Certified",
@@ -1862,10 +1862,10 @@ export const PRODUCTS: Product[] = [
     "associatedDeities": "Shri Radha / Tulsi Maharani, Shri Krishna, Guru",
     "price": 749,
     "originalPrice": 899,
-    "image": "/images/origin/know_tulsi_wood.jpg",
+    "image": "/images/products/tulsi/tulsi_32.jpg",
     "images": [
+      "/images/products/tulsi/tulsi_32.jpg",
       "/images/origin/know_tulsi_wood.jpg",
-      "/images/products/prod2.webp",
       "/images/origin/tulsi_heritage_plant.jpg"
     ],
     "badge": "Temple Soil Harvest",

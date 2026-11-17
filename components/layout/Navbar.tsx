@@ -44,8 +44,14 @@ export function Navbar() {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 15);
 
-      // Keep navbar visible near the top
-      if (currentScrollY <= 30) {
+      // On homepage, keep navbar visible throughout the Hero section scroll
+      // preventing the navbar from hiding and exposing a blank whitish spacer gap
+      const isHeroActive =
+        pathname === "/"
+          ? currentScrollY <= (typeof window !== "undefined" ? window.innerHeight - 60 : 700)
+          : currentScrollY <= 30;
+
+      if (isHeroActive) {
         setIsVisible(true);
         lastScrollY.current = currentScrollY;
         return;
@@ -72,7 +78,7 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [mobileMenuOpen, searchOpen]);
+  }, [mobileMenuOpen, searchOpen, pathname]);
 
   // Close menus on route change
   useEffect(() => {
@@ -82,8 +88,8 @@ export function Navbar() {
 
   const shopCategories = [
     { name: "All Collections", href: "/products" },
-    { name: "Sacred Vrindavan Tulsi", href: "/products?category=tulsi" },
-    { name: "Wild Himalayan Rudraksha", href: "/products?category=rudraksha" },
+    { name: "Vrindavan Tulsi", href: "/products?category=tulsi" },
+    { name: "Himalayan Rudraksha", href: "/products?category=rudraksha" },
     { name: "Spiritual Bracelets", href: "/products?category=bracelets" },
     { name: "108 Japa Malas", href: "/products?category=malas" },
     { name: "Earth Gemstones", href: "/products?category=gemstones" },

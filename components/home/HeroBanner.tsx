@@ -208,6 +208,7 @@ export function HeroBanner() {
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const animTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
   const { addToCart, openCart } = useCart();
 
   const triggerSlideChange = useCallback(
@@ -255,6 +256,35 @@ export function HeroBanner() {
     };
   }, []);
 
+  // Pure Native CSS Sticky Pinning (0ms lag, zero jitter / fluctuation).
+  // When scrolled completely past the hero section, toggle visibility to optimize GPU resources.
+  useEffect(() => {
+    let isHidden = false;
+
+    const handleScroll = () => {
+      const sy = window.scrollY;
+      const heroThreshold = typeof window !== "undefined" ? window.innerHeight + 50 : 850;
+      const shouldHide = sy > heroThreshold;
+
+      if (shouldHide && !isHidden) {
+        isHidden = true;
+        if (heroRef.current) {
+          heroRef.current.style.visibility = "hidden";
+          heroRef.current.style.pointerEvents = "none";
+        }
+      } else if (!shouldHide && isHidden) {
+        isHidden = false;
+        if (heroRef.current) {
+          heroRef.current.style.visibility = "visible";
+          heroRef.current.style.pointerEvents = "auto";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const current = NINE_STAGES[activeIndex];
 
   const handleQuickAdd = (e: React.MouseEvent) => {
@@ -274,11 +304,14 @@ export function HeroBanner() {
 
   return (
     <section
+      ref={heroRef}
       id="hero"
-      className="relative w-full h-[calc(100dvh-82px)] sm:h-[calc(100vh-76px)] min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] bg-black text-[#ECEADE] overflow-hidden border-b border-[#C5A880]/20 select-none"
+      className="sticky top-[106px] sm:top-[108px] w-full h-[calc(100dvh-82px)] sm:h-[calc(100vh-76px)] min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] bg-black text-[#ECEADE] overflow-hidden border-b border-[#C5A880]/20 select-none z-0"
     >
-      {/* 1. Original Suatiman Background Photography with Smooth Cinematic Horizontal Slider & Subtle Fade */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* 1. Original Suatiman Background Photography with Cinematic Slider */}
+      <div
+        className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+      >
         {NINE_STAGES.map((stage, idx) => {
           const isIncoming = idx === activeIndex && prevIndex !== null;
           const isOutgoing = idx === prevIndex;
@@ -319,16 +352,19 @@ export function HeroBanner() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent pointer-events-none z-10" />
       </div>
 
-
       {/* Main Content Area: Left-aligned, positioned in the lower portion */}
-      <div className="absolute left-6 sm:left-10 lg:left-16 xl:left-20 bottom-20 sm:bottom-24 lg:bottom-28 z-20 max-w-4xl xl:max-w-5xl pr-4 text-left">
+      <div
+        className="absolute left-6 sm:left-10 lg:left-16 xl:left-20 bottom-20 sm:bottom-24 lg:bottom-28 z-20 max-w-4xl xl:max-w-5xl pr-4 text-left"
+      >
         <h1 className="font-serif text-3xl sm:text-5xl lg:text-7xl xl:text-[76px] font-normal text-white leading-[1.08] tracking-tight drop-shadow-md">
           {current.title}
         </h1>
       </div>
 
       {/* Bottom Center: Slide Pagination Line & Dots for the 9 Stages */}
-      <div className="absolute bottom-12 sm:bottom-14 lg:bottom-16 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2">
+      <div
+        className="absolute bottom-12 sm:bottom-14 lg:bottom-16 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2"
+      >
         {NINE_STAGES.map((stage, idx) => {
           const isActive = idx === activeIndex;
           return (
@@ -350,7 +386,9 @@ export function HeroBanner() {
 
       {/* Bottom Right: Quick-Buy Floating Product Card Lifted Above Bottom Edge */}
       {current.product && (
-        <div className="hidden md:flex absolute bottom-16 sm:bottom-20 lg:bottom-24 right-4 sm:right-8 lg:right-12 xl:right-16 z-30 items-center gap-2">
+        <div
+          className="hidden md:flex absolute bottom-16 sm:bottom-20 lg:bottom-24 right-4 sm:right-8 lg:right-12 xl:right-16 z-30 items-center gap-2"
+        >
           <div className="bg-[#122E46]/85 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 shadow-2xl border border-[#C5A880]/30 flex items-center gap-3 sm:gap-4 max-w-[340px] transition-all duration-300 hover:border-[#C5A880]">
             {/* Product Link wrapper */}
             <Link

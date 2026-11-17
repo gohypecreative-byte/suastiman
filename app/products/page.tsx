@@ -316,7 +316,7 @@ function ProductsCatalog() {
     <div className="min-h-screen flex flex-col bg-[#F9F8F5] text-[#111111]">
       <Navbar />
 
-      <main className="flex-1 pt-6 sm:pt-8 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
+      <main className="flex-1 pt-6 sm:pt-8 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 w-full">
         {/* Page Header */}
         <div className="border-b border-[#E8E2D5] pb-6 mb-8 sm:mb-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">

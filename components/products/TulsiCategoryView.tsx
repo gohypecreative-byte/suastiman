@@ -154,157 +154,9 @@ export function TulsiCategoryView({
   }, [products, roundFilter, shapeFilter, knotFilter]);
 
   return (
-    <div className="space-y-10 sm:space-y-12">
-      {/* 1. SACRED PROVENANCE HERO BANNER (Client Exact Content) */}
-      <div className="relative rounded-2xl sm:rounded-3xl bg-[#FAF8F5] border border-[#E8E2D5] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xs">
-        {/* Subtle Watermark Texture */}
-        <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.07] pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl space-y-5">
-          {/* Eyebrow & Badges */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="bg-[#122E46] text-[#FAF8F5] text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-sm font-bold shadow-xs">
-              ORIGIN: VRINDAVAN, BRAJ
-            </span>
-            <span className="bg-[#C5A880]/20 text-[#7A6242] border border-[#C5A880]/40 text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-sm font-semibold">
-              100% NATURAL TULSI WOOD
-            </span>
-            <span className="bg-[#EAE5D9] text-[#1A1815] text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-sm font-semibold">
-              32 VERIFIED ARTIFACTS
-            </span>
-          </div>
-
-          {/* Heading */}
-          <div className="space-y-2">
-            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
-              Sacred Vrindavan Tulsi Collection
-            </h2>
-            <p className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#7A6242]">
-              Revered as Vrinda Devi • Symbol of Devotion, Purity, Humility & Surrender
-            </p>
-          </div>
-
-          {/* Exact Client Description from PDF */}
-          <p className="text-sm sm:text-base leading-relaxed text-stone-700 font-sans max-w-3xl border-l-2 border-[#C5A880] pl-4 py-1 italic bg-[#F2EDE2]/40 rounded-r-lg">
-            &ldquo;Revered as Vrinda Devi, Tulsi Ji holds a special place in Vaishnava tradition and is deeply cherished by devotees of Lord Krishna. Wearing a Tulsi Mala is a symbol of devotion, purity, humility and surrender. More than a sacred ornament, it serves as a gentle reminder to stay connected with Krishna and walk the path of Bhakti in everyday life.&rdquo;
-          </p>
-
-          {/* Provenance Key Attributes Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs">
-            <div className="p-3 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
-              <span className="text-[9.5px] font-mono uppercase tracking-wider text-stone-500 block">
-                Source & Soil
-              </span>
-              <p className="font-medium text-[#1A1815] truncate">Vrindavan, Braj</p>
-            </div>
-            <div className="p-3 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
-              <span className="text-[9.5px] font-mono uppercase tracking-wider text-stone-500 block">
-                Material Authenticity
-              </span>
-              <p className="font-medium text-[#1A1815] truncate">100% Natural Tulsi</p>
-            </div>
-            <div className="p-3 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
-              <span className="text-[9.5px] font-mono uppercase tracking-wider text-stone-500 block">
-                Associated Deities
-              </span>
-              <p className="font-medium text-[#1A1815] truncate">Shri Krishna & Radha</p>
-            </div>
-            <div className="p-3 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
-              <span className="text-[9.5px] font-mono uppercase tracking-wider text-stone-500 block">
-                Beads Hue
-              </span>
-              <p className="font-medium text-[#1A1815] truncate">Natural Beige Core</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. SACRED PRACTICE & GUIDES ACCORDION (Client Google Docs References) */}
-      <div className="rounded-2xl bg-white border border-[#E8E2D5] p-5 sm:p-7 shadow-xs space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E8E2D5]">
-          <div>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A6242] font-semibold block">
-              SACRED KNOWLEDGE & SCRIPTURAL TENETS
-            </span>
-            <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#1A1815] mt-0.5">
-              Which Round To Choose ? & Devotional Guides
-            </h3>
-          </div>
-          <span className="text-xs text-stone-500 font-sans">
-            Tap a guide to expand official instructions
-          </span>
-        </div>
-
-        {/* 4 Guide Accordion Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {TULSI_GUIDES.map((guide) => {
-            const isOpen = activeGuideId === guide.id;
-            const Icon = guide.icon;
-
-            return (
-              <div
-                key={guide.id}
-                className={`rounded-xl border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? "bg-[#FAF8F5] border-[#C5A880] shadow-md"
-                    : "bg-white border-[#E8E2D5] hover:border-stone-400"
-                }`}
-              >
-                <button
-                  onClick={() => setActiveGuideId(isOpen ? null : guide.id)}
-                  className="w-full p-4 sm:p-4.5 text-left flex items-start justify-between gap-3 cursor-pointer"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E8E2D5] flex items-center justify-center shrink-0 mt-0.5 text-[#7A6242]">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="font-serif text-base font-medium text-[#1A1815]">
-                        {guide.title}
-                      </h4>
-                      <p className="text-xs text-stone-500 font-sans mt-0.5">
-                        {guide.subtitle}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="shrink-0 text-stone-400 mt-1">
-                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </div>
-                </button>
-
-                {isOpen && (
-                  <div className="px-4 pb-4 pt-1 border-t border-[#E8E2D5]/70 space-y-3 animate-in fade-in-50 duration-200">
-                    <div className="space-y-2 text-xs text-stone-700 font-sans">
-                      {guide.points.map((pt, idx) => (
-                        <div key={idx} className="p-2.5 rounded-lg bg-white border border-[#E8E2D5]/60 space-y-0.5">
-                          <span className="font-semibold text-[#1A1815] block">
-                            {pt.heading}
-                          </span>
-                          <p className="text-stone-600 leading-relaxed">{pt.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <a
-                      href={guide.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#7A6242] hover:text-[#1A1815] font-semibold pt-1 transition-colors"
-                    >
-                      <span>Open Official Client Reference Doc</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* 3. TULSI SUBCATEGORY & SHAPE FILTERS */}
-      <div className="space-y-4 bg-white p-4 sm:p-5 rounded-2xl border border-[#E8E2D5]">
+    <div className="space-y-10 sm:space-y-14 w-full">
+      {/* 1. TULSI SUBCATEGORY & SHAPE FILTERS (Positioned above product grid) */}
+      <div className="space-y-4 bg-white p-4 sm:p-5 rounded-2xl border border-[#E8E2D5] shadow-xs w-full">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="w-4 h-4 text-[#7A6242]" />
@@ -389,9 +241,9 @@ export function TulsiCategoryView({
         </div>
       </div>
 
-      {/* 4. PRODUCT GRID (32 Tulsi Products with exact specs) */}
+      {/* 2. PRODUCT GRID (End-to-End Responsive Grid across the page) */}
       {filteredProducts.length === 0 ? (
-        <div className="py-16 text-center bg-white rounded-2xl border border-[#E8E2D5]">
+        <div className="py-16 text-center bg-white rounded-2xl border border-[#E8E2D5] w-full">
           <p className="text-stone-600 font-sans text-sm">
             No Tulsi artifacts match the selected filters.
           </p>
@@ -407,7 +259,7 @@ export function TulsiCategoryView({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-4 lg:gap-5 w-full">
           {filteredProducts.map((prod, idx) => {
             const isSaved = isInWishlist(prod.id);
             const isAdded = addedId === prod.id;
@@ -526,6 +378,154 @@ export function TulsiCategoryView({
           })}
         </div>
       )}
+
+      {/* 3. SACRED PROVENANCE HERO BANNER (Image 1 Box 1 - Positioned below products) */}
+      <div className="relative rounded-2xl sm:rounded-3xl bg-[#FAF8F5] border border-[#E8E2D5] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xs mt-12 sm:mt-16 w-full">
+        {/* Subtle Watermark Texture */}
+        <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.07] pointer-events-none" />
+
+        <div className="relative z-10 w-full space-y-6">
+          {/* Eyebrow & Badges */}
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="bg-[#122E46] text-[#FAF8F5] text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-sm font-bold shadow-xs">
+              ORIGIN: VRINDAVAN, BRAJ
+            </span>
+            <span className="bg-[#C5A880]/20 text-[#7A6242] border border-[#C5A880]/40 text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-sm font-semibold">
+              100% NATURAL TULSI WOOD
+            </span>
+            <span className="bg-[#EAE5D9] text-[#1A1815] text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-sm font-semibold">
+              32 VERIFIED ARTIFACTS
+            </span>
+          </div>
+
+          {/* Heading */}
+          <div className="space-y-2">
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#1A1815] leading-[1.15] tracking-tight">
+              Vrindavan Tulsi Collection
+            </h2>
+            <p className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#7A6242]">
+              Revered as Vrinda Devi • Symbol of Devotion, Purity, Humility & Surrender
+            </p>
+          </div>
+
+          {/* Exact Client Description from PDF */}
+          <p className="text-sm sm:text-base leading-relaxed text-stone-700 font-sans max-w-4xl border-l-2 border-[#C5A880] pl-4 py-2 italic bg-[#F2EDE2]/40 rounded-r-lg">
+            &ldquo;Revered as Vrinda Devi, Tulsi Ji holds a special place in Vaishnava tradition and is deeply cherished by devotees of Lord Krishna. Wearing a Tulsi Mala is a symbol of devotion, purity, humility and surrender. More than a sacred ornament, it serves as a gentle reminder to stay connected with Krishna and walk the path of Bhakti in everyday life.&rdquo;
+          </p>
+
+          {/* Provenance Key Attributes Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-2 text-xs">
+            <div className="p-4 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                Source & Soil
+              </span>
+              <p className="font-medium text-[#1A1815] text-sm truncate">Vrindavan, Braj</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                Material Authenticity
+              </span>
+              <p className="font-medium text-[#1A1815] text-sm truncate">100% Natural Tulsi</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                Associated Deities
+              </span>
+              <p className="font-medium text-[#1A1815] text-sm truncate">Shri Krishna & Radha</p>
+            </div>
+            <div className="p-4 rounded-xl bg-white border border-[#E8E2D5] space-y-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                Beads Hue
+              </span>
+              <p className="font-medium text-[#1A1815] text-sm truncate">Natural Beige Core</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. SACRED PRACTICE & GUIDES ACCORDION (Image 1 Box 2 - Positioned below products) */}
+      <div className="rounded-2xl bg-white border border-[#E8E2D5] p-5 sm:p-8 shadow-xs space-y-6 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E8E2D5]">
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#7A6242] font-semibold block">
+              SACRED KNOWLEDGE & SCRIPTURAL TENETS
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1A1815] mt-1">
+              Which Round To Choose ? & Devotional Guides
+            </h3>
+          </div>
+          <span className="text-xs text-stone-500 font-sans">
+            Tap a guide to expand official instructions
+          </span>
+        </div>
+
+        {/* 4 Guide Accordion Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {TULSI_GUIDES.map((guide) => {
+            const isOpen = activeGuideId === guide.id;
+            const Icon = guide.icon;
+
+            return (
+              <div
+                key={guide.id}
+                className={`rounded-xl border transition-all duration-300 overflow-hidden ${
+                  isOpen
+                    ? "bg-[#FAF8F5] border-[#C5A880] shadow-md"
+                    : "bg-white border-[#E8E2D5] hover:border-stone-400"
+                }`}
+              >
+                <button
+                  onClick={() => setActiveGuideId(isOpen ? null : guide.id)}
+                  className="w-full p-4 sm:p-4.5 text-left flex items-start justify-between gap-3 cursor-pointer"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#E8E2D5] flex items-center justify-center shrink-0 mt-0.5 text-[#7A6242]">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-base font-medium text-[#1A1815]">
+                        {guide.title}
+                      </h4>
+                      <p className="text-xs text-stone-500 font-sans mt-0.5">
+                        {guide.subtitle}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 text-stone-400 mt-1">
+                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
+                </button>
+
+                {isOpen && (
+                  <div className="px-4 pb-4 pt-1 border-t border-[#E8E2D5]/70 space-y-3 animate-in fade-in-50 duration-200">
+                    <div className="space-y-2 text-xs text-stone-700 font-sans">
+                      {guide.points.map((pt, idx) => (
+                        <div key={idx} className="p-2.5 rounded-lg bg-white border border-[#E8E2D5]/60 space-y-0.5">
+                          <span className="font-semibold text-[#1A1815] block">
+                            {pt.heading}
+                          </span>
+                          <p className="text-stone-600 leading-relaxed">{pt.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a
+                      href={guide.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#7A6242] hover:text-[#1A1815] font-semibold pt-1 transition-colors"
+                    >
+                      <span>Open Official Client Reference Doc</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
