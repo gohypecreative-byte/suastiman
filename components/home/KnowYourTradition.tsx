@@ -274,14 +274,14 @@ export function KnowYourTradition() {
       className="relative h-[320vh] sm:h-[350vh] lg:h-[380vh] bg-[#F6F4EE] text-[#0C161D]"
     >
       {/* Sticky Pinned Container */}
-      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center overflow-hidden z-10">
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center lg:justify-start lg:pt-16 xl:pt-20 overflow-hidden z-10">
         {/* Subtle Background Texture */}
         <div className="absolute inset-0 bg-[radial-gradient(#C5A880_1px,transparent_1px)] [background-size:28px_28px] opacity-[0.08] pointer-events-none" />
 
-        <div className="w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10 py-4 sm:py-6 lg:py-8 flex flex-col justify-center h-full max-h-[850px]">
-          {/* Main Heading – Fixed & Exactly Unchanged */}
-          <div className="mb-5 sm:mb-6 lg:mb-8 max-w-3xl">
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-normal text-[#1A1815] leading-[1.18] tracking-tight">
+        <div className="w-full max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10 py-4 sm:py-6 lg:py-8 flex flex-col justify-center">
+          {/* Main Heading – Centered and elevated */}
+          <div className="mb-6 sm:mb-8 lg:mb-10 max-w-4xl mx-auto text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[42px] xl:text-[46px] font-normal text-[#1A1815] leading-[1.2] tracking-tight">
               Vedic Wisdom and Botanical Science, <br className="hidden sm:inline" />
               <span className="italic text-[#7A6242] font-light">
                 grounded in scriptural truth.
@@ -289,11 +289,11 @@ export function KnowYourTradition() {
             </h2>
           </div>
 
-          {/* Clean Pinned Two-Column Layout (Matching Image 2 Sizing & Proportions) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 items-center">
-            {/* LEFT COLUMN: Compact, Proportionate Image with Horizontal Side-Slide Motion */}
-            <div className="lg:col-span-5 w-full flex justify-center lg:justify-start">
-              <div className="relative w-full max-w-[380px] sm:max-w-[400px] lg:max-w-[420px] aspect-[4/3] rounded-2xl overflow-hidden bg-[#EAE5D9] border border-stone-200/90 shadow-lg shadow-stone-900/5">
+          {/* Clean Pinned Two-Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 xl:gap-14 items-center">
+            {/* LEFT COLUMN: Enlarged Image */}
+            <div className="lg:col-span-5 xl:col-span-5 w-full flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[490px] xl:max-w-[530px] aspect-[4/3] rounded-2xl overflow-hidden bg-[#EAE5D9] border border-stone-200/90 shadow-xl shadow-stone-900/8">
                 {SLIDES.map((slide, idx) => {
                   const isActive = idx === activeIndex;
                   const isPast = idx < activeIndex;
@@ -314,7 +314,7 @@ export function KnowYourTradition() {
                         fill
                         priority={idx === 0}
                         className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 420px"
+                        sizes="(max-width: 1024px) 100vw, 530px"
                       />
                     </div>
                   );
@@ -322,9 +322,9 @@ export function KnowYourTradition() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Compact Refined Content (Matching Image 2) */}
-            <div className="lg:col-span-7 w-full">
-              <div className="grid grid-cols-1 grid-rows-1 w-full min-h-[260px] sm:min-h-[280px] lg:min-h-[320px] items-center">
+            {/* RIGHT COLUMN: Enlarged Content */}
+            <div className="lg:col-span-7 xl:col-span-7 w-full flex flex-col justify-center pl-0 lg:pl-2 xl:pl-4">
+              <div className="grid grid-cols-1 grid-rows-1 w-full min-h-[300px] sm:min-h-[330px] lg:min-h-[360px] items-center">
                 {SLIDES.map((slide, idx) => {
                   const isActive = idx === activeIndex;
                   const isPast = idx < activeIndex;
@@ -340,28 +340,28 @@ export function KnowYourTradition() {
                       }`}
                     >
                       {/* Subtle Category */}
-                      <p className="font-serif italic text-xs sm:text-sm text-stone-400 font-light mb-1 sm:mb-1.5">
+                      <p className="font-serif text-xs sm:text-sm lg:text-[15px] text-[#7A6242] font-normal mb-1.5 sm:mb-2 tracking-wide">
                         {slide.category}
                       </p>
 
-                      {/* Title: Compact & Refined, Matching Image 2 */}
-                      <h3 className="font-serif text-xl sm:text-2xl lg:text-[26px] font-normal text-[#1A1815] leading-[1.25] tracking-tight mb-2 sm:mb-2.5">
+                      {/* Title: Larger & Refined */}
+                      <h3 className="font-serif text-2xl sm:text-3xl lg:text-[30px] xl:text-[32px] font-normal text-[#1A1815] leading-[1.22] tracking-tight mb-2.5 sm:mb-3">
                         {slide.title}
                       </h3>
 
-                      {/* Description: Clean, Moderate Font */}
-                      <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-sans mb-3.5 sm:mb-4 max-w-lg">
+                      {/* Description: Clean, Comfortable Font */}
+                      <p className="text-sm sm:text-base lg:text-[16px] text-stone-600 leading-relaxed font-sans mb-4 sm:mb-5 max-w-xl">
                         {slide.description}
                       </p>
 
-                      {/* Supporting Points: Compact with Small Green Checkmarks */}
-                      <div className="space-y-2 sm:space-y-2.5">
+                      {/* Supporting Points: Enhanced with clear checkmarks */}
+                      <div className="space-y-2.5 sm:space-y-3">
                         {slide.supportingPoints.map((point, pIdx) => (
-                          <div key={pIdx} className="flex items-start gap-2.5">
-                            <div className="w-4 h-4 rounded-full bg-[#EBF5ED] text-[#2E7D32] border border-[#2E7D32]/25 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                              <Check className="w-2.5 h-2.5 stroke-[2.5]" />
+                          <div key={pIdx} className="flex items-start gap-3">
+                            <div className="w-5 h-5 rounded-full bg-[#EBF5ED] text-[#2E7D32] border border-[#2E7D32]/30 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                              <Check className="w-3 h-3 stroke-[2.5]" />
                             </div>
-                            <div className="text-xs sm:text-[13px] leading-relaxed">
+                            <div className="text-sm sm:text-[14.5px] leading-relaxed">
                               <strong className="font-semibold text-[#1A1815]">
                                 {point.title}:{" "}
                               </strong>

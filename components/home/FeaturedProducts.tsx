@@ -292,31 +292,9 @@ export function FeaturedProducts() {
 
                 {/* Bottom Content Area with gradient overlay for crystal clear contrast */}
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 flex flex-col items-center text-center z-10 bg-gradient-to-t from-black/85 via-black/45 to-transparent pt-8 sm:pt-10">
-                  <h3 className="font-serif text-base sm:text-xl md:text-2xl lg:text-3xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] mb-1 transition-transform duration-300">
+                  <h3 className="font-serif text-base sm:text-xl md:text-2xl lg:text-3xl font-normal text-white uppercase tracking-[0.08em] leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] transition-transform duration-300">
                     {cat.name}
                   </h3>
-
-                  <p className="text-[10px] sm:text-xs md:text-sm text-[#DFCAAB] font-light tracking-wide mb-2 sm:mb-2.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] line-clamp-1">
-                    {cat.subtitle}
-                  </p>
-
-                  {/* Explore Collection Action Button (Active Center Card Only) */}
-                  <div
-                    className={`transition-all duration-300 ${
-                      isCentered
-                        ? "opacity-100 translate-y-0 pointer-events-auto"
-                        : "opacity-0 translate-y-2 pointer-events-none"
-                    }`}
-                  >
-                    <Link
-                      href={cat.href}
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-widest uppercase transition-all duration-300 shadow-xl bg-white hover:bg-[#C5A880] text-[#1A1815] hover:text-white group/btn"
-                    >
-                      <span>Explore Collection</span>
-                      <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </Link>
-                  </div>
                 </div>
               </div>
             );

@@ -282,18 +282,6 @@ export function TulsiCategoryView({
                     />
                   </Link>
 
-                  {/* Top Badges: SKU & Inventory */}
-                  <div className="absolute top-2.5 left-2.5 z-10 flex flex-wrap items-center gap-1.5 pointer-events-none">
-                    <span className="bg-[#1A1815] text-[#FAF8F5] text-[10px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded shadow-sm">
-                      {prod.sku || prod.code.toUpperCase()}
-                    </span>
-                    {prod.inventory && (
-                      <span className="bg-emerald-800 text-white text-[9px] font-mono px-1.5 py-0.5 rounded shadow-xs hidden sm:inline-block">
-                        {prod.inventory} Left
-                      </span>
-                    )}
-                  </div>
-
                   {/* Round & Knot pill on top right */}
                   <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1">
                     <button
@@ -311,16 +299,6 @@ export function TulsiCategoryView({
                         }`}
                       />
                     </button>
-                  </div>
-
-                  {/* Bottom Image Specification Pill */}
-                  <div className="absolute bottom-2 left-2 right-2 pointer-events-none flex items-center justify-between text-[9.5px] font-mono bg-black/60 backdrop-blur-xs text-white px-2 py-1 rounded-md">
-                    <span className="font-semibold text-[#DFCAAB]">
-                      {prod.beadSize} • {prod.beadShape}
-                    </span>
-                    <span className="text-stone-300">
-                      {prod.length} • {prod.weight}
-                    </span>
                   </div>
                 </div>
 

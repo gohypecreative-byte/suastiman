@@ -95,18 +95,6 @@ export function ProductDetailView({ product }: ProductDetailViewProps) {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
 
-            {/* Product Code Badge (Top Left) */}
-            <div className="absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5">
-              <span className="bg-[#1A1815] text-[#FAF8F5] text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-sm shadow-md font-bold">
-                {product.code.toUpperCase()}
-              </span>
-              {product.badge && (
-                <span className="bg-[#C5A880] text-[#122E46] text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-sm shadow-md">
-                  {product.badge}
-                </span>
-              )}
-            </div>
-
             {/* Bookmark button */}
             <button
               onClick={() =>

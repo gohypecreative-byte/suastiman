@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, Quote, ShieldCheck, Compass } from "lucide-react";
+import { Star, Quote, ShieldCheck } from "lucide-react";
 
 interface Testimonial {
   name: string;
@@ -47,15 +47,11 @@ export function Testimonials() {
     <section className="py-24 bg-[#F7F5F0] text-[#132532] border-b border-[#E2DEC9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-[#9E7D4E] text-xs font-semibold uppercase tracking-[0.2em]">
-            <Compass className="w-3.5 h-3.5" />
-            <span>Reflections and Provenance</span>
-          </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#0C161D] font-normal">
+        <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-16 space-y-3">
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#0C161D] font-normal tracking-tight text-balance">
             Voices of Tradition and Material Integrity
           </h2>
-          <p className="text-stone-600 text-sm font-light">
+          <p className="text-stone-600 text-sm sm:text-base font-light max-w-xl mx-auto">
             Read perspectives from scholars, practitioners, and custodians of Indian heritage.
           </p>
         </div>

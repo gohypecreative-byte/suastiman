@@ -108,15 +108,12 @@ export function BestSellers() {
     <section id="bestsellers" className="py-20 sm:py-24 bg-[#F9F8F5] border-b border-[#E2DEC9] relative">
       <div className="max-w-[1520px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Header matching Hira's Collection Carousel style with Svastiman Brand Tokens */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-14 gap-4">
-          <div className="space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#C5A880] font-semibold block">
-              SANCTIFIED FAVORITES
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#122E46] font-normal tracking-tight">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 gap-6">
+          <div className="space-y-3.5 sm:space-y-4">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#122E46] font-normal tracking-[-0.015em] leading-[1.18]">
               Most Revered Creations
             </h2>
-            <p className="text-stone-600 text-sm font-light max-w-lg">
+            <p className="text-stone-600 text-sm sm:text-[15px] font-light leading-relaxed max-w-xl">
               The consecrated malas and healing gemstones most chosen by practitioners and seekers.
             </p>
           </div>

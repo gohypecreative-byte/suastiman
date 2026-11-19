@@ -153,7 +153,7 @@ export function Footer() {
                 </li>
                 <li>
                   <Link href="/blog" className="hover:text-[#7A6242] hover:translate-x-0.5 transition-all inline-block">
-                    Sacred Knowledge Chronicles
+                    Blogs
                   </Link>
                 </li>
               </ul>
@@ -271,16 +271,13 @@ export function Footer() {
               <p className="text-xs sm:text-[13px] text-stone-600 leading-relaxed font-light">
                 Himalayan Cloud Belts and Vrindavan Groves, India
               </p>
-              <div className="pt-0.5 space-y-0.5">
+              <div className="pt-0.5">
                 <a
                   href="mailto:concierge@svastiman.com"
                   className="block text-xs sm:text-[13px] text-[#7A6242] hover:text-[#122E46] transition-colors underline underline-offset-2 font-medium"
                 >
                   concierge@svastiman.com
                 </a>
-                <span className="block text-[11px] font-mono text-stone-500">
-                  +91 92209 00591
-                </span>
               </div>
             </div>
           </div>

@@ -76,18 +76,6 @@ function ProductCardItem({
           />
         </Link>
 
-        {/* Top Badges: Product Code & Provenance Badge */}
-        <div className="absolute top-2.5 left-2.5 z-10 flex flex-wrap items-center gap-1.5 pointer-events-none">
-          <span className="bg-[#1A1815] text-[#FAF8F5] text-[9.5px] font-mono uppercase tracking-widest font-bold px-2 py-0.5 rounded shadow-sm">
-            {prod.code.toUpperCase()}
-          </span>
-          {prod.badge && (
-            <span className="bg-[#C5A880] text-[#122E46] text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded shadow-xs hidden sm:inline-block">
-              {prod.badge}
-            </span>
-          )}
-        </div>
-
         {/* Previous Image Button */}
         {images.length > 1 && (
           <button
@@ -328,11 +316,11 @@ function ProductsCatalog() {
               </h1>
             </div>
 
-            <p className="text-xs sm:text-sm text-stone-600 max-w-md font-sans">
-              {activeCategory === "all"
-                ? "Each piece carries verified natural origin, unvarnished tactile integrity, and dedicated product archival codes."
-                : activeCategoryMeta?.tagline}
-            </p>
+            {activeCategory !== "all" && activeCategoryMeta?.tagline && (
+              <p className="text-xs sm:text-sm text-stone-600 max-w-md font-sans">
+                {activeCategoryMeta.tagline}
+              </p>
+            )}
           </div>
 
           {/* Category Filter Pills (Modern luxury navigation) */}
