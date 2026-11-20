@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import { PRODUCTS } from "@/lib/products";
+import { PRODUCTS, DEMO_PRODUCT_T01 } from "@/lib/products";
 import {
   ShoppingBag,
   Search,
@@ -18,20 +18,18 @@ import {
 } from "lucide-react";
 
 const POPULAR_SUGGESTIONS = [
-  "VRINDAVAN TULSI 108 JAPA MALA",
-  "HIMALAYAN 5-MUKHI RUDRAKSHA",
-  "RAW LAPIS LAZULI BRACELET",
-  "SACRED TIGER EYE WRIST MALA",
-  "AYURVEDIC TAMRA WATER BOTTLE",
-  "NATURAL AMETHYST HEALING STONE",
+  "TULSI KANTHI MALA 1 ROUND",
+  "TULSI RADHA KRISHAN KANTHI MALA (T01)",
+  "100% NATURAL TULSI WOOD",
+  "VRINDAVAN BRAJ ORIGIN",
+  "AUTHENTICITY LAB CERTIFIED",
 ];
 
 const ANNOUNCEMENTS = [
-  "🔥 Buy 1 Get 1 Free on all sacred malas & botanicals 🔥",
-  "✨ 100% Certified Wild Himalayan Botanicals & Lab-Tested Mukhis ✨",
-  "🪔 Complimentary Gangajal & Sanctified Pouch on Orders Above ₹999 🪔",
-  "🌿 Hand-Rolled Vrindavan Krishna Tulsi & Ancient 5-Mukhi Malas 🌿",
-  "🕊️ Free All-India Sacred Insured Delivery On All Pre-Paid Orders 🕊️",
+  "🌿 Tulsi Kanthi Mala 1 Round (SKU: T01) • 100% Natural Vrindavan Tulsi Wood 🌿",
+  "✨ Authenticity Lab Certificate Included With Every Acquisition ✨",
+  "🪔 Associated Deities: Shri Krishna • Single Round 2.5mm Beige Beads 🪔",
+  "🕊️ Free Sacred Insured Delivery Across India • Vrindavan Sourced 🕊️",
 ];
 
 export function Navbar() {
@@ -54,7 +52,7 @@ export function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 15);
+      setIsScrolled(currentScrollY > 40);
 
       // On homepage, keep navbar visible throughout the Hero section scroll
       // preventing the navbar from hiding and exposing a blank whitish spacer gap
@@ -129,49 +127,23 @@ export function Navbar() {
     }
   }, [searchOpen]);
 
-  // Filtered products for search overlay
-  const filteredProducts = searchQuery.trim()
-    ? PRODUCTS.filter((p) => {
-        const q = searchQuery.toLowerCase().trim();
-        return (
-          p.name.toLowerCase().includes(q) ||
-          p.categoryName.toLowerCase().includes(q) ||
-          p.material.toLowerCase().includes(q) ||
-          (p.code && p.code.toLowerCase().includes(q))
-        );
-      }).slice(0, 6)
-    : PRODUCTS.slice(0, 6);
+  // Demo restriction: Surface only Tulsi Mala T01 in search overlay
+  const demoProductList = [DEMO_PRODUCT_T01];
+  const filteredProducts = demoProductList;
 
-  // Dynamic suggestions matching user input
+  // Dynamic suggestions matching T01 sacred terms
   const suggestions = searchQuery.trim()
-    ? Array.from(
-        new Set(
-          PRODUCTS.filter((p) => {
-            const q = searchQuery.toLowerCase().trim();
-            return (
-              p.name.toLowerCase().includes(q) ||
-              p.categoryName.toLowerCase().includes(q)
-            );
-          })
-            .map((p) => p.name.toUpperCase())
-            .concat(
-              POPULAR_SUGGESTIONS.filter((s) =>
-                s.toLowerCase().includes(searchQuery.toLowerCase().trim())
-              )
-            )
-        )
-      ).slice(0, 6)
-    : POPULAR_SUGGESTIONS;
+    ? POPULAR_SUGGESTIONS.filter((s) =>
+        s.toLowerCase().includes(searchQuery.toLowerCase().trim())
+      ).slice(0, 4)
+    : POPULAR_SUGGESTIONS.slice(0, 4);
 
+  // Client Presentation Demo: Navigation focused exclusively on Tulsi Mala T01
   const shopCategories = [
-    { name: "All Collections", href: "/products" },
-    { name: "Vrindavan Tulsi", href: "/products?category=tulsi" },
-    { name: "Himalayan Rudraksha", href: "/products?category=rudraksha" },
-    { name: "Spiritual Bracelets", href: "/products?category=bracelets" },
-    { name: "108 Japa Malas", href: "/products?category=malas" },
-    { name: "Earth Gemstones", href: "/products?category=gemstones" },
-    { name: "Zodiac Jewellery", href: "/tools/energy-finder" },
-    { name: "Find Your Crystal Calculator", href: "/pages/profession-crystal-mapping-calculator" },
+    { name: "Tulsi Kanthi Mala 1 Round (T01)", href: "/products/tulsi/t-01" },
+    { name: "Discover Product (T01)", href: "/#discover-product" },
+    { name: "Principles to wear Tulsi", href: "/principles-to-wear-tulsi" },
+    { name: "Authenticity & Certificate", href: "/#authenticity" },
   ];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -182,41 +154,54 @@ export function Navbar() {
     }
   };
 
+  const isHomePage = pathname === "/";
+  const isTransparent = isHomePage && !isScrolled && !mobileMenuOpen;
+
   return (
     <>
-      {/* Spacer to preserve document layout height (28px Announcement Bar + 80px Navbar = 108px) */}
-      <div className="w-full h-[106px] sm:h-[108px] pointer-events-none" aria-hidden="true" />
+      {/* Spacer to preserve document layout height on non-home pages */}
+      {!isHomePage && (
+        <div className="w-full h-[106px] sm:h-[108px] pointer-events-none" aria-hidden="true" />
+      )}
 
-      {/* Main Fixed Header (Top Announcement Bar + Main Navbar) */}
+      {/* Main Fixed Header */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        {/* Top Announcement Bar matching reference layout with sacred website offerings */}
-        <div className="w-full bg-[#FFEDE2] border-b border-[#E8DEC8]/60 text-[#122E46] h-7 sm:h-[28px] flex items-center overflow-hidden select-none">
-          <div className="animate-marquee flex items-center gap-12 text-[11px] sm:text-xs font-medium tracking-wide">
-            {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((item, idx) => (
-              <span key={idx} className="flex items-center gap-2 whitespace-nowrap">
-                <span>{item}</span>
-              </span>
-            ))}
+        {/* Top Announcement Bar (Shown on non-home pages, or hidden on home hero to match AXELS reference) */}
+        {!isHomePage && (
+          <div className="w-full bg-[#FFEDE2] border-b border-[#E8DEC8]/60 text-[#122E46] h-7 sm:h-[28px] flex items-center overflow-hidden select-none">
+            <div className="animate-marquee flex items-center gap-12 text-[11px] sm:text-xs font-medium tracking-wide">
+              {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((item, idx) => (
+                <span key={idx} className="flex items-center gap-2 whitespace-nowrap">
+                  <span>{item}</span>
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Main Navbar */}
+        {/* Main Navbar: Transparent overlay on home hero, solid white when scrolled or on other pages */}
         <div
-          className={`w-full bg-[#FFFFFF]/98 backdrop-blur-md text-[#122E46] border-b border-[#EBE7DE] transition-all duration-300 ${
-            isScrolled ? "shadow-[0_4px_25px_-5px_rgba(0,0,0,0.08)] bg-white" : ""
+          className={`w-full transition-all duration-300 ${
+            isTransparent
+              ? "bg-transparent text-white border-b border-transparent shadow-none"
+              : "bg-white/95 backdrop-blur-md text-[#122E46] border-b border-[#EBE7DE] shadow-[0_4px_25px_-5px_rgba(0,0,0,0.08)]"
           }`}
         >
           <div className="w-full px-5 sm:px-8 lg:px-12 xl:px-16 h-[78px] sm:h-[80px] flex items-center justify-between">
-            {/* Left: Navigation Links matching reference layout */}
+            {/* Left: Navigation Links matching AXELS reference layout */}
             <div className="flex-1 flex items-center justify-start gap-4 sm:gap-6">
               {/* Mobile Menu Hamburger Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-1.5 -ml-1 text-[#122E46] hover:text-[#C5A880] transition-colors focus:outline-none"
+                className={`lg:hidden p-1.5 -ml-1 transition-colors focus:outline-none ${
+                  isTransparent
+                    ? "text-white hover:text-white/80"
+                    : "text-[#122E46] hover:text-[#C5A880]"
+                }`}
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -226,7 +211,11 @@ export function Navbar() {
               <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
                 <Link
                   href="/"
-                  className="text-[14px] font-sans font-medium tracking-wide transition-colors text-[#122E46] hover:text-[#C5A880]"
+                  className={`text-[14px] font-sans font-medium tracking-wide transition-colors ${
+                    isTransparent
+                      ? "text-white hover:text-white/80"
+                      : "text-[#122E46] hover:text-[#C5A880]"
+                  }`}
                 >
                   Home
                 </Link>
@@ -235,14 +224,18 @@ export function Navbar() {
                 <div className="relative group">
                   <Link
                     href="/products"
-                    className="flex items-center gap-1.5 text-[14px] font-sans font-medium tracking-wide transition-colors py-2 text-[#122E46] hover:text-[#C5A880]"
+                    className={`flex items-center gap-1.5 text-[14px] font-sans font-medium tracking-wide transition-colors py-2 ${
+                      isTransparent
+                        ? "text-white hover:text-white/80"
+                        : "text-[#122E46] hover:text-[#C5A880]"
+                    }`}
                   >
                     <span>Shop</span>
                     <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 opacity-80" />
                   </Link>
 
                   {/* Dropdown Menu */}
-                  <div className="absolute top-full left-0 mt-0.5 w-64 bg-white shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top translate-y-1 group-hover:translate-y-0 overflow-hidden z-50">
+                  <div className="absolute top-full left-0 mt-0.5 w-64 bg-white text-[#122E46] shadow-xl rounded-xl border border-[#E2DEC9] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top translate-y-1 group-hover:translate-y-0 overflow-hidden z-50">
                     <div className="py-2">
                       {shopCategories.map((cat) => (
                         <Link
@@ -259,7 +252,11 @@ export function Navbar() {
 
                 <Link
                   href="/about"
-                  className="text-[14px] font-sans font-medium tracking-wide transition-colors text-[#122E46] hover:text-[#C5A880]"
+                  className={`text-[14px] font-sans font-medium tracking-wide transition-colors ${
+                    isTransparent
+                      ? "text-white hover:text-white/80"
+                      : "text-[#122E46] hover:text-[#C5A880]"
+                  }`}
                 >
                   About Us
                 </Link>
@@ -273,18 +270,30 @@ export function Navbar() {
                 className="group flex items-center justify-center select-none"
                 aria-label="Svastimān Home"
               >
-                <span className="font-serif text-2xl lg:text-[28px] font-normal tracking-[0.22em] uppercase text-[#122E46] transition-opacity group-hover:opacity-90">
+                <span
+                  className={`font-serif text-2xl lg:text-[28px] font-normal tracking-[0.22em] uppercase transition-colors ${
+                    isTransparent ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]" : "text-[#122E46]"
+                  }`}
+                >
                   Svastimān
                 </span>
               </Link>
             </div>
 
-            {/* Right: Actions Matching Image 1 (Search, Account, Cart) with matching typography */}
-            <div className="flex-1 flex items-center justify-end gap-5 sm:gap-7 lg:gap-8 xl:gap-9 text-[#122E46]">
+            {/* Right: Actions (Search, Account, Cart) matching AXELS reference typography & icons */}
+            <div
+              className={`flex-1 flex items-center justify-end gap-5 sm:gap-7 lg:gap-8 xl:gap-9 transition-colors ${
+                isTransparent ? "text-white" : "text-[#122E46]"
+              }`}
+            >
               {/* Search */}
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="flex items-center gap-1.5 p-1 text-[#122E46] hover:text-[#C5A880] transition-colors focus:outline-none cursor-pointer group"
+                className={`flex items-center gap-1.5 p-1 transition-colors focus:outline-none cursor-pointer group ${
+                  isTransparent
+                    ? "text-white hover:text-white/80"
+                    : "text-[#122E46] hover:text-[#C5A880]"
+                }`}
                 title="Search sacred collections"
                 aria-label="Search"
               >
@@ -297,7 +306,11 @@ export function Navbar() {
               {/* Account */}
               <Link
                 href="/account"
-                className="flex items-center gap-1.5 p-1 text-[#122E46] hover:text-[#C5A880] transition-colors group"
+                className={`flex items-center gap-1.5 p-1 transition-colors group ${
+                  isTransparent
+                    ? "text-white hover:text-white/80"
+                    : "text-[#122E46] hover:text-[#C5A880]"
+                }`}
                 title="My Account"
                 aria-label="My Account"
               >
@@ -310,14 +323,22 @@ export function Navbar() {
               {/* Cart */}
               <button
                 onClick={openCart}
-                className="flex items-center gap-1.5 p-1 text-[#122E46] hover:text-[#C5A880] transition-colors focus:outline-none cursor-pointer group"
+                className={`flex items-center gap-1.5 p-1 transition-colors focus:outline-none cursor-pointer group ${
+                  isTransparent
+                    ? "text-white hover:text-white/80"
+                    : "text-[#122E46] hover:text-[#C5A880]"
+                }`}
                 title="Shopping Bag"
                 aria-label="Shopping Bag"
               >
                 <div className="relative flex items-center">
                   <ShoppingBag className="w-[18px] h-[18px] stroke-[1.8] group-hover:scale-105 transition-transform" />
                   {mounted && totalCount > 0 && (
-                    <span className="sm:hidden absolute -top-1.5 -right-2 text-[10px] font-bold leading-none bg-[#122E46] text-white w-3.5 h-3.5 rounded-full flex items-center justify-center">
+                    <span
+                      className={`sm:hidden absolute -top-1.5 -right-2 text-[10px] font-bold leading-none w-3.5 h-3.5 rounded-full flex items-center justify-center ${
+                        isTransparent ? "bg-white text-[#122E46]" : "bg-[#122E46] text-white"
+                      }`}
+                    >
                       {totalCount}
                     </span>
                   )}
@@ -325,7 +346,11 @@ export function Navbar() {
                 <span className="hidden sm:inline text-[14px] font-sans font-medium tracking-wide">
                   Cart
                   {mounted && totalCount > 0 && (
-                    <span className="ml-1 text-[12px] font-semibold text-[#122E46]">
+                    <span
+                      className={`ml-1 text-[12px] font-semibold ${
+                        isTransparent ? "text-white" : "text-[#122E46]"
+                      }`}
+                    >
                       ({totalCount})
                     </span>
                   )}
@@ -333,7 +358,7 @@ export function Navbar() {
               </button>
             </div>
           </div>
-      </div>
+        </div>
 
         {/* Mobile Slide-down Drawer */}
         {mobileMenuOpen && (
@@ -371,18 +396,11 @@ export function Navbar() {
                 About Us
               </Link>
               <Link
-                href="/pages/profession-crystal-mapping-calculator"
+                href="/authenticity-charter"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block text-base font-medium py-2.5 text-[#122E46] hover:text-[#C5A880] border-b border-[#E2DEC9]/40"
               >
-                Crystal Calculator
-              </Link>
-              <Link
-                href="/blog"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium py-2.5 text-[#122E46] hover:text-[#C5A880] border-b border-[#E2DEC9]/40"
-              >
-                Journal & Traditions
+                Authenticity Charter
               </Link>
             </div>
 

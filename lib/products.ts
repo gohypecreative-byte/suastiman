@@ -36,6 +36,7 @@ export interface Product {
   
   // Client Table Specifications
   rawCategoryTitle?: string;
+  beadsColor?: string;
   beadSize?: string;
   beadShape?: string;
   weight?: string;
@@ -44,6 +45,7 @@ export interface Product {
   knot?: string;
   pendant?: string;
   inventory?: number;
+  purchaseCost?: number;
   associatedDeities?: string;
 }
 
@@ -100,9 +102,10 @@ export const PRODUCTS: Product[] = [
     "secondaryCategories": [
       "malas"
     ],
-    "name": "Tulsi Radha Krishan Kanthi Mala",
-    "subtitle": "Single Round \u2022 2.5mm Round Beads \u2022 10 CM \u2022 Lock",
+    "name": "TULSI KANTHI MALA 1 ROUND",
+    "subtitle": "Single Round • 2.5mm Round Beads • 10 CM • Lock",
     "rawCategoryTitle": "TULSI RADHA KRISHAN KANTHI MALA",
+    "beadsColor": "BEIGE",
     "beadSize": "2.5mm",
     "beadShape": "ROUND",
     "weight": "27 GM",
@@ -111,29 +114,35 @@ export const PRODUCTS: Product[] = [
     "knot": "LOCK",
     "pendant": "PENDANTS",
     "inventory": 20,
-    "material": "100% Natural Tulsi Wood. We provide a aunthenticity lab certificate along with it.",
-    "origin": "Vrindavan,Braj",
+    "purchaseCost": 20,
+    "material": "100% Natural Tulsi Wood. We provide an authenticity lab certificate along with it.",
+    "origin": "Vrindavan, Braj",
     "associatedDeities": "Shri Krishna",
     "price": 399,
     "originalPrice": 549,
     "image": "/images/products/tulsi/tulsi_01.jpg",
     "images": [
       "/images/products/tulsi/tulsi_01.jpg",
-      "/images/origin/know_tulsi_wood.jpg",
-      "/images/origin/tulsi_heritage_plant.jpg"
+      "/images/products/tulsi/t01_beads_macro.jpg",
+      "/images/products/tulsi/t01_pendant_detail.jpg",
+      "/images/products/tulsi/t01_lock_knot_detail.jpg",
+      "/images/products/tulsi/t01_lifestyle.jpg"
     ],
     "badge": "Authenticity Certified",
     "specs": [
+      "Beads Color: BEIGE",
       "Bead Size: 2.5mm",
-      "Shape: Round",
-      "Length: 10 CM",
+      "Bead Shape: ROUND",
       "Weight: 27 GM",
-      "Round: Single",
-      "Lock: Lock",
-      "Deities: Shri Krishna",
+      "Length: 10 CM",
+      "Round: SINGLE",
+      "Knot Type: LOCK",
+      "Tassel / Pendants: PENDANTS",
+      "Associated Deities: Shri Krishna",
+      "Origin: Vrindavan, Braj",
       "100% Natural Tulsi Wood"
     ],
-    "rating": 4.8,
+    "rating": 4.9,
     "reviews": 48,
     "description": "Revered as Vrinda Devi, Tulsi Ji holds a special place in Vaishnava tradition and is deeply cherished by devotees of Lord Krishna. Wearing a Tulsi Mala is a symbol of devotion, purity, humility and surrender. More than a sacred ornament, it serves as a gentle reminder to stay connected with Krishna and walk the path of Bhakti in everyday life.",
     "details": [
@@ -2193,3 +2202,6 @@ export function getProductsByCategory(category: ProductCategory | "all"): Produc
 export function getCategoryMeta(category: ProductCategory): ProductCategoryMeta | undefined {
   return PRODUCT_CATEGORIES.find((c) => c.id === category);
 }
+
+// Client Demo: Single Product Focus on Tulsi Mala T01
+export const DEMO_PRODUCT_T01 = PRODUCTS.find((p) => p.sku === "T01") || PRODUCTS[0];

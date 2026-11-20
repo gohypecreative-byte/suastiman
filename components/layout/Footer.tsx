@@ -58,9 +58,9 @@ export function Footer() {
       <div className="w-full max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12 pt-12 sm:pt-16 pb-8 relative z-10">
         
         {/* ========================================================================= */}
-        {/* 1. TOP CENTER BRAND WORDMARK & SUBTITLE                                   */}
+        {/* 1. TOP CENTER BRAND WORDMARK                                              */}
         {/* ========================================================================= */}
-        <div className="flex flex-col items-center justify-center text-center space-y-1.5 mb-6 sm:mb-8">
+        <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8">
           <Link href="/" className="inline-block group">
             <h3
               className="text-3xl sm:text-4xl md:text-[44px] font-normal tracking-[0.20em] sm:tracking-[0.25em] text-[#122E46] uppercase leading-none transition-opacity group-hover:opacity-90"
@@ -69,17 +69,14 @@ export function Footer() {
               SVASTIMĀN
             </h3>
           </Link>
-          <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.26em] sm:tracking-[0.30em] uppercase text-[#7A6242] font-semibold">
-            HOUSE OF SACRED MATERIALS • ROOTED IN SOURCE
-          </span>
         </div>
 
         {/* ========================================================================= */}
         {/* 2. MASSIVE STATEMENT HEADLINE (Traveling Shine Effect as per Video)       */}
         {/* ========================================================================= */}
-        <div className="w-full flex items-center justify-center my-6 sm:my-10 lg:my-12 px-2 overflow-hidden">
+        <div className="w-full flex items-center justify-center my-6 sm:my-10 lg:my-12 px-2 overflow-visible">
           <h2
-            className="font-serif text-[clamp(1.65rem,4.2vw,4.75rem)] font-normal tracking-tight leading-none select-none text-center sm:whitespace-nowrap animate-shine-travel"
+            className="font-serif text-[clamp(1.65rem,4.2vw,4.75rem)] font-normal tracking-tight leading-[1.25] py-2 sm:py-3 select-none text-center sm:whitespace-nowrap animate-shine-travel"
             style={{
               fontFamily: "var(--font-serif), 'Playfair Display', Georgia, serif",
               filter: "drop-shadow(0 1px 2px rgba(18, 46, 70, 0.08)) drop-shadow(0 2px 6px rgba(197, 168, 128, 0.18))",
